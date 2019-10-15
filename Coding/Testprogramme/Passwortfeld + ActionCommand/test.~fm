@@ -1,10 +1,10 @@
 object test: TFGUIForm
-  Left = 0
-  Top = 257
+  Left = 2161
+  Top = 322
   BorderIcons = [biSystemMenu]
   Caption = 'test'
-  ClientHeight = 377
-  ClientWidth = 623
+  ClientHeight = 54
+  ClientWidth = 496
   Color = clBtnFace
   ParentFont = True
   FormStyle = fsStayOnTop
@@ -23,7 +23,7 @@ object test: TFGUIForm
   TextHeight = 13
   object button_login: TJButton
     Tag = 4
-    Left = 337
+    Left = 313
     Top = 3
     Width = 75
     Height = 25
@@ -67,9 +67,9 @@ object test: TFGUIForm
   end
   object field_password: TJPasswordField
     Tag = 26
-    Left = 154
+    Left = 106
     Top = 6
-    Width = 150
+    Width = 198
     Height = 20
     Cursor = crIBeam
     Hint = 'jPasswordField1'
@@ -84,5 +84,28 @@ object test: TFGUIForm
     Text = ''
     Editable = True
     EchoChar = '*'
+  end
+  object label_meldung: TJLabel
+    Tag = 1
+    Left = 105
+    Top = 27
+    Width = 198
+    Height = 20
+    Hint = 'jLabel1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Dialog'
+    Font.Style = [fsBold]
+    Foreground = 3355443
+    Background = clLime
+    Text = ''
+    HorizontalAlignment = CENTER
+    VerticalAlignment = CENTER
+    HorizontalTextPosition = RIGHT
+    VerticalTextPosition = CENTER
+    IconTextGap = 4
+    DisplayedMnemonic = 0
+    DisplayedMnemonicIndex = 0
   end
 end

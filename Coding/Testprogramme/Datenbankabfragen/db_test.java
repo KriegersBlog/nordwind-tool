@@ -19,8 +19,8 @@ public class db_test {
       rs = stmt.executeQuery("SELECT artikelnr, artikelname FROM artikel"); // Ergebnisse = AusführenVonBefehl
       //int testUpdate = stmt.executeUpdate("UPDATE users SET vorname = 'Harry' WHERE vorname='Larry' "); // Ergebnisse = Update
       while (rs.next()){        
-        String  artikelnr = rs.getString("artikelnr");        
-        String  artikelname = rs.getString("artikelname");        
+        String artikelnr = rs.getString("artikelnr");        
+        String artikelname = rs.getString("artikelname");        
         System.out.println("Nummer: "+artikelnr+" | Name: "+artikelname);        
       }
       con.close();
