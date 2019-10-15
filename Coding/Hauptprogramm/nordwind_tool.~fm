@@ -1,0 +1,23 @@
+object nordwind_tool: TFGUIForm
+  Left = 2262
+  Top = 144
+  BorderIcons = [biSystemMenu]
+  Caption = 'Nordwind Tool - Made by Julian Krieger'
+  ClientHeight = 537
+  ClientWidth = 1008
+  Color = clBtnFace
+  ParentFont = True
+  FormStyle = fsStayOnTop
+  OldCreateOrder = True
+  Position = poDesigned
+  Visible = True
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnResize = FormResize
+  FrameType = 5
+  Resizable = False
+  Undecorated = False
+  Background = clBtnFace
+  PixelsPerInch = 96
+  TextHeight = 13
+end
