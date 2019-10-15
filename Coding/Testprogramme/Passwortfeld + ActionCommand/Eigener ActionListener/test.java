@@ -13,7 +13,7 @@ import java.util.*; //ARRAYS
  * @author 
  */
 
-public class test extends JFrame implements ActionListener {
+public class test extends JFrame{
   // Anfang Attribute
   private String confirm = "Confirm";
   private JButton button_login = new JButton();                                                                              
@@ -44,15 +44,21 @@ public class test extends JFrame implements ActionListener {
     field_password.setBounds(106, 6, 198, 20);
     cp.add(field_password);
     cp.add(button_login);
-    button_login.setActionCommand(confirm);
-    field_password.setActionCommand(confirm);
-    button_login.addActionListener(this);
-    field_password.addActionListener(this);
     label_meldung.setBounds(105, 27, 198, 20);
     label_meldung.setText("");
     label_meldung.setHorizontalAlignment(SwingConstants.CENTER);
     label_meldung.setOpaque(true);
     cp.add(label_meldung);
+    field_password.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                salami();
+            }
+    });
+    button_login.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                salami();
+            }
+    });
   }
     // Anfang Komponenten
     
@@ -64,10 +70,7 @@ public class test extends JFrame implements ActionListener {
     new test();
   } 
   
-  public void actionPerformed(ActionEvent e){
-     String actionCommand = e.getActionCommand();
-     
-    if(confirm.equals(actionCommand)){
+  public void salami(){
       char[] input = field_password.getPassword();
       if(input.length == 0){
         label_meldung.setBackground(null);
@@ -88,7 +91,7 @@ public class test extends JFrame implements ActionListener {
     Arrays.fill(input, '0'); //FÜLLT ARRAY MIT 0 UM PASSWÖRTER ZU LÖSCHEN      
     field_password.selectAll();
     field_password.requestFocusInWindow();;
-    }
+    
   }
 }
 

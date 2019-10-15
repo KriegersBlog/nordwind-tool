@@ -16,7 +16,7 @@ import java.util.*; //ARRAYS
 public class test extends JFrame implements ActionListener {
   // Anfang Attribute
   private String confirm = "Confirm";
-  private JButton button_login = new JButton();
+  private JButton button_login = new JButton();                                                                              
   private JPasswordField field_password = new JPasswordField();
   private JLabel label_meldung = new JLabel();
   // Ende Attribute
@@ -74,7 +74,7 @@ public class test extends JFrame implements ActionListener {
         label_meldung.setText("Bitte Passwort eingeben");
         System.out.println("Bitte geben Sie ein Passwort ein");
         }
-      else if(password_check(input)){
+      else if(password.check(input)){
         label_meldung.setBackground(Color.GREEN);
         label_meldung.setText("Korrektes Passwort");
         System.out.println("Korrektes Passwort"); 
@@ -90,22 +90,6 @@ public class test extends JFrame implements ActionListener {
     field_password.requestFocusInWindow();;
     }
   }
-  
-  private static boolean password_check(char[] input){
-    boolean return_variable = true;
-    char[] password = {'A', 'B', 'C'};
-    if(input.length != password.length){
-      return_variable = false;
-    }
-    else {
-      return_variable = Arrays.equals(input, password);    
-      }
-    Arrays.fill(password, '0');
-    return return_variable;
-  }
-  // Ende Methoden
-  
-  
 }
 
 
