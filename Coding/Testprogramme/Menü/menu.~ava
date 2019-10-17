@@ -10,7 +10,7 @@ public class menu extends JFrame {
   // Anfang Attribute
   private JMenuBar menu_bar = new JMenuBar();
   
-  private JMenu menu_erstellen = new JMenu("Abfragen");
+  private JMenu menu_erstellen = new JMenu("Erstellen");
   private JMenu menu_aendern = new JMenu("Ändern");
   private JMenu menu_abfragen = new JMenu("Abfragen");
   

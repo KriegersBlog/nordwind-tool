@@ -10,18 +10,25 @@ public class menu extends JFrame {
   // Anfang Attribute
   private JMenuBar menu_bar = new JMenuBar();
   
-  private JMenu menu_erstellen = new JMenu("Abfragen");
-  private JMenu menu_aendern = new JMenu("Ändern");
   private JMenu menu_abfragen = new JMenu("Abfragen");
+  private JMenu menu_anlegen = new JMenu("Anlegen");
+  private JMenu menu_editieren = new JMenu("Editieren");
+  private JMenu menu_admin = new JMenu("Admin");
+  private JMenu menu_info = new JMenu("Info");
   
-  private JMenuItem item_abfragen_artikel = new JMenuItem("Artikel");
-  private JMenuItem item_abfragen_personal = new JMenuItem("Peronal");
   
-  private JMenuItem menu_aendern_artikel = new JMenuItem("Artikel");
-  private JMenuItem menu_aendern_personal = new JMenuItem("Personal");
+  private JMenuItem item_abfragen = new JMenuItem("Neue Abfrage");
+
+  private JMenuItem item_anlegen = new JMenuItem("Datensatz anlegen");
   
-  private JMenuItem menu_erstellen_artikel = new JMenuItem("Artikel");
-  private JMenuItem menu_erstellen_personal = new JMenuItem("Personal");
+  private JMenuItem item_editieren = new JMenuItem("Datensätze editieren");
+  
+  private JMenuItem item_admin_rechteverwaltung = new JMenuItem("Rechteverwaltung");
+  private JMenuItem item_admin_benutzerverwaltung = new JMenuItem("Benutzerverwaltung");
+  
+  private JMenuItem item_info_info = new JMenuItem("Info");
+  private JMenuItem item_info_hilfe = new JMenuItem("Hilfe");
+  
   // Ende Attribute
   
   public menu() { 
@@ -40,49 +47,45 @@ public class menu extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
-    menu_aendern.add(menu_aendern_personal);
-    menu_aendern.add(menu_aendern_artikel);
-    menu_erstellen.add(menu_erstellen_artikel);
-    menu_erstellen.add(menu_erstellen_personal);
-    menu_abfragen.add(item_abfragen_artikel);
-    menu_abfragen.add(item_abfragen_personal);
+    menu_abfragen.add(item_abfragen);
+    menu_anlegen.add(item_anlegen);
+    menu_editieren.add(item_editieren);
+    menu_admin.add(item_admin_rechteverwaltung);
+    menu_admin.add(item_admin_benutzerverwaltung);
+    menu_info.add(item_info_info);
+    menu_info.add(item_info_hilfe);
     
-    menu_bar.add(menu_erstellen);
-    menu_bar.add(menu_aendern);
     menu_bar.add(menu_abfragen);
+    menu_bar.add(menu_anlegen);
+    menu_bar.add(menu_editieren);
+    menu_bar.add(menu_admin);
+    menu_bar.add(menu_info);
     // jMenu1.setMnemonic(KeyEvent.VK_A);  Tastenkürzel um Menü zu öffnen
     // Ende Komponenten
      
     setJMenuBar(menu_bar);
     setVisible(true);
     
-    menu_aendern_artikel.addActionListener(new ActionListener() {
+    item_abfragen.addActionListener(new ActionListener() {
             // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Sucks");
+                System.out.println("Item von 'Abfragen'");
             }
     }); 
     
-    menu_aendern_personal.addActionListener(new ActionListener() {
+    item_anlegen.addActionListener(new ActionListener() {
             // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Hard");
+                System.out.println("Item von 'Anlegen'");
             }
     });
     
-    menu_erstellen_artikel.addActionListener(new ActionListener() {
+    item_editieren.addActionListener(new ActionListener() {
             // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Sucks");
+                System.out.println("Item von 'Editieren'");
             }
     }); 
-    
-    menu_erstellen_personal.addActionListener(new ActionListener() {
-            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Hard");
-            }
-    });
   }
   
   // Anfang Methoden
