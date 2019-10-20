@@ -100,11 +100,13 @@ public class NordwindTool extends JFrame {
     label_login.setHorizontalAlignment(SwingConstants.CENTER);
     label_login.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
     panel_login.add(label_login);
-    label_loginstatus.setBounds(427, 314, 150, 20);
+    label_loginstatus.setBounds(405, 314, 179, 20);
     label_loginstatus.setText("");
     label_loginstatus.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+    label_loginstatus.setOpaque(true);
+    label_loginstatus.setBackground(Color.WHITE);
+    label_loginstatus.setHorizontalAlignment(SwingConstants.CENTER);
     panel_login.add(label_loginstatus);
-    label_loginstatus.setBackground(null);
     panel_home.setBounds(0, 0, 1024, 540);
     panel_home.setOpaque(false);
     
@@ -218,7 +220,7 @@ public class NordwindTool extends JFrame {
     label_logout_map.put(TextAttribute.SIZE, new Integer(12));
     label_logout_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_logout.setFont(new Font(label_logout_map));
-    
+    label_loginstatus.setBackground(null);
     menu_control();
 
     panel_home.add(label_logout);
@@ -240,27 +242,34 @@ public class NordwindTool extends JFrame {
       }
     
     else {
-      if(dbQuery.checkName(loginname)){
+      if(!dbQuery.checkName(loginname)){
         char[] passwordfield_input = passwordfield_login.getPassword();
         if(passwordfield_input.length == 0){
-          label_loginstatus.setBackground(null);
           label_loginstatus.setText("Bitte Passwort eingeben");
         }
         
         else{
-          if(PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))){     
-            login();
+          try{
+            if(PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))){     
+              login();
+            }
             
+            else{
+              label_loginstatus.setBackground(Color.RED);
+              label_loginstatus.setText("Falsches Passwort");
+              Arrays.fill(passwordfield_input, '0'); //FÜLLT ARRAY MIT 0 UM PASSWÖRTER ZU LÖSCHEN      
+              passwordfield_login.selectAll();
+              passwordfield_login.requestFocusInWindow();
+            }
           }
-          else{
-            label_loginstatus.setText("Falsches Passwort");
-            Arrays.fill(passwordfield_input, '0'); //FÜLLT ARRAY MIT 0 UM PASSWÖRTER ZU LÖSCHEN      
-            passwordfield_login.selectAll();
-            passwordfield_login.requestFocusInWindow();
+          catch(Exception e){
+            System.out.println("Schwerwiegender Passwortfehler, bitte wenden Sie sich an einen Admin");
+            label_loginstatus.setText("Fehler: Bitte an Admin wenden");
           }
         }         
       }
       else{
+        label_loginstatus.setBackground(Color.RED);
         label_loginstatus.setText("Benutzer existiert nicht!");
       }
     }
@@ -274,6 +283,7 @@ public class NordwindTool extends JFrame {
     textfield_loginname.setText("");
     passwordfield_login.setText("");
     label_loginstatus.setText("");
+    label_loginstatus.setBackground(null);
     
     cl_main.show(panel_main, "HOME");
     label_loginname.setText("Angemeldet als '" + loginname + "'");
@@ -312,4 +322,3 @@ public class NordwindTool extends JFrame {
  
   // Ende Methoden
 }
-
