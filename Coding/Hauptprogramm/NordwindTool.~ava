@@ -9,7 +9,7 @@ import java.awt.font.TextAttribute;
 // Autor: Julian Krieger
 // Datum: 15.10.2019
 
-public class nordwind_tool extends JFrame {
+public class NordwindTool extends JFrame {
   // Anfang Attribute
   private JPanel panel_main = new JPanel(new CardLayout());
   private JPanel panel_login = new JPanel(null, true);
@@ -52,7 +52,7 @@ public class nordwind_tool extends JFrame {
   CardLayout cl_main = (CardLayout) panel_main.getLayout();
   // Ende Attribute
   
-  public nordwind_tool() { 
+  public NordwindTool() { 
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -229,30 +229,42 @@ public class nordwind_tool extends JFrame {
   // Anfang Methoden
   
   public static void main(String[] args) {
-    new nordwind_tool();
+    new NordwindTool();
   }
   
   public void login_process(){
     loginname = textfield_loginname.getText();
-    char[] passwordfield_input = passwordfield_login.getPassword();
-      if(passwordfield_input.length == 0){
-        label_loginstatus.setBackground(null);
-        label_loginstatus.setText("Bitte Passwort eingeben");
+    
+    if(loginname.length() == 0){
+      label_loginstatus.setText("Bitte Benutzernamen eingeben");
+      }
+    
+    else {
+      if(dbQuery.checkName(loginname)){
+        char[] passwordfield_input = passwordfield_login.getPassword();
+        if(passwordfield_input.length == 0){
+          label_loginstatus.setBackground(null);
+          label_loginstatus.setText("Bitte Passwort eingeben");
         }
-      else if(password.check(passwordfield_input)){
-        label_loginstatus.setBackground(Color.GREEN);
-        label_loginstatus.setText("Korrektes Passwort");
-        login();
+        
+        else{
+          if(PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))){     
+            login();
+            
+          }
+          else{
+            label_loginstatus.setText("Falsches Passwort");
+            Arrays.fill(passwordfield_input, '0'); //FÜLLT ARRAY MIT 0 UM PASSWÖRTER ZU LÖSCHEN      
+            passwordfield_login.selectAll();
+            passwordfield_login.requestFocusInWindow();
+          }
+        }         
       }
-      else {   
-      label_loginstatus.setBackground(Color.RED);                                  
-      label_loginstatus.setText("Falsches Passwort");
+      else{
+        label_loginstatus.setText("Benutzer existiert nicht!");
       }
-  
-    Arrays.fill(passwordfield_input, '0'); //FÜLLT ARRAY MIT 0 UM PASSWÖRTER ZU LÖSCHEN      
-    passwordfield_login.selectAll();
-    passwordfield_login.requestFocusInWindow();
     }
+  }
   
   public void login(){
     loginstate = true;
