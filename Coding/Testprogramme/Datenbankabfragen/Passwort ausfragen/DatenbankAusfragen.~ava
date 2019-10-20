@@ -13,7 +13,6 @@ public class DatenbankAusfragen {
       Connection con = DriverManager.getConnection(url,"java", "java"); // Verbindung wird definiert: "DB, Name, PW"     
       stmt = con.createStatement(); // Statement, was auch immer, wird erstellt                          
       
-      
       /*
         executeQuery gibt ein ResultSet zurück
         executeUpdate gibt INT zurück (Betroffene Datensätze)      

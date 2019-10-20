@@ -1,6 +1,6 @@
 object NordwindTool: TFGUIForm
-  Left = 2188
-  Top = 248
+  Left = 576
+  Top = 145
   BorderIcons = [biSystemMenu]
   Caption = 'Nordwind Tool - Made by Julian Krieger'
   ClientHeight = 537
