@@ -2,10 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import java.util.*; //ARRAYS
-import java.util.Hashtable;
+import java.util.*;
 import java.awt.font.TextAttribute;  
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -13,70 +11,52 @@ import java.text.SimpleDateFormat;
 // Datum: 15.10.2019
 
 public class NordwindTool extends JFrame {
-  // Anfang Attribute
+  
   /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
   
-  //PANELS
-  //Panels mit CardLayout
-  private JPanel panel_main = new JPanel(new CardLayout());
-  private JPanel panel_filter = new JPanel(new CardLayout());
-  private JPanel panel_bestellungen = new JPanel(null, true);
-  private JPanel panel_kategorien = new JPanel(null, true);
-  private JPanel panel_kunden = new JPanel(null, true);
-  private JPanel panel_lieferanten = new JPanel(null, true);
-  private JPanel panel_personal = new JPanel(null, true);
-  private JComboBox<String> combobox_anrede = new JComboBox<String>();
-  private DefaultComboBoxModel<String> combobox_anredeModel = new DefaultComboBoxModel<String>();
-  private JPanel panel_versandfirmen = new JPanel(null, true);
-  private JPanel panel_null = new JPanel(null, true);
-  private JLabel label_BestellteEinheiten = new JLabel();
-  
-  
   DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-  JFormattedTextField datefield_bestelldatum = new JFormattedTextField(normalDateFormat);
-  JFormattedTextField datefield_lieferdatum = new JFormattedTextField(normalDateFormat);
-  JFormattedTextField datefield_versanddatum = new JFormattedTextField(normalDateFormat);
-  JFormattedTextField datefield_geburtsdatum = new JFormattedTextField(normalDateFormat);
-  JFormattedTextField datefield_einstellung = new JFormattedTextField(normalDateFormat);
-  
-  //Panels ohne Layout
-  private JPanel panel_artikel = new JPanel(null, true);
-  private JPanel panel_login = new JPanel(null, true);
-  private JPanel panel_home = new JPanel(null, true);
+  //Main - Panel
+  private JPanel panel_main = new JPanel(new CardLayout());
   private JLabel label_filter = new JLabel();
-  private JLabel label_tablesList = new JLabel();
+  private JLabel label_tablesList = new JLabel(); 
+  private JPanel panel_home = new JPanel(null, true);
+  private JTextField textfield_loginname = new JTextField();
+  private JLabel label_logout = new JLabel();
+  
+  //RESULT - PANEL
   private JPanel panel_results = new JPanel(null, true);
+  
+  //LOGIN - PANEL
+  private JPanel panel_login = new JPanel(null, true); 
+  private JLabel label_loginname = new JLabel();
+  private JLabel label_login = new JLabel();
+  private JLabel label_loginstatus = new JLabel();
+  private JPasswordField passwordfield_login = new JPasswordField();
+  private JButton button_login = new JButton();
+  
+  //Liste aller Tabellen
   private JPanel panel_tables = new JPanel(null, true);
   private JList list_tables = new JList();
   private DefaultListModel list_tablesModel = new DefaultListModel();
   private JScrollPane list_tablesScrollPane = new JScrollPane(list_tables);
   private JButton button_resetList = new JButton();
+  
+  //Filterpanels
+  private JPanel panel_filter = new JPanel(new CardLayout()); //Haupt-Panel, auf dem alle Panels angzeigt werden 
+  private JPanel panel_bestellungen = new JPanel(null, true);
+  private JPanel panel_kategorien = new JPanel(null, true);
+  private JPanel panel_kunden = new JPanel(null, true);
+  private JPanel panel_lieferanten = new JPanel(null, true);
+  private JPanel panel_personal = new JPanel(null, true); 
+  private JPanel panel_versandfirmen = new JPanel(null, true);
+  private JPanel panel_null = new JPanel(null, true);
   private JPanel panel_bestelldetails = new JPanel(null, true);
+  private JPanel panel_artikel = new JPanel(null, true);
   
-  /*---------------------SWING ELEMENTE---------------------------------------*/
-  
-  //EINGABE - ELEMENTE 
-  
-  //Nummernfelder
-  private JNumberField numberfield_anzahl = new JNumberField();
-  private JNumberField numberfield_rabatt = new JNumberField(); 
-  
-  //Textfelder
-  private JTextField textfield_loginname = new JTextField();
-  
-  //Buttons
-  private JButton button_login = new JButton();
-  
-  //AUSGABE
-  
-  //Label
-  private JLabel label_logout = new JLabel();
-  private JLabel label_loginname = new JLabel();
-  private JLabel label_login = new JLabel();
-  private JLabel label_loginstatus = new JLabel();
-  
+  //Swing Elemente der Filter: Label + passendes Eingabefeld
   private JLabel label_artikelnr = new JLabel();
   private JNumberField numberfield_artikelnr = new JNumberField();
+  
   private JLabel label_artikelname = new JLabel();
   private JTextField textfield_artikelname = new JTextField();
   
@@ -91,83 +71,119 @@ public class NordwindTool extends JFrame {
   
   private JLabel label_einzelpreis = new JLabel();
   private JNumberField numberfield_einzelpreis = new JNumberField();
+  
   private JLabel label_lagerbestand = new JLabel();
   private JNumberField numberfield_lagerbestand = new JNumberField();
+  
   private JLabel label_bestellteEinheiten = new JLabel();
   private JNumberField numberfield_bestellteEinheiten = new JNumberField();
+  
   private JLabel label_mindestbestand = new JLabel();
   private JNumberField numberfield_mindestbestand = new JNumberField();
+  
   private JLabel label_auslaufartikel = new JLabel();
+  private JCheckBox checkbox_auslaufartikel = new JCheckBox();
   
   private JLabel label_bestellnr = new JLabel();
   private JNumberField numberfield_bestellnr = new JNumberField();
+  
   private JLabel label_kundencode = new JLabel();
   private JTextField textfield_kundencode = new JTextField();
   
-  private JLabel label_anzahl = new JLabel(); 
-  private JLabel label_rabatt = new JLabel(); 
+  private JLabel label_anzahl = new JLabel();
+  private JNumberField numberfield_anzahl = new JNumberField();
   
+  private JLabel label_rabatt = new JLabel();
+  private JNumberField numberfield_rabatt = new JNumberField();
+   
   private JLabel label_personalnr = new JLabel();
-  private JNumberField numberfield_personalnr = new JNumberField();
+  private JNumberField numberfield_personalnr = new JNumberField();    
+  
   private JLabel label_bestelldatum = new JLabel();
+  private JFormattedTextField datefield_bestelldatum = new JFormattedTextField(normalDateFormat);
+  
   private JLabel label_lieferdatum = new JLabel();
+  private JFormattedTextField datefield_lieferdatum = new JFormattedTextField(normalDateFormat);
+  
   private JLabel label_versanddatum = new JLabel();
+  private JFormattedTextField datefield_versanddatum = new JFormattedTextField(normalDateFormat);
+  
   private JLabel label_versandUeber = new JLabel();
   private JNumberField numberfield_versandUeber = new JNumberField();
+  
   private JLabel label_frachtkosten = new JLabel();
   private JNumberField numberfield_frachtkosten = new JNumberField();
+  
   private JLabel label_empfaenger = new JLabel();
   private JTextField textfield_empfaenger = new JTextField();
+  
   private JLabel label_strasse = new JLabel();
   private JTextField textfield_strasse = new JTextField();
+  
   private JLabel label_plzOrt = new JLabel();
   private JTextField textfield_ort = new JTextField();
   private JTextField textfield_plz = new JTextField();
   
   private JLabel label_land = new JLabel();
   private JTextField textfield_land = new JTextField();
+  
   private JLabel label_kategoriename = new JLabel();
   private JTextField textfield_kategoriename = new JTextField();
+  
   private JLabel label_beschreibung = new JLabel();
   private JTextField textfield_beschreibung = new JTextField();
+  
   private JLabel label_firma = new JLabel();
   private JTextField textfield_firma = new JTextField();
+  
   private JLabel label_kontaktperson = new JLabel();
   private JTextField textfield_kontaktperson = new JTextField();
-  private JLabel label_position = new JLabel();
   
-  private JLabel label_telefon = new JLabel();
-  private JTextField textfield_telefon = new JTextField();
+  private JLabel label_position = new JLabel();
+  private JTextField textfield_position = new JTextField(); 
+  
+  private JLabel label_telefon = new JLabel(); 
+  private JNumberField numberfield_telefon = new JNumberField();
+  
   private JLabel label_telefax = new JLabel();
-  private JTextField textfield_telefax = new JTextField();
+  private JNumberField numberfield_telefax = new JNumberField();
+  
   private JLabel label_homepage = new JLabel();   
   private JTextField textfield_homepage = new JTextField();
+  
   private JLabel label_vorname = new JLabel();
   private JTextField textfield_vorname = new JTextField();
+  
   private JLabel label_nachname = new JLabel();    
-  private JTextField textfield_nachname = new JTextField(); 
-  private JLabel label_anrede = new JLabel();
-  private JLabel label_datum = new JLabel();
-  private JLabel label_einstellung = new JLabel();
-  private JLabel label_durchwahl = new JLabel();
-  private JNumberField numberfield_durchwahl = new JNumberField();
-  private JLabel label_bemerkung = new JLabel();
-  private JTextField textfield_bemerkung = new JTextField();
-  private JLabel label_vorgesetzte = new JLabel();
-  private JLabel label_geburtsdatum = new JLabel(); 
-  private JLabel label_bemerkungen = new JLabel();
-  private JLabel label_firmennr = new JLabel();
-  private JCheckBox checkbox_auslaufartikel = new JCheckBox();
-  private JTextField textfield_position = new JTextField(); 
-  private JNumberField numberfield_telefon = new JNumberField();
-  private JNumberField numberfield_telefax = new JNumberField();
-  private JTextField textfield_bemerkungen = new JTextField();
+  private JTextField textfield_nachname = new JTextField();
+  
+  private JLabel label_vorgesetzte = new JLabel();  
   private JTextField textfield_vorgesetzte = new JTextField(); 
-  private JPasswordField passwordfield_login = new JPasswordField();
+  
+  private JLabel label_geburtsdatum = new JLabel();
+  private JFormattedTextField datefield_geburtsdatum = new JFormattedTextField(normalDateFormat);
+  
+  private JLabel label_bemerkungen = new JLabel();
+  private JTextField textfield_bemerkungen = new JTextField();
+  
+  private JLabel label_firmennr = new JLabel(); 
   private JNumberField numberfield_firmennr = new JNumberField();
   
-  //MENÜ DEKLARIEREN
+  private JLabel label_anrede = new JLabel();
+  private JComboBox<String> combobox_anrede = new JComboBox<String>();
+  private DefaultComboBoxModel<String> combobox_anredeModel = new DefaultComboBoxModel<String>();
   
+  private JLabel label_einstellung = new JLabel();
+  private JFormattedTextField datefield_einstellung = new JFormattedTextField(normalDateFormat);
+  
+  private JLabel label_durchwahl = new JLabel();
+  private JNumberField numberfield_durchwahl = new JNumberField();
+  
+  private JLabel label_bemerkung = new JLabel();
+  private JTextField textfield_bemerkung = new JTextField();
+  
+  
+  /*-----------------MENÜ-KOMPONENTEN ERSTELLEN-------------------------------*/
   //Menüleiste erstellen
   private JMenuBar menu_bar = new JMenuBar();
   
@@ -190,15 +206,18 @@ public class NordwindTool extends JFrame {
   private JMenuItem item_about = new JMenuItem("Über 'Nordwind - Tool'");
   private JMenuItem item_help = new JMenuItem("Hilfe");
   
+  
+  /*------------------------VARIABLEN-----------------------------------------*/
   String loginname;
   boolean loginstate = false;
   
+  //Card Layouts
   CardLayout cl_main = (CardLayout) panel_main.getLayout();
   CardLayout cl_filter = (CardLayout) panel_filter.getLayout();
-  // Ende Attribute
+  
   
   public NordwindTool() { 
-    // Frame-Initialisierung
+    /*-----------------FRAME-INITIALISIERUNG----------------------------------*/
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     int frameWidth = 1280; 
@@ -212,20 +231,31 @@ public class NordwindTool extends JFrame {
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
-    // Anfang Komponenten
     
+    /*------------------PANELS KONFIGURIEREN----------------------------------*/
+    
+    /*           MAIN PANEL            */
     panel_main.setBounds(0, 0, 1366, 680);
     panel_main.setOpaque(false);
     cp.add(panel_main);
-    panel_login.setBounds(0, 0, 1366, 680);
-    panel_login.setOpaque(false);
     
-    //PANELS DEM MAIN-PANEL (cl_main) HINZUFÜGEN
-    panel_main.add(panel_login, "LOGIN");
+    /*           HOME PANEL            */
+    panel_home.setBounds(0, 0, 1366, 680);
+    panel_home.setOpaque(false);
     panel_main.add(panel_home, "HOME");
     
-    //PANELS DEM FILTER-PANEL (cl_filter) HINZUFÜGEN  
-    //panel_filter.add(panel_null, "NULL");
+    /*           LOGIN PANEL            */
+    panel_login.setBounds(0, 0, 1366, 680);
+    panel_login.setOpaque(false);
+    panel_main.add(panel_login, "LOGIN"); 
+    
+    
+    /*           FILTER PANEL          */ 
+    panel_filter.setBounds(370, 100, 300, 512);
+    panel_filter.setOpaque(true);
+    panel_filter.setBackground(Color.YELLOW);
+    panel_home.add(panel_filter);
+    //Objekte zum Panel hinzufügen
     panel_filter.add(panel_artikel, "ARTIKEL");
     panel_filter.add(panel_bestelldetails, "BESTELLDETAILS");
     panel_filter.add(panel_bestellungen, "BESTELLUNGEN");
@@ -236,82 +266,142 @@ public class NordwindTool extends JFrame {
     panel_filter.add(panel_versandfirmen, "VERSANDFIRMEN"); 
     panel_filter.add(panel_null, "NULL");
     
+    /*        TABELLEN PANEL          */ 
+    panel_tables.setBounds(30, 100, 300, 480);
+    panel_tables.setOpaque(true);
+    panel_home.add(panel_tables);
     
+    /*      ALLE FILTER PANELS       */
+    panel_artikel.setBounds(328, 576, 300, 400);
+    panel_artikel.setOpaque(true);
+    panel_artikel.setBackground(Color.CYAN);
+    
+    panel_bestelldetails.setBounds(360, 576, 300, 532);
+    panel_bestelldetails.setOpaque(true);
+    panel_bestelldetails.setBackground(Color.GREEN);
+    
+    panel_bestellungen.setBounds(336, 584, 300, 400);
+    panel_bestellungen.setOpaque(true);
+    panel_bestellungen.setBackground(new Color(0xFFC800));
+    
+    panel_kategorien.setBounds(352, 576, 300, 400);
+    panel_kategorien.setOpaque(true);
+    panel_kategorien.setBackground(new Color(0xFFAFAF));
+    
+    panel_kunden.setBounds(362, 577, 300, 400);
+    panel_kunden.setOpaque(true);
+    panel_kunden.setBackground(Color.MAGENTA);
+    
+    panel_lieferanten.setBounds(355, 576, 300, 400);
+    panel_lieferanten.setOpaque(true);
+    panel_lieferanten.setBackground(Color.RED);
+    
+    panel_personal.setBounds(0, 32, 300, 400);
+    panel_personal.setOpaque(true);
+    panel_personal.setBackground(Color.BLUE);
+    
+    panel_versandfirmen.setBounds(368, 571, 300, 400);
+    panel_versandfirmen.setOpaque(true);
+    panel_versandfirmen.setBackground(new Color(0x404040));
+    
+    panel_null.setBounds(376, 576, 300, 400);
+    panel_null.setOpaque(true);
+    panel_null.setBackground(new Color(0xEEEEEE));
+    
+    
+    /*-----------------SWING-ELEMENTE KONFIGURIEREN---------------------------*/
+    //LOGIN PANEL
     passwordfield_login.setBounds(380, 218, 230, 40);
     passwordfield_login.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
     passwordfield_login.setToolTipText("Passwort eingeben");
     panel_login.add(passwordfield_login);
+    
     textfield_loginname.setBounds(380, 160, 230, 40);
     textfield_loginname.setText("");
     textfield_loginname.setToolTipText("Anmeldename eingeben");
     textfield_loginname.setHorizontalAlignment(SwingConstants.LEFT);
     textfield_loginname.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
     panel_login.add(textfield_loginname);
+     
     button_login.setBounds(405, 264, 179, 41);
     button_login.setText("Anmelden");
     button_login.setMargin(new Insets(2, 2, 2, 2)); 
-    
     button_login.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
     panel_login.add(button_login);
+    
     label_login.setBounds(374, 118, 233, 36);
     label_login.setText("Bitte melden Sie sich an");
     label_login.setHorizontalAlignment(SwingConstants.CENTER);
     label_login.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
     panel_login.add(label_login);
+    
     label_loginstatus.setBounds(405, 314, 179, 20);
     label_loginstatus.setText("");
     label_loginstatus.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
     label_loginstatus.setOpaque(true);
     label_loginstatus.setHorizontalAlignment(SwingConstants.CENTER);
     panel_login.add(label_loginstatus);
-    panel_home.setBounds(0, 0, 1366, 680);
-    panel_home.setOpaque(false);
     
-    //MENÜ KONFIGURIEREN
-    //Items zu "menu_dml" hinzufügen
-    menu_dml.add(item_query);
-    menu_dml.add(item_create);
-    menu_dml.add(item_edit);
-    menu_dml.add(item_home);
-    
-    //Items zu "menu_admin" hinzufügen
-    menu_admin.add(item_rightAdministration);
-    menu_admin.add(item_userAdministration);
-    
-    //Items zu "menu_info" hinzufügen
-    menu_info.add(item_about);
-    menu_info.add(item_help);
-    
-    //Menüs zur Menüleiste hinzufügen
-    menu_bar.add(menu_dml);
-    menu_bar.add(menu_admin);
-    menu_bar.add(menu_info);
-    
-    
-    setJMenuBar(menu_bar);
-    setVisible(true);
-    
-    
-    
+    //HOME PANEL
     label_loginname.setBounds(1008, 2, 182, 20);
     label_loginname.setHorizontalAlignment(SwingConstants.RIGHT);
     panel_home.add(label_loginname);
+    
+    panel_results.setBounds(721, 104, 500, 536);
+    panel_results.setOpaque(true);
+    panel_results.setBackground(new Color(0xFFAFAF));
+    panel_home.add(panel_results);
+    
+    label_filter.setBounds(392, 76, 250, 20);
+    label_filter.setText("FILTERAUSWAHL");
+    label_filter.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+    label_filter.setHorizontalAlignment(SwingConstants.CENTER);
+    panel_home.add(label_filter);
+    
+    label_tablesList.setBounds(44, 68, 250, 33);
+    label_tablesList.setText("TABELLENAUSWAHL");
+    label_tablesList.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+    label_tablesList.setHorizontalAlignment(SwingConstants.CENTER); 
+    panel_home.add(label_tablesList);
+    
     label_logout.setBounds(1196, 0, 70, 22);
     label_logout.setText("ABMELDEN");
+    label_logout.setForeground(Color.BLUE);
+    label_logout.setHorizontalAlignment(SwingConstants.CENTER);
     Hashtable<TextAttribute, Object> label_abmelden_map = new Hashtable<TextAttribute, Object>();
     label_abmelden_map.put(TextAttribute.FAMILY, "Trebuchet MS");
     label_abmelden_map.put(TextAttribute.SIZE, new Integer(12));
     label_abmelden_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    label_logout.setForeground(Color.BLUE);
-    label_logout.setHorizontalAlignment(SwingConstants.CENTER);
     Hashtable<TextAttribute, Object> label_logout_map = new Hashtable<TextAttribute, Object>();
     label_logout_map.put(TextAttribute.FAMILY, "Trebuchet MS");
     label_logout_map.put(TextAttribute.SIZE, new Integer(12));
     label_logout_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_logout.setFont(new Font(label_logout_map));
-    label_loginstatus.setBackground(null);
-    menu_control();
+    panel_home.add(label_logout);
     
+    //TABELLEN PANEL
+    button_resetList.setBounds(9, 416, 278, 41);
+    button_resetList.setText("Auswahl zurücksetzen");
+    button_resetList.setMargin(new Insets(2, 2, 2, 2));
+    button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+    panel_tables.add(button_resetList);
+    
+    list_tablesScrollPane.setBounds(6, 11, 286, 388);
+    list_tablesModel.addElement("artikel");
+    list_tablesModel.addElement("bestelldetails");
+    list_tablesModel.addElement("bestellungen");
+    list_tablesModel.addElement("kategorien");
+    list_tablesModel.addElement("kunden");
+    list_tablesModel.addElement("lieferanten");
+    list_tablesModel.addElement("personal");
+    list_tablesModel.addElement("versandfirmen");  
+    panel_tables.add(list_tablesScrollPane);
+    
+    list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
+    list_tables.setModel(list_tablesModel);
+    
+    //ALLE FILTER PANELS
+    //Labels: Texte setzen
     label_artikelname.setText("Artikelname:");
     label_lagerbestand.setText("Lagerbestand:"); 
     label_bestellteEinheiten.setText("Bestellte Einh.:");
@@ -352,6 +442,7 @@ public class NordwindTool extends JFrame {
     label_firmennr.setText("Firmennr.:"); 
     label_firma.setText("Firma:");
     
+    //Alle ToolTipTexte setzen
     textfield_artikelname.setToolTipText("Artikelname angeben");
     textfield_liefereinheit.setToolTipText("Liefereinheit angeben");
     textfield_land.setToolTipText("Land angeben");
@@ -387,98 +478,44 @@ public class NordwindTool extends JFrame {
     numberfield_personalnr.setToolTipText("Personalnummer angeben");
     numberfield_telefax.setToolTipText("Telefax angeben");
     numberfield_firmennr.setToolTipText("Firmennummer angeben");
-    numberfield_mindestbestand.setToolTipText("Mindestbestand angeben");    
+    numberfield_mindestbestand.setToolTipText("Mindestbestand angeben");
     
-    label_bestellnr.setBounds(10, 95, 100, 20);
-    panel_home.add(label_logout);
-    panel_filter.setBounds(370, 100, 300, 512);
-    panel_filter.setOpaque(true);
-    panel_filter.setBackground(Color.YELLOW);
-    panel_home.add(panel_filter);
-    panel_artikel.setBounds(328, 576, 300, 400);
-    panel_artikel.setOpaque(true);
-    panel_artikel.setBackground(Color.CYAN);
-    panel_bestelldetails.setBounds(360, 576, 300, 532);
-    panel_bestelldetails.setOpaque(true);
-    panel_bestelldetails.setBackground(Color.GREEN);
-    panel_results.setBounds(721, 104, 500, 536);
-    panel_results.setOpaque(true);
-    panel_results.setBackground(new Color(0xFFAFAF));
-    panel_home.add(panel_results);
-    panel_bestellungen.setBounds(336, 584, 300, 400);
-    panel_bestellungen.setOpaque(true);
-    panel_bestellungen.setBackground(new Color(0xFFC800));
-    panel_kategorien.setBounds(352, 576, 300, 400);
-    panel_kategorien.setOpaque(true);
-    panel_kategorien.setBackground(new Color(0xFFAFAF));
-    panel_kunden.setBounds(362, 577, 300, 400);
-    panel_kunden.setOpaque(true);
-    panel_kunden.setBackground(Color.MAGENTA);
-    panel_lieferanten.setBounds(355, 576, 300, 400);
-    panel_lieferanten.setOpaque(true);
-    panel_lieferanten.setBackground(Color.RED);
-    panel_personal.setBounds(0, 32, 300, 400);
-    panel_personal.setOpaque(true);
-    panel_personal.setBackground(Color.BLUE);
-    panel_versandfirmen.setBounds(368, 571, 300, 400);
-    panel_versandfirmen.setOpaque(true);
-    panel_versandfirmen.setBackground(new Color(0x404040));
-    panel_null.setBounds(376, 576, 300, 400);
-    panel_null.setOpaque(true);
-    panel_null.setBackground(new Color(0xEEEEEE));
-    cl_filter.show(panel_filter, "NULL");
-    panel_tables.setBounds(30, 100, 300, 480);
-    panel_tables.setOpaque(true);
-    panel_home.add(panel_tables);
-    list_tablesScrollPane.setBounds(6, 11, 286, 388);
-    list_tables.setModel(list_tablesModel);
-    list_tablesModel.addElement("artikel");
-    list_tablesModel.addElement("bestelldetails");
-    list_tablesModel.addElement("bestellungen");
-    list_tablesModel.addElement("kategorien");
-    list_tablesModel.addElement("kunden");
-    list_tablesModel.addElement("lieferanten");
-    list_tablesModel.addElement("personal");
-    list_tablesModel.addElement("versandfirmen");
-    list_tables.addListSelectionListener(new ListSelectionListener() { 
-      public void valueChanged(ListSelectionEvent evt) { 
-        list_tables_ValueChanged(evt);
-      }
-    });
-    list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
-    panel_tables.add(list_tablesScrollPane);
-    button_resetList.setBounds(9, 416, 278, 41);
-    button_resetList.setText("Auswahl zurücksetzen");
-    button_resetList.setMargin(new Insets(2, 2, 2, 2));
-    button_resetList.addActionListener(new ActionListener() { 
-      public void actionPerformed(ActionEvent evt) { 
-        button_resetList_ActionPerformed(evt);
-      }
-    });
-    button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-    panel_tables.add(button_resetList);
+    //Feste Objekte konfigurieren
     combobox_anrede.setModel(combobox_anredeModel);
-    
     combobox_anredeModel.addElement("Herr");
     combobox_anredeModel.addElement("Frau");
-    combobox_anredeModel.addElement("Dr.");
+    combobox_anredeModel.addElement("Dr."); 
     panel_personal.add(combobox_anrede);
-    panel_personal.setToolTipText("");
-    label_filter.setBounds(392, 76, 250, 20);
-    label_filter.setText("FILTERAUSWAHL");
-    label_filter.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    label_filter.setHorizontalAlignment(SwingConstants.CENTER);
-    panel_home.add(label_filter);
-    label_tablesList.setBounds(44, 68, 250, 33);
-    label_tablesList.setText("TABELLENAUSWAHL");
-    label_tablesList.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    label_tablesList.setHorizontalAlignment(SwingConstants.CENTER);
-    panel_home.add(label_tablesList);
     
+    /*-------------------MENÜ KONFIGURIEREN-----------------------------------*/
+    //Items zu "menu_dml" hinzufügen
+    menu_dml.add(item_query);
+    menu_dml.add(item_create);
+    menu_dml.add(item_edit);
+    menu_dml.add(item_home);
+    
+    //Items zu "menu_admin" hinzufügen
+    menu_admin.add(item_rightAdministration);
+    menu_admin.add(item_userAdministration);
+    
+    //Items zu "menu_info" hinzufügen
+    menu_info.add(item_about);
+    menu_info.add(item_help);
+    
+    //Menüs zur Menüleiste hinzufügen
+    menu_bar.add(menu_dml);
+    menu_bar.add(menu_admin);
+    menu_bar.add(menu_info);
+    
+    
+    /*---------------------STARTBEDINGUNGEN-----------------------------------*/
+    cl_filter.show(panel_filter, "NULL");
     label_filter.setVisible(false);
-    //STANDARDMÄSSIG IST DIE TABELLE NICHT ZU SEHEN
-    disable_listPanel();
-    // Ende Komponenten
+    setJMenuBar(menu_bar);
+    setVisible(true);
+    label_loginstatus.setBackground(null);
+    menu_control();
+    
     
     /*--------------------------LISTENER--------------------------------------*/ 
      
@@ -566,15 +603,43 @@ public class NordwindTool extends JFrame {
       public void mouseClicked(MouseEvent e){
         logout();
         }
-    });               
-
+    });
+                   
+    list_tables.addListSelectionListener(new ListSelectionListener() { 
+      public void valueChanged(ListSelectionEvent evt) { 
+        list_tables_ValueChanged(evt);
+      }
+    });
+    
+    button_resetList.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent evt) { 
+        button_resetList_ActionPerformed(evt);
+      }
+    });
   }
   
-  // Anfang Methoden
+  /*------------------------MAIN METHODE--------------------------------------*/
   
   public static void main(String[] args) {
     new NordwindTool();
   }
+  
+  /*------------------LISTENER METHODEN---------------------------------------*/
+  
+  public void button_resetList_ActionPerformed(ActionEvent evt) {
+    // TODO hier Quelltext einfügen
+    list_tables.clearSelection();
+  }
+
+  public void list_tables_ValueChanged(ListSelectionEvent evt) {
+    // TODO hier Quelltext einfügen
+    if (!evt.getValueIsAdjusting()) {
+      openFilterPanel(list_tables.getSelectedIndex());
+    }  
+  }
+  
+  
+  
   
   public void login_process(){
     loginname = textfield_loginname.getText();
@@ -691,11 +756,10 @@ public class NordwindTool extends JFrame {
     switch (index){
       case -1: 
         cl_filter.show(panel_filter, "NULL");
-        
         label_filter.setVisible(false);
         break;
-      case 0: 
         
+      case 0:
         label_filter.setVisible(true);
           
         label_artikelnr.setBounds(10, 25, 100, 20);
@@ -767,8 +831,8 @@ public class NordwindTool extends JFrame {
         cl_filter.show(panel_filter, "ARTIKEL");
         System.out.println("CASE 0");
         break;
-      case 1:
         
+      case 1:
         label_filter.setVisible(true);
         label_bestellnr.setBounds(10, 25, 100, 20);
         panel_bestelldetails.add(label_bestellnr);
@@ -803,8 +867,8 @@ public class NordwindTool extends JFrame {
         cl_filter.show(panel_filter, "BESTELLDETAILS");
         System.out.println("CASE 1");
         break;
-      case 2: 
         
+      case 2: 
         label_filter.setVisible(true);
         label_bestellnr.setBounds(10, 25,100,20);
         panel_bestellungen.add(label_bestellnr);
@@ -906,8 +970,8 @@ public class NordwindTool extends JFrame {
         
         cl_filter.show(panel_filter, "KATEGORIEN");
         break;
+        
       case 4: 
-         
         label_filter.setVisible(true);
         label_kundencode.setBounds(10, 25, 100, 20);
         panel_kunden.add(label_kundencode);
@@ -968,8 +1032,8 @@ public class NordwindTool extends JFrame {
         
         cl_filter.show(panel_filter, "KUNDEN");
         break;
-      case 5: 
         
+      case 5:
         label_filter.setVisible(true);
         label_lieferantennr.setBounds(10, 25, 100, 20);
         panel_lieferanten.add(label_lieferantennr);
@@ -1036,8 +1100,8 @@ public class NordwindTool extends JFrame {
         
         cl_filter.show(panel_filter, "LIEFERANTEN");
         break;
-      case 6: 
         
+      case 6: 
         label_filter.setVisible(true);
         label_personalnr.setBounds(10, 25, 100, 20);
         panel_personal.add(label_personalnr);  
@@ -1128,8 +1192,8 @@ public class NordwindTool extends JFrame {
       
         cl_filter.show(panel_filter, "PERSONAL");
         break;
+        
       case 7: 
-         
         label_filter.setVisible(true);
         label_firmennr.setBounds(10, 25, 100, 20);
         panel_versandfirmen.add(label_firmennr);
@@ -1150,23 +1214,10 @@ public class NordwindTool extends JFrame {
         panel_versandfirmen.add(numberfield_telefon);
                 
         cl_filter.show(panel_filter, "VERSANDFIRMEN"); 
-        break;  
+        break;
+          
       default:
         System.out.println("Fataler Fehler. Bitte Admin kontaktieren"); 
-      }
     }
-  public void button_resetList_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
-    list_tables.clearSelection();
   }
-
-  public void list_tables_ValueChanged(ListSelectionEvent evt) {
-    // TODO hier Quelltext einfügen
-    if (!evt.getValueIsAdjusting()) {
-      openFilterPanel(list_tables.getSelectedIndex());
-    }  
-  }
-
-  // Ende Methoden
-  
 }

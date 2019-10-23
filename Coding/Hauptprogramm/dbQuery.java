@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class dbQuery extends test {
+public class dbQuery extends NordwindTool {
   
   //Returns true if the username is free
   public static boolean checkName(String username){
