@@ -9,7 +9,7 @@ public class dbQuery extends test {
     int counter = 0;
     
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
+      Class.forName("com.mysql.jdbc.Driver");
       String url = "jdbc:mysql://localhost:3306/nordwind_tool";  
       Connection con = DriverManager.getConnection(url,"java", "java");      
       stmt = con.createStatement();                        
@@ -41,7 +41,7 @@ public class dbQuery extends test {
     String password = null;
     
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
+      Class.forName("com.mysql.jdbc.Driver");
       String url = "jdbc:mysql://localhost:3306/nordwind_tool";  
       Connection con = DriverManager.getConnection(url,"java", "java");      
       stmt = con.createStatement();                        
@@ -67,7 +67,7 @@ public class dbQuery extends test {
   public static void createUser(String username, String password, String name, String surname, String email){
     try { 
       //MIT DB VERBINDEN
-      Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
+      Class.forName("com.mysql.jdbc.Driver");    //Treiber einbinden
       String url = "jdbc:mysql://localhost:3306/nordwind_tool";     //Datenbankverbindung angeben
       Connection con = DriverManager.getConnection(url,"java", "java");    // Verbindungsparameter angeben
       
@@ -99,7 +99,7 @@ public class dbQuery extends test {
     if(!checkName(username)){ 
       try { 
         //MIT DB VERBINDEN
-        Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
+        Class.forName("com.mysql.jdbc.Driver");    //Treiber einbinden
         String url = "jdbc:mysql://localhost:3306/nordwind_tool";     //Datenbankverbindung angeben
         Connection con = DriverManager.getConnection(url,"java", "java");    // Verbindungsparameter angeben
         

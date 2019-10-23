@@ -11,36 +11,148 @@ import java.awt.font.TextAttribute;
 
 public class NordwindTool extends JFrame {
   // Anfang Attribute
+  /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
+  
+  //PANELS
+  //Panels mit CardLayout
   private JPanel panel_main = new JPanel(new CardLayout());
   private JPanel panel_filter = new JPanel(new CardLayout());
-          private JPanel panel_artikel = new JPanel(null, true);
-            private JNumberField numberfield_artikelnr = new JNumberField();
-            private JTextField textfield_artikelname = new JTextField();
-            private JNumberField numberfield_lieferantennr = new JNumberField();
-            private JNumberField numberfield_kategorienr = new JNumberField();
-            private JTextField textfield_liefereinheit = new JTextField();
-            private JNumberField numberfield_einzelpreis = new JNumberField();
-            private JNumberField numberfield_lagerbestand = new JNumberField();
-            private JNumberField numberfield_bestellteEinheiten = new JNumberField();
-            private JNumberField numberfield_mindestbestand = new JNumberField();
-            private JCheckBox checkbox_auslaufartikel = new JCheckBox();
-          private JPanel panel_bestelldetails = new JPanel(null, true);
-            private JNumberField numberfield_anzahl = new JNumberField();
-            private JNumberField numberfield_rabatt = new JNumberField();
+  private JPanel panel_bestellungen = new JPanel(null, true);
+  private JPanel panel_kategorien = new JPanel(null, true);
+  private JPanel panel_kunden = new JPanel(null, true);
+  private JPanel panel_lieferanten = new JPanel(null, true);
+  private JPanel panel_personal = new JPanel(null, true);
+            private JComboBox<String> combobox_anrede = new JComboBox<String>();
+              private DefaultComboBoxModel<String> combobox_anredeModel = new DefaultComboBoxModel<String>();
+  private JPanel panel_versandfirmen = new JPanel(null, true);
+  private JPanel panel_null = new JPanel(null, true);
+  private JLabel label_BestellteEinheiten = new JLabel();
+  
+  //Panels ohne Layout
+  private JPanel panel_artikel = new JPanel(null, true);
   private JPanel panel_login = new JPanel(null, true);
   private JPanel panel_home = new JPanel(null, true);
+  private JPanel panel_results = new JPanel(null, true);
+  private JPanel panel_tables = new JPanel(null, true);
+  private JLabel label_tableList = new JLabel();
   private JList list_tables = new JList();
   private DefaultListModel list_tablesModel = new DefaultListModel();
   private JScrollPane list_tablesScrollPane = new JScrollPane(list_tables);
-  private JLabel label_tableList = new JLabel();
   private JButton button_resetList = new JButton();
+  private JPanel panel_bestelldetails = new JPanel(null, true);
+  
+  /*------------------SWING ELEMENTE------------------------------------------*/
+  
+  //EINGABE - ELEMENTE 
+  
+  //Nummernfelder
+  private JNumberField numberfield_anzahl = new JNumberField();
+  private JNumberField numberfield_rabatt = new JNumberField(); 
+  
+  //Textfelder
+  private JTextField textfield_loginname = new JTextField();
+  
+  //Buttons
+  private JButton button_login = new JButton();
+  
+  //AUSGABE
+  
+  //Label
   private JLabel label_logout = new JLabel();
   private JLabel label_loginname = new JLabel();
-  private JPasswordField passwordfield_login = new JPasswordField();
-  private JTextField textfield_loginname = new JTextField();
-  private JButton button_login = new JButton();
   private JLabel label_login = new JLabel();
   private JLabel label_loginstatus = new JLabel();
+  
+  private JLabel label_artikelnr = new JLabel();
+  private JNumberField numberfield_artikelnr = new JNumberField();
+  private JLabel label_artikelname = new JLabel();
+  private JTextField textfield_artikelname = new JTextField();
+  
+  private JLabel label_lieferantennr = new JLabel();
+  private JNumberField numberfield_lieferantennr = new JNumberField();
+  
+  private JLabel label_kategoriennr = new JLabel();
+  private JNumberField numberfield_kategorienr = new JNumberField();
+  
+  private JLabel label_liefereinheit = new JLabel();
+  private JTextField textfield_liefereinheit = new JTextField();
+  
+  private JLabel label_einzelpreis = new JLabel();
+  private JNumberField numberfield_einzelpreis = new JNumberField();
+  private JLabel label_lagerbestand = new JLabel();
+  private JNumberField numberfield_lagerbestand = new JNumberField();
+  private JLabel label_bestellteEinheiten = new JLabel();
+  private JNumberField numberfield_bestellteEinheiten = new JNumberField();
+  private JLabel label_mindestbestand = new JLabel();
+  private JNumberField numberfield_mindestbestand = new JNumberField();
+  private JLabel label_auslaufartikel = new JLabel();
+  
+  private JLabel label_bestellnr = new JLabel();
+  private JNumberField numberfield_bestellnr = new JNumberField();
+  private JLabel label_kundencode = new JLabel();
+  private JTextField textfield_kundencode = new JTextField();
+  
+  private JLabel label_anzahl = new JLabel(); 
+  private JLabel label_rabatt = new JLabel(); 
+  
+  private JLabel label_personalnr = new JLabel();
+  private JNumberField numberfield_personalnr = new JNumberField();
+  private JLabel label_bestelldatum = new JLabel();
+  private JLabel label_lieferdatum = new JLabel();
+  private JLabel label_versanddatum = new JLabel();
+  private JLabel label_versandUeber = new JLabel();
+  private JNumberField numberfield_versandUeber = new JNumberField();
+  private JLabel label_frachtkosten = new JLabel();
+  private JNumberField numberfield_frachtkosten = new JNumberField();
+  private JLabel label_empfaenger = new JLabel();
+  private JTextField textfield_empfaenger = new JTextField();
+  private JLabel label_strasse = new JLabel();
+  private JTextField textfield_strasse = new JTextField();
+  private JLabel label_plzOrt = new JLabel();
+  private JTextField textfield_ort = new JTextField();
+  private JTextField textfield_plz = new JTextField();
+  
+  private JLabel label_land = new JLabel();
+  private JTextField textfield_land = new JTextField();
+  private JLabel label_kategoriename = new JLabel();
+  private JTextField textfield_kategoriename = new JTextField();
+  private JLabel label_beschreibung = new JLabel();
+  private JTextField textfield_beschreibung = new JTextField();
+  private JLabel label_firma = new JLabel();
+  private JTextField textfield_firma = new JTextField();
+  private JLabel label_kontaktperson = new JLabel();
+  private JTextField textfield_kontaktperson = new JTextField();
+  private JLabel label_position = new JLabel();
+  
+  private JLabel label_telefon = new JLabel();
+  private JTextField textfield_telefon = new JTextField();
+  private JLabel label_telefax = new JLabel();
+  private JTextField textfield_telefax = new JTextField();
+  private JLabel label_homepage = new JLabel();   
+  private JTextField textfield_homepage = new JTextField();
+  private JLabel label_vorname = new JLabel();
+  private JTextField textfield_vorname = new JTextField();
+  private JLabel label_nachname = new JLabel();    
+  private JTextField textfield_nachname = new JTextField(); 
+  private JLabel label_anrede = new JLabel();
+  private JLabel label_datum = new JLabel();
+  private JLabel label_einstellung = new JLabel();
+  private JLabel label_durchwahl = new JLabel();
+  private JNumberField numberfield_durchwahl = new JNumberField();
+  private JLabel label_bemerkung = new JLabel();
+  private JTextField textfield_bemerkung = new JTextField();
+  private JLabel label_vorgesetzte = new JLabel();
+  private JLabel label_geburtsdatum = new JLabel(); 
+  private JLabel label_bemerkungen = new JLabel();
+  private JLabel label_firmennr = new JLabel();
+  private JCheckBox checkbox_auslaufartikel = new JCheckBox();
+  private JTextField textfield_position = new JTextField(); 
+  private JNumberField numberfield_telefon = new JNumberField();
+  private JNumberField numberfield_telefax = new JNumberField();
+  private JTextField textfield_bemerkungen = new JTextField();
+  private JTextField textfield_vorgesetzte = new JTextField(); 
+  private JPasswordField passwordfield_login = new JPasswordField();
+  private JNumberField numberfield_firmennr = new JNumberField();
   
   //MENÜ DEKLARIEREN
   
@@ -77,8 +189,8 @@ public class NordwindTool extends JFrame {
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    int frameWidth = 1024; 
-    int frameHeight = 576;
+    int frameWidth = 1280; 
+    int frameHeight = 720;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -90,10 +202,10 @@ public class NordwindTool extends JFrame {
     cp.setLayout(null);
     // Anfang Komponenten
     
-    panel_main.setBounds(0, 0, 1012, 540);
+    panel_main.setBounds(0, 0, 1366, 680);
     panel_main.setOpaque(false);
     cp.add(panel_main);
-    panel_login.setBounds(0, 0, 1012, 532);
+    panel_login.setBounds(0, 0, 1366, 680);
     panel_login.setOpaque(false);
     
     //PANELS DEM MAIN-PANEL (cl_main) HINZUFÜGEN
@@ -104,12 +216,13 @@ public class NordwindTool extends JFrame {
     //panel_filter.add(panel_null, "NULL");
     panel_filter.add(panel_artikel, "ARTIKEL");
     panel_filter.add(panel_bestelldetails, "BESTELLDETAILS");
-    /*panel_filter.add(panel_bestellungen, "BESTELLUNGEN");
+    panel_filter.add(panel_bestellungen, "BESTELLUNGEN");
     panel_filter.add(panel_kategorien, "KATEGORIEN");
     panel_filter.add(panel_kunden, "KUNDEN");
     panel_filter.add(panel_lieferanten, "LIEFERANTEN");
     panel_filter.add(panel_personal, "PERSONAL");
-    panel_filter.add(panel_versandfirmen, "VERSANDFIRMEN");    */
+    panel_filter.add(panel_versandfirmen, "VERSANDFIRMEN"); 
+    panel_filter.add(panel_null, "NULL");
     
     
     passwordfield_login.setBounds(380, 218, 230, 40);
@@ -140,7 +253,7 @@ public class NordwindTool extends JFrame {
     label_loginstatus.setBackground(Color.WHITE);
     label_loginstatus.setHorizontalAlignment(SwingConstants.CENTER);
     panel_login.add(label_loginstatus);
-    panel_home.setBounds(0, 0, 1024, 540);
+    panel_home.setBounds(0, 0, 1366, 680);
     panel_home.setOpaque(false);
     
     //MENÜ KONFIGURIEREN
@@ -168,10 +281,10 @@ public class NordwindTool extends JFrame {
     
     
     
-    label_loginname.setBounds(752, 2, 182, 20);
+    label_loginname.setBounds(1008, 2, 182, 20);
     label_loginname.setHorizontalAlignment(SwingConstants.RIGHT);
     panel_home.add(label_loginname);
-    label_logout.setBounds(940, 0, 70, 22);
+    label_logout.setBounds(1196, 0, 70, 22);
     label_logout.setText("ABMELDEN");
     Hashtable<TextAttribute, Object> label_abmelden_map = new Hashtable<TextAttribute, Object>();
     label_abmelden_map.put(TextAttribute.FAMILY, "Trebuchet MS");
@@ -186,21 +299,114 @@ public class NordwindTool extends JFrame {
     label_logout.setFont(new Font(label_logout_map));
     label_loginstatus.setBackground(null);
     menu_control();
-
+    
+    label_artikelnr.setText("Artikelnummer:");
+    label_artikelname.setText("Artikelname:");
+    label_lagerbestand.setText("Lagerbestand:"); 
+    label_bestellteEinheiten.setText("Bestellte Einh.:");
+    label_einzelpreis.setText("Einzelpreis:"); 
+    label_liefereinheit.setText("Liefereinheit:");
+    label_kategoriennr.setText("Kategorienr.:");
+    label_lieferantennr.setText("Lieferantennr.:");   
+    label_bestellnr.setText("Bestellnummer:");  
+    label_artikelnr.setText("Artikelnummer:");   
+    label_bestellnr.setBounds(10, 95, 100, 20);
+    label_bestellnr.setText("Bestellnummer:"); 
+    label_kundencode.setText("Kundencode:"); 
+    label_personalnr.setText("Personalnr.:"); 
+    label_bestelldatum.setText("Bestelldatum:"); 
+    label_lieferdatum.setText("Lieferdatum:");    
+    label_versanddatum.setText("Versanddatum:");      
+    label_anrede.setText("Anrede:");
+    label_versandUeber.setText("Versand über:"); 
+    label_frachtkosten.setText("Frachtkosten:");
+    label_plzOrt.setText("PLZ & Ort:"); 
+    label_land.setText("Land:");         
+    label_empfaenger.setText("Empfänger:");    
+    label_strasse.setText("Straße:");
+    label_einzelpreis.setText("Einzelpreis:"); 
+    label_anzahl.setText("Anzahl:"); 
+    label_rabatt.setText("Rabatt:");
+    label_telefon.setText("Telefon:");    
+    label_land.setText("Land:");      
+    label_plzOrt.setText("PLZ & Ort:");    
+    label_kontaktperson.setText("Kontaktperson:");  
+    label_firma.setText("Firma:");               
+    label_kundencode.setText("Kundencode:");
+    label_position.setText("Position:");
+    label_strasse.setText("Straße:");     
+    label_durchwahl.setText("Durchwahl:");
+    label_bemerkungen.setText("Bemerkungen:");    
+    label_personalnr.setText("Personalnr.:");
+    label_geburtsdatum.setText("Geburtsdatum:"); 
+    label_vorname.setText("Vorname:");  
+    label_einstellung.setText("Einstellung:");    
+    label_nachname.setText("Nachname:");        
+    label_position.setText("Position:");
+    label_firma.setText("Firma:");
+    label_homepage.setText("Homepage:"); 
+    label_lieferantennr.setText("Lieferantennr.:"); 
+    label_beschreibung.setText("Beschreibung:");     
+    label_kategoriennr.setText("Kategorienr.:");  
+    label_kategoriename.setText("Kategoriename:");
+    label_strasse.setText("Straße:"); 
+    label_land.setText("Land:");
+    label_kontaktperson.setText("Kontaktperson:");
+    label_position.setText("Position:");
+    label_telefax.setText("Telefax:");             
+    label_vorgesetzte.setText("Vorgesetzte:");  
+    label_firmennr.setText("Firmennr.:"); 
+    label_firma.setText("Firma:");
+    
+    
     panel_home.add(label_logout);
-    panel_filter.setBounds(344, 0, 316, 532);
+    panel_filter.setBounds(370, 40, 300, 600);
     panel_filter.setOpaque(true);
     panel_filter.setBackground(Color.YELLOW);
     panel_home.add(panel_filter);
+    panel_artikel.setBounds(328, 576, 300, 400);
+    panel_artikel.setOpaque(true);
+    panel_artikel.setBackground(Color.CYAN);
+    panel_bestelldetails.setBounds(360, 576, 300, 532);
+    panel_bestelldetails.setOpaque(true);
+    panel_bestelldetails.setBackground(Color.GREEN);
+    panel_results.setBounds(721, 40, 500, 600);
+    panel_results.setOpaque(true);
+    panel_results.setBackground(new Color(0xFFAFAF));
+    panel_home.add(panel_results);
+    panel_bestellungen.setBounds(336, 584, 300, 400);
+    panel_bestellungen.setOpaque(true);
+    panel_bestellungen.setBackground(new Color(0xFFC800));
+    panel_kategorien.setBounds(352, 576, 300, 400);
+    panel_kategorien.setOpaque(true);
+    panel_kategorien.setBackground(new Color(0xFFAFAF));
+    panel_kunden.setBounds(362, 577, 300, 400);
+    panel_kunden.setOpaque(true);
+    panel_kunden.setBackground(Color.MAGENTA);
+    panel_lieferanten.setBounds(355, 576, 300, 400);
+    panel_lieferanten.setOpaque(true);
+    panel_lieferanten.setBackground(Color.RED);
+    panel_personal.setBounds(0, 16, 300, 400);
+    panel_personal.setOpaque(true);
+    panel_personal.setBackground(Color.BLUE);
+    panel_versandfirmen.setBounds(368, 571, 300, 400);
+    panel_versandfirmen.setOpaque(true);
+    panel_versandfirmen.setBackground(new Color(0x404040));
+    panel_null.setBounds(376, 576, 300, 400);
+    panel_null.setOpaque(true);
+    panel_null.setBackground(new Color(0xEEEEEE));
+    cl_filter.show(panel_filter, "NULL");
+    panel_tables.setBounds(29, 40, 300, 600);
+    panel_tables.setOpaque(true);
+    panel_tables.setBackground(Color.WHITE);
+    panel_home.add(panel_tables);
+    label_tableList.setBounds(21, 36, 248, 33);
+    label_tableList.setText("Tabelle wählen!");
+    label_tableList.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+    label_tableList.setHorizontalAlignment(SwingConstants.CENTER);
+    panel_tables.add(label_tableList);
+    list_tablesScrollPane.setBounds(6, 83, 286, 412);
     list_tables.setModel(list_tablesModel);
-    list_tablesScrollPane.setBounds(33, 163, 198, 268);
-    list_tables.setLayoutOrientation(JList.VERTICAL);
-    list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    list_tables.addListSelectionListener(new ListSelectionListener() { 
-      public void valueChanged(ListSelectionEvent evt) { 
-        list_tables_ValueChanged(evt);
-      }
-    });
     list_tablesModel.addElement("artikel");
     list_tablesModel.addElement("bestelldetails");
     list_tablesModel.addElement("bestellungen");
@@ -209,13 +415,14 @@ public class NordwindTool extends JFrame {
     list_tablesModel.addElement("lieferanten");
     list_tablesModel.addElement("personal");
     list_tablesModel.addElement("versandfirmen");
-    panel_home.add(list_tablesScrollPane);
-    label_tableList.setBounds(13, 124, 248, 33);
-    label_tableList.setText("Bitte Tabelle wählen!");
-    label_tableList.setHorizontalAlignment(SwingConstants.CENTER);
-    label_tableList.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    panel_home.add(label_tableList);
-    button_resetList.setBounds(33, 432, 198, 25);
+    list_tables.addListSelectionListener(new ListSelectionListener() { 
+      public void valueChanged(ListSelectionEvent evt) { 
+        list_tables_ValueChanged(evt);
+      }
+    });
+    list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
+    panel_tables.add(list_tablesScrollPane);
+    button_resetList.setBounds(9, 496, 278, 41);
     button_resetList.setText("Auswahl zurücksetzen");
     button_resetList.setMargin(new Insets(2, 2, 2, 2));
     button_resetList.addActionListener(new ActionListener() { 
@@ -223,53 +430,18 @@ public class NordwindTool extends JFrame {
         button_resetList_ActionPerformed(evt);
       }
     });
-    button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-    panel_home.add(button_resetList);
-    panel_artikel.setBounds(168, 400, 316, 532);
-    panel_artikel.setOpaque(true);
-    panel_artikel.setBackground(Color.CYAN);
-    numberfield_artikelnr.setBounds(111, 10, 75, 20);
-    numberfield_artikelnr.setText("");
-    panel_artikel.add(numberfield_artikelnr);
-    textfield_artikelname.setBounds(74, 40, 150, 20);
-    panel_artikel.add(textfield_artikelname);
-    numberfield_lieferantennr.setBounds(110, 66, 75, 20);
-    numberfield_lieferantennr.setText("");
-    panel_artikel.add(numberfield_lieferantennr);
-    numberfield_kategorienr.setBounds(110, 101, 75, 20);
-    numberfield_kategorienr.setText("");
-    panel_artikel.add(numberfield_kategorienr);
-    textfield_liefereinheit.setBounds(72, 136, 150, 20);
-    panel_artikel.add(textfield_liefereinheit);
-    numberfield_einzelpreis.setBounds(109, 164, 75, 20);
-    numberfield_einzelpreis.setText("");
-    panel_artikel.add(numberfield_einzelpreis);
-    numberfield_lagerbestand.setBounds(111, 191, 75, 20);
-    numberfield_lagerbestand.setText("");
-    panel_artikel.add(numberfield_lagerbestand);
-    numberfield_bestellteEinheiten.setBounds(109, 217, 75, 20);
-    numberfield_bestellteEinheiten.setText("");
-    panel_artikel.add(numberfield_bestellteEinheiten);
-    numberfield_mindestbestand.setBounds(108, 242, 75, 20);
-    numberfield_mindestbestand.setText("");
-    panel_artikel.add(numberfield_mindestbestand);
-    checkbox_auslaufartikel.setBounds(128, 267, 20, 20);
-    checkbox_auslaufartikel.setOpaque(false);
-    panel_artikel.add(checkbox_auslaufartikel);
-    panel_bestelldetails.setBounds(24, 408, 316, 532);
-    panel_bestelldetails.setOpaque(true);
-    panel_bestelldetails.setBackground(Color.GREEN);
-    numberfield_anzahl.setBounds(113, 413, 75, 20);
-    numberfield_anzahl.setText("");
-    panel_bestelldetails.add(numberfield_anzahl);
-    numberfield_rabatt.setBounds(114, 441, 75, 20);
-    numberfield_rabatt.setText("");
-    panel_bestelldetails.add(numberfield_rabatt);
+    button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+    panel_tables.add(button_resetList);
+    combobox_anrede.setModel(combobox_anredeModel);
+    
+    combobox_anredeModel.addElement("Herr");
+    combobox_anredeModel.addElement("Frau");
+    combobox_anredeModel.addElement("Dr.");
+    panel_personal.add(combobox_anrede);
     // Ende Komponenten
     
-    /*------------------------------------------------------------------------*/ 
-    //LISTENER ERSTELLEN
-  
+    /*--------------------------LISTENER--------------------------------------*/ 
+     
     //ACTIONLISTENER
     
     //Actionlistener für Menüitems
@@ -337,8 +509,7 @@ public class NordwindTool extends JFrame {
         logout();
         }
     });               
-    
-    
+
   }
   
   // Anfang Methoden
@@ -438,45 +609,445 @@ public class NordwindTool extends JFrame {
         cl_filter.show(panel_filter, "NULL");
         break;
       case 0: 
+        
+          
+        label_artikelnr.setBounds(10, 130, 100, 20);
+            
+        label_mindestbestand.setText("Mindestbestand:");
+        label_auslaufartikel.setText("Auslaufartikel:");
+        
+        panel_artikel.add(label_artikelnr);
+        
+        numberfield_artikelnr.setBounds(125,130,50,20);
+        panel_artikel.add(numberfield_artikelnr);
+        
+        label_artikelname.setBounds(10, 165, 100, 20);
+        
+        panel_artikel.add(label_artikelname);
+        
+        textfield_artikelname.setBounds(125,165,150,20);
+        panel_artikel.add(textfield_artikelname);
+        
+        
+        label_lieferantennr.setBounds(10, 200, 100, 20);
+        panel_artikel.add(label_lieferantennr);
+        
+        numberfield_lieferantennr.setBounds(125,200,50,20);
+        panel_artikel.add(numberfield_lieferantennr);
+        
+        label_kategoriennr.setBounds(10, 235, 100, 20);
+        panel_artikel.add(label_kategoriennr);
+        
+        numberfield_kategorienr.setBounds(125,235,50,20);
+        panel_artikel.add(numberfield_kategorienr);
+        
+        label_liefereinheit.setBounds(10, 270, 100, 20);
+        panel_artikel.add(label_liefereinheit);
+        
+        textfield_liefereinheit.setBounds(125,270,150,20);
+        panel_artikel.add(textfield_liefereinheit);
+        
+        label_einzelpreis.setBounds(10, 305, 100, 20);
+        panel_artikel.add(label_einzelpreis);
+        
+        numberfield_einzelpreis.setBounds(125,305,50,20);
+        panel_artikel.add(numberfield_einzelpreis);
+        
+        label_lagerbestand.setBounds(10, 340, 100, 20);
+        panel_artikel.add(label_lagerbestand);
+        
+        numberfield_lagerbestand.setBounds(125,340,50,20);
+        panel_artikel.add(numberfield_lagerbestand);
+        
+        label_bestellteEinheiten.setBounds(10, 375, 100, 20);
+        panel_artikel.add(label_bestellteEinheiten);
+        
+        numberfield_bestellteEinheiten.setBounds(125,375,50,20);
+        panel_artikel.add(numberfield_bestellteEinheiten);
+        
+        label_mindestbestand.setBounds(10, 410, 100, 20);
+        panel_artikel.add(label_mindestbestand);
+        
+        numberfield_mindestbestand.setBounds(125,410,50,20);
+        panel_artikel.add(numberfield_mindestbestand);
+        
+        label_auslaufartikel.setBounds(10, 445, 100, 20);
+        panel_artikel.add(label_auslaufartikel);
+        
+        checkbox_auslaufartikel.setBounds(125, 445, 20, 20);
+        panel_artikel.add(checkbox_auslaufartikel);
+        
         cl_filter.show(panel_filter, "ARTIKEL");
         System.out.println("CASE 0");
         break;
-      case 1: 
+      case 1:
+        label_bestellnr.setBounds(10, 200, 100, 20);
+        panel_bestelldetails.add(label_bestellnr);
+        
+        numberfield_bestellnr.setBounds(125,200,50,20);
+        panel_bestelldetails.add(numberfield_bestellnr);
+        
+        label_artikelnr.setBounds(10, 235, 100, 20);
+        panel_bestelldetails.add(label_artikelnr);
+        
+        numberfield_artikelnr.setBounds(125,235,50,20);
+        panel_bestelldetails.add(numberfield_artikelnr);
+        
+        label_einzelpreis.setBounds(10, 270, 100, 20);
+        panel_bestelldetails.add(label_einzelpreis);  
+        
+        numberfield_einzelpreis.setBounds(125,270,50,20);
+        panel_bestelldetails.add(numberfield_einzelpreis);
+        
+        label_anzahl.setBounds(10, 305, 100, 20);
+        panel_bestelldetails.add(label_anzahl);
+        
+        numberfield_anzahl.setBounds(125,305,50,20);
+        panel_bestelldetails.add(numberfield_anzahl);
+        
+        label_rabatt.setBounds(10, 340, 100, 20);
+        panel_bestelldetails.add(label_rabatt);
+        
+        numberfield_rabatt.setBounds(125,340,50,20);
+        panel_bestelldetails.add(numberfield_rabatt);
+        
         cl_filter.show(panel_filter, "BESTELLDETAILS");
         System.out.println("CASE 1");
-        validate();
         break;
       case 2: 
+        label_bestellnr.setBounds(10, 95,100,20);
+        panel_bestellungen.add(label_bestellnr);
+        
+        numberfield_bestellnr.setBounds(125,95,50,20);
+        panel_bestellungen.add(numberfield_bestellnr);
+        
+        label_kundencode.setBounds(10, 130, 100, 20);
+        panel_bestellungen.add(label_kundencode);
+        
+        textfield_kundencode.setBounds(125,130,150,20);
+        panel_bestellungen.add(textfield_kundencode);
+        
+        label_personalnr.setBounds(10, 165, 100, 20);
+        panel_bestellungen.add(label_personalnr);
+        
+        numberfield_personalnr.setBounds(125,165,50,20);
+        panel_bestellungen.add(numberfield_personalnr);
+        
+        label_bestelldatum.setBounds(10, 200, 100, 20);
+        panel_bestellungen.add(label_bestelldatum);
+        
+        label_lieferdatum.setBounds(10, 235, 100, 20);
+        panel_bestellungen.add(label_lieferdatum);
+        
+        label_versanddatum.setBounds(10, 270, 100, 20);
+        panel_bestellungen.add(label_versanddatum);
+        
+        label_versandUeber.setBounds(10, 305, 100, 20);
+        panel_bestellungen.add(label_versandUeber);
+        
+        numberfield_versandUeber.setBounds(125,305,50,20);
+        panel_bestellungen.add(numberfield_versandUeber);
+        
+        label_frachtkosten.setBounds(10, 340, 100, 20);
+        panel_bestellungen.add(label_frachtkosten);
+        
+        numberfield_frachtkosten.setBounds(125,340,50,20);
+        panel_bestellungen.add(numberfield_frachtkosten);
+        
+        label_empfaenger.setBounds(10, 375, 100, 20);
+        panel_bestellungen.add(label_empfaenger);
+        
+        textfield_empfaenger.setBounds(125,375,150,20);
+        panel_bestellungen.add(textfield_empfaenger);
+        
+        label_strasse.setBounds(10, 410, 100, 20);
+        panel_bestellungen.add(label_strasse);
+        
+        textfield_strasse.setBounds(125,410,150,20);
+        panel_bestellungen.add(textfield_strasse);
+        
+        label_plzOrt.setBounds(10, 445, 100, 20);
+        panel_bestellungen.add(label_plzOrt);
+        
+        textfield_plz.setBounds(125,445,50,20);
+        panel_bestellungen.add(textfield_plz);
+        
+        textfield_ort.setBounds(185,445,90,20);
+        panel_bestellungen.add(textfield_ort);
+        
+        label_land.setBounds(10, 480, 100, 20);
+        panel_bestellungen.add(label_land);
+        
+        textfield_land.setBounds(125,480,150,20);
+        panel_bestellungen.add(textfield_land);
+ 
         cl_filter.show(panel_filter, "BESTELLUNGEN");
         break;
       case 3: 
+        label_kategoriennr.setBounds(10, 200, 100, 20);
+        panel_kategorien.add(label_kategoriennr);
+        
+        numberfield_kategorienr.setBounds(125,200,50,20);
+        panel_kategorien.add(numberfield_kategorienr);
+        
+        label_kategoriename.setBounds(10, 235, 100, 20);
+        panel_kategorien.add(label_kategoriename);
+        
+        textfield_kategoriename.setBounds(125,235,150,20);
+        panel_kategorien.add(textfield_kategoriename);
+        
+        label_beschreibung.setBounds(10, 270, 100, 20);
+        panel_kategorien.add(label_beschreibung);
+        
+        textfield_beschreibung.setBounds(125,270,150,20);
+        panel_kategorien.add(textfield_beschreibung);
+        
         cl_filter.show(panel_filter, "KATEGORIEN");
         break;
       case 4: 
+        label_kundencode.setBounds(10, 130, 100, 20);
+        panel_kunden.add(label_kundencode);
+        
+        textfield_kundencode.setBounds(125,130,150,20);
+        panel_kunden.add(textfield_kundencode);
+        
+        label_firma.setBounds(10, 165, 100, 20);
+        panel_kunden.add(label_firma);
+        
+        textfield_firma.setBounds(125,165,150,20);
+        panel_kunden.add(textfield_firma);
+        
+        label_kontaktperson.setBounds(10, 200, 100, 20);
+        panel_kunden.add(label_kontaktperson);
+        
+        textfield_kontaktperson.setBounds(125,200,150,20);
+        panel_kunden.add(textfield_kontaktperson);
+        
+        label_position.setBounds(10, 235, 100, 20);
+        panel_kunden.add(label_position);
+        
+        textfield_position.setBounds(125,235,150,20);
+        panel_kunden.add(textfield_position);
+        
+        label_strasse.setBounds(10, 270, 100, 20);
+        panel_kunden.add(label_strasse);
+        
+        textfield_strasse.setBounds(125,270,150,20);
+        panel_kunden.add(textfield_strasse);
+        
+        label_plzOrt.setBounds(10, 305, 100, 20);
+        panel_kunden.add(label_plzOrt);
+        
+        textfield_plz.setBounds(125,305,50,20);
+        panel_kunden.add(textfield_plz);
+        
+        textfield_ort.setBounds(185,305,90,20);
+        panel_kunden.add(textfield_ort);
+        
+        label_land.setBounds(10, 340, 100, 20);
+        panel_kunden.add(label_land);
+        
+        textfield_land.setBounds(125,340,150,20);
+        panel_kunden.add(textfield_land);
+        
+        label_telefon.setBounds(10, 375, 100, 20);
+        panel_kunden.add(label_telefon);
+        
+        numberfield_telefon.setBounds(125,375,100,20);
+        panel_kunden.add(numberfield_telefon);
+        
+        label_telefax.setBounds(10, 410, 100, 20);
+        panel_kunden.add(label_telefax);
+        
+        numberfield_telefax.setBounds(125,410,100,20);
+        panel_kunden.add(numberfield_telefax);
+        
         cl_filter.show(panel_filter, "KUNDEN");
         break;
       case 5: 
+        label_lieferantennr.setBounds(10, 130, 100, 20);
+        panel_lieferanten.add(label_lieferantennr);
+        
+        numberfield_lieferantennr.setBounds(125,130,50,20);
+        panel_lieferanten.add(numberfield_lieferantennr);
+        
+        label_firma.setBounds(10, 165, 100, 20);
+        panel_lieferanten.add(label_firma);
+        
+        textfield_firma.setBounds(125,165,150,20);
+        panel_lieferanten.add(textfield_firma);
+        
+        label_kontaktperson.setBounds(10, 200, 100, 20);
+        panel_lieferanten.add(label_kontaktperson);
+        
+        textfield_kontaktperson.setBounds(125,200,150,20);
+        panel_lieferanten.add(textfield_kontaktperson);
+        
+        label_position.setBounds(10, 235, 100, 20);
+        panel_lieferanten.add(label_position);
+        
+        textfield_position.setBounds(125,235,150,20);
+        panel_lieferanten.add(textfield_position);
+        
+        label_strasse.setBounds(10, 270, 100, 20);
+        panel_lieferanten.add(label_strasse);
+        
+        textfield_strasse.setBounds(125,270,150,20);
+        panel_lieferanten.add(textfield_strasse);
+        
+        label_plzOrt.setBounds(10, 305, 100, 20);
+        panel_lieferanten.add(label_plzOrt);
+        
+        textfield_plz.setBounds(125,305,50,20);
+        panel_lieferanten.add(textfield_plz);
+        
+        textfield_ort.setBounds(185,305,90,20);
+        panel_lieferanten.add(textfield_ort);
+        
+        label_land.setBounds(10, 340, 100, 20);
+        panel_lieferanten.add(label_land);
+        
+        textfield_land.setBounds(125,340,150,20);
+        panel_lieferanten.add(textfield_land);
+        
+        label_telefon.setBounds(10, 375, 100, 20);
+        panel_lieferanten.add(label_telefon);
+        
+        numberfield_telefon.setBounds(125,375,100,20);
+        panel_lieferanten.add(numberfield_telefon);
+        
+        label_telefax.setBounds(10, 410, 100, 20);
+        panel_lieferanten.add(label_telefax);
+        
+        numberfield_telefax.setBounds(125,410,100,20);
+        panel_lieferanten.add(numberfield_telefax);
+        
+        label_homepage.setBounds(10, 445, 100, 20);
+        panel_lieferanten.add(label_homepage); 
+        
+        textfield_homepage.setBounds(125,445,150,20);
+        panel_lieferanten.add(textfield_homepage);
+        
         cl_filter.show(panel_filter, "LIEFERANTEN");
         break;
       case 6: 
+        label_personalnr.setBounds(10, 25, 100, 20);
+        panel_personal.add(label_personalnr);  
+        
+        label_vorname.setBounds(10, 60, 100, 20);
+        panel_personal.add(label_vorname); 
+        
+        textfield_vorname.setBounds(125,60,150,20);
+        panel_personal.add(textfield_vorname);    
+        
+        label_nachname.setBounds(10, 95, 100, 20);
+        panel_personal.add(label_nachname);
+        
+        textfield_nachname.setBounds(125,95,150,20);
+        panel_personal.add(textfield_nachname);
+        
+        label_position.setBounds(10, 130, 100, 20);
+        panel_personal.add(label_position);
+        
+        textfield_position.setBounds(125,130,150,20);
+        panel_personal.add(textfield_position);
+    
+        label_anrede.setBounds(10, 165, 100, 20);
+        panel_personal.add(label_anrede);
+        
+        combobox_anrede.setBounds(125, 165, 150, 20);
+        
+        label_geburtsdatum.setBounds(10, 200, 100, 20);
+        panel_personal.add(label_geburtsdatum);
+        
+        label_einstellung.setBounds(10, 235, 100, 20);
+        panel_personal.add(label_einstellung);
+        
+        label_strasse.setBounds(10, 270, 100, 20);
+        panel_personal.add(label_strasse);
+        
+        textfield_strasse.setBounds(125,270,150,20);
+        panel_personal.add(textfield_strasse);
+        
+        label_plzOrt.setBounds(10, 305, 100, 20);
+        panel_personal.add(label_plzOrt);
+        
+        textfield_plz.setBounds(125,305,50,20);
+        panel_personal.add(textfield_plz);
+        
+        textfield_ort.setBounds(185,305,90,20);
+        panel_personal.add(textfield_ort);
+        
+        label_land.setBounds(10, 340, 100, 20);
+        panel_personal.add(label_land);
+        
+        textfield_land.setBounds(125,340,150,20);
+        panel_personal.add(textfield_land);
+        
+        label_telefon.setBounds(10, 375, 100, 20);
+        panel_personal.add(label_telefon);
+        
+        numberfield_telefon.setBounds(125,375,100,20);
+        panel_personal.add(numberfield_telefon);
+        
+        label_durchwahl.setBounds(10, 410, 100, 20);
+        panel_personal.add(label_durchwahl);
+        
+        numberfield_durchwahl.setBounds(125,410,100,20);
+        panel_personal.add(numberfield_durchwahl);
+        
+        label_bemerkungen.setBounds(10, 445, 100, 20);
+        panel_personal.add(label_bemerkungen);
+        
+        textfield_bemerkungen.setBounds(125,445,150,20);
+        panel_personal.add(textfield_bemerkungen);
+        
+        label_vorgesetzte.setBounds(10, 480, 100, 20);
+        panel_personal.add(label_vorgesetzte);
+        
+        textfield_vorgesetzte.setBounds(125,480,150,20);
+        panel_personal.add(textfield_vorgesetzte);
+        
+      
         cl_filter.show(panel_filter, "PERSONAL");
         break;
       case 7: 
-        cl_filter.show(panel_filter, "VERSANDFIRMEN");
+        label_firmennr.setBounds(10, 200, 100, 20);
+        panel_versandfirmen.add(label_firmennr);
+        
+        numberfield_firmennr.setBounds(125,200,50,20);
+        panel_versandfirmen.add(numberfield_firmennr);
+        
+        label_firma.setBounds(10, 235, 100, 20);
+        panel_versandfirmen.add(label_firma);
+        
+        textfield_firma.setBounds(125,235,150,20);
+        panel_versandfirmen.add(textfield_firma);
+        
+        label_telefon.setBounds(10, 270, 100, 20);
+        panel_versandfirmen.add(label_telefon);
+        
+        numberfield_telefon.setBounds(125,270,100,20);
+        panel_versandfirmen.add(numberfield_telefon);
+                
+        cl_filter.show(panel_filter, "VERSANDFIRMEN"); 
         break;  
       default:
         System.out.println("Fataler Fehler. Bitte Admin kontaktieren"); 
       }
     }
-  
   public void button_resetList_ActionPerformed(ActionEvent evt) {
+    // TODO hier Quelltext einfügen
     list_tables.clearSelection();
   }
 
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
-    if (!evt.getValueIsAdjusting()) { //Sorgt dafür, dass bei Mausklick die Methode nicht 2x aufgerufen wird
+    // TODO hier Quelltext einfügen
+    if (!evt.getValueIsAdjusting()) {
       openFilterPanel(list_tables.getSelectedIndex());
-    }
-    
+    }  
   }
+
+  // Ende Methoden
+  
 }
