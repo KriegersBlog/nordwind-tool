@@ -15,8 +15,7 @@ public class Datum extends JFrame {
   private JComboBox<String> jComboBox1 = new JComboBox<String>();
     private DefaultComboBoxModel<String> jComboBox1Model = new DefaultComboBoxModel<String>();
   
-  DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-  JFormattedTextField dateField = new JFormattedTextField(normalDateFormat);
+  
   // Ende Attribute
   
   public Datum() { 
