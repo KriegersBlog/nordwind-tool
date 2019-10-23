@@ -10,10 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class testt extends JFrame {
   // Anfang Attribute
-  private JNumberField jNumberField1 = new JNumberField();
   private JButton jButton1 = new JButton();
-  private JComboBox<String> jComboBox1 = new JComboBox<String>();
-    private DefaultComboBoxModel<String> jComboBox1Model = new DefaultComboBoxModel<String>();
   
   DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
   JFormattedTextField dateField = new JFormattedTextField(normalDateFormat);
@@ -23,8 +20,8 @@ public class testt extends JFrame {
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    int frameWidth = 300;
-    int frameHeight = 300;
+    int frameWidth = 190; 
+    int frameHeight = 194;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -39,10 +36,7 @@ public class testt extends JFrame {
     cp.add(dateField);
     
     
-    jNumberField1.setBounds(93, 91, 75, 20);
-    jNumberField1.setText("");
-    cp.add(jNumberField1);
-    jButton1.setBounds(61, 176, 75, 25);
+    jButton1.setBounds(29, 56, 75, 25);
     jButton1.setText("jButton1");
     jButton1.setMargin(new Insets(2, 2, 2, 2));
     jButton1.addActionListener(new ActionListener() { 
@@ -51,13 +45,7 @@ public class testt extends JFrame {
       }
     });
     cp.add(jButton1);
-    jComboBox1.setModel(jComboBox1Model);
-    jComboBox1Model.addElement("Herr");
-    jComboBox1Model.addElement("Frau");
-    jComboBox1Model.addElement("Dr.");
-    jComboBox1.setBounds(25, 125, 150, 20);
     
-    cp.add(jComboBox1);
     // Ende Komponenten
     
     setVisible(true);
@@ -71,18 +59,14 @@ public class testt extends JFrame {
   public void jButton1_ActionPerformed(ActionEvent evt) {
     // TODO hier Quelltext einfügen
     try{
-    Date sens = normalDateFormat.parse(dateField.getText()); 
-    String test = normalDateFormat.format(sens);
-    System.out.println(test);
+      Date sens = normalDateFormat.parse(dateField.getText()); 
+      String test = normalDateFormat.format(sens);
+      System.out.println(sens);  
+      System.out.println(test);
     }
     catch(Exception e){
       System.out.println("test");
-      }      
-    if(jNumberField1.isNumeric()){
-      
-  System.out.println(jNumberField1.getInt());
-    }
-
+      }  
   }
 
   // Ende Methoden
