@@ -14,6 +14,7 @@ public class testt extends JFrame {
   
   DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
   JFormattedTextField dateField = new JFormattedTextField(normalDateFormat);
+  private JOptionPane jOptionPane1 = new JOptionPane();
   // Ende Attribute
   
   public testt() { 
@@ -66,7 +67,12 @@ public class testt extends JFrame {
     }
     catch(Exception e){
       System.out.println("test");
-      }  
+      }
+      jOptionPane1_ShowDialog();  
+  }
+
+  public void jOptionPane1_ShowDialog() {
+    JOptionPane.showMessageDialog(this, "test: \n" + "'Green eggs and ham'", "", JOptionPane.INFORMATION_MESSAGE);
   }
 
   // Ende Methoden
