@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.*;
 import java.util.*;
 import java.awt.font.TextAttribute;  
@@ -15,13 +16,25 @@ public class NordwindTool extends JFrame {
   
   /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
   // Anfang Attribute
-  ImageIcon info = new ImageIcon("info.png");
+  ImageIcon info = new ImageIcon("images/about.png");
+  ImageIcon admin = new ImageIcon("images/admin.png");
+  ImageIcon create = new ImageIcon("images/create.png");
+  ImageIcon edit = new ImageIcon("images/edit.png");
+  ImageIcon query = new ImageIcon("images/query.png");
+  ImageIcon user = new ImageIcon("images/user.png");
+  ImageIcon home = new ImageIcon("images/home.png");
+  
   DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
   private JLabel label_about_versionAutor =  new JLabel();
   private JLabel label_githubProject = new JLabel();
+  private JLabel label_readMe = new JLabel();
   private JLabel label_githubUser = new JLabel();
   TitledBorder titledBorder_versionAutor = new TitledBorder("Version und Autor");
   TitledBorder titledBorder_links = new TitledBorder("Links");
+  TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
+  TitledBorder titledBorder_tables = new TitledBorder("Tabellenauswahl");
+  EmptyBorder emptyBorder_filter = new EmptyBorder(0,0,0,0);
+  EmptyBorder emptyBorder_tables = new EmptyBorder(0,0,0,0);
   private JPanel panel_versionAutor = new JPanel(null, true);
   private JPanel panel_links = new JPanel(null, true);
   private JPanel panel_about = new JPanel(null, true);
@@ -31,8 +44,6 @@ public class NordwindTool extends JFrame {
   
   //Main - Panel
   private JPanel panel_main = new JPanel(new CardLayout());
-  private JLabel label_filter = new JLabel();
-  private JLabel label_tablesList = new JLabel(); 
   private JPanel panel_home = new JPanel(null, true);
   private JLabel label_function = new JLabel();
   private JTextField textfield_loginname = new JTextField();
@@ -67,6 +78,7 @@ public class NordwindTool extends JFrame {
   private JPanel panel_null = new JPanel(null, true);
   private JPanel panel_bestelldetails = new JPanel(null, true);
   private JPanel panel_artikel = new JPanel(null, true);
+
   
   //Swing Elemente der Filter: Label + passendes Eingabefeld
   private JLabel label_artikelnr = new JLabel();
@@ -135,8 +147,10 @@ public class NordwindTool extends JFrame {
   private JLabel label_strasse = new JLabel();
   private JTextField textfield_strasse = new JTextField();
   
-  private JLabel label_plzOrt = new JLabel();
+  private JLabel label_plz = new JLabel();
   private JTextField textfield_ort = new JTextField();
+  
+  private JLabel label_ort = new JLabel();
   private JTextField textfield_plz = new JTextField();
   
   private JLabel label_land = new JLabel();
@@ -172,9 +186,6 @@ public class NordwindTool extends JFrame {
   private JLabel label_nachname = new JLabel();    
   private JTextField textfield_nachname = new JTextField();
   
-  private JLabel label_vorgesetzte = new JLabel();  
-  private JTextField textfield_vorgesetzte = new JTextField(); 
-  
   private JLabel label_geburtsdatum = new JLabel();
   private JFormattedTextField datefield_geburtsdatum = new JFormattedTextField(normalDateFormat);
   
@@ -197,6 +208,7 @@ public class NordwindTool extends JFrame {
   private JLabel label_bemerkung = new JLabel();
   private JTextField textfield_bemerkung = new JTextField();
   
+  private JButton button_submit = new JButton();
   
   /*-----------------MENÜ-KOMPONENTEN ERSTELLEN-------------------------------*/
   //Menüleiste erstellen
@@ -209,13 +221,13 @@ public class NordwindTool extends JFrame {
   
   //Menüitems erstellen
   //Für menu_dml
-  private JMenuItem item_query = new JMenuItem("Abfrage erstellen");
-  private JMenuItem item_create = new JMenuItem("Datensätze anlegen");
-  private JMenuItem item_edit = new JMenuItem("Datensätze editieren");
-  private JMenuItem item_home = new JMenuItem("Home");
+  private JMenuItem item_query = new JMenuItem("Abfragen erstellen", query);
+  private JMenuItem item_create = new JMenuItem("Datensätze anlegen", create);
+  private JMenuItem item_edit = new JMenuItem("Datensätze editieren", edit);
+  private JMenuItem item_home = new JMenuItem("Home", home);
   //Für menu_admin
-  private JMenuItem item_rightAdministration = new JMenuItem("Rechteverwaltung");
-  private JMenuItem item_userAdministration = new JMenuItem("Benutzerverwaltung");
+  private JMenuItem item_rightAdministration = new JMenuItem("Rechteverwaltung", admin);
+  private JMenuItem item_userAdministration = new JMenuItem("Benutzerverwaltung", user);
   
   //Für menu_info  
   private JMenuItem item_about = new JMenuItem("Über 'Nordwind - Tool'", info);
@@ -227,6 +239,10 @@ public class NordwindTool extends JFrame {
   /*------------------------VARIABLEN-----------------------------------------*/
   String loginname;
   boolean loginstate = false;
+  int[] position = {10, 45, 80, 115, 150, 185, 220, 255, 290, 325, 360,
+    395, 430, 465, 500, 535};
+  String button_mode = null;
+  String mode = null; 
   
   //Card Layouts
   CardLayout cl_main = (CardLayout) panel_main.getLayout();
@@ -271,7 +287,6 @@ public class NordwindTool extends JFrame {
     /*           FILTER PANEL          */ 
     panel_filter.setBounds(370, 100, 300, 512);
     panel_filter.setOpaque(true);
-    panel_filter.setBackground(Color.YELLOW);
     panel_home.add(panel_filter);
     //Objekte zum Panel hinzufügen
     panel_filter.add(panel_artikel, "ARTIKEL");
@@ -285,46 +300,37 @@ public class NordwindTool extends JFrame {
     panel_filter.add(panel_null, "NULL");
     
     /*        TABELLEN PANEL          */ 
-    panel_tables.setBounds(30, 100, 300, 480);
+    panel_tables.setBounds(30, 100, 300, 472);
     panel_tables.setOpaque(true);
     panel_home.add(panel_tables);
     
     /*      ALLE FILTER PANELS       */
     panel_artikel.setBounds(328, 576, 300, 400);
     panel_artikel.setOpaque(true);
-    panel_artikel.setBackground(Color.CYAN);
     
     panel_bestelldetails.setBounds(360, 576, 300, 532);
     panel_bestelldetails.setOpaque(true);
-    panel_bestelldetails.setBackground(Color.GREEN);
     
     panel_bestellungen.setBounds(336, 584, 300, 400);
     panel_bestellungen.setOpaque(true);
-    panel_bestellungen.setBackground(new Color(0xFFC800));
     
     panel_kategorien.setBounds(352, 576, 300, 400);
     panel_kategorien.setOpaque(true);
-    panel_kategorien.setBackground(new Color(0xFFAFAF));
     
     panel_kunden.setBounds(362, 577, 300, 400);
     panel_kunden.setOpaque(true);
-    panel_kunden.setBackground(Color.MAGENTA);
     
     panel_lieferanten.setBounds(355, 576, 300, 400);
     panel_lieferanten.setOpaque(true);
-    panel_lieferanten.setBackground(Color.RED);
     
     panel_personal.setBounds(0, 32, 300, 400);
     panel_personal.setOpaque(true);
-    panel_personal.setBackground(Color.BLUE);
     
     panel_versandfirmen.setBounds(368, 571, 300, 400);
     panel_versandfirmen.setOpaque(true);
-    panel_versandfirmen.setBackground(new Color(0x404040));
     
     panel_null.setBounds(376, 576, 300, 400);
     panel_null.setOpaque(true);
-    panel_null.setBackground(new Color(0xEEEEEE));
     
     
     /*-----------------SWING-ELEMENTE KONFIGURIEREN---------------------------*/
@@ -370,18 +376,6 @@ public class NordwindTool extends JFrame {
     panel_results.setBackground(new Color(0xFFAFAF));
     panel_home.add(panel_results);
     
-    label_filter.setBounds(392, 76, 250, 20);
-    label_filter.setText("FILTERAUSWAHL");
-    label_filter.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    label_filter.setHorizontalAlignment(SwingConstants.CENTER);
-    panel_home.add(label_filter);
-    
-    label_tablesList.setBounds(44, 68, 250, 33);
-    label_tablesList.setText("TABELLENAUSWAHL");
-    label_tablesList.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
-    label_tablesList.setHorizontalAlignment(SwingConstants.CENTER); 
-    panel_home.add(label_tablesList);
-    
     label_logout.setBounds(1196, 0, 70, 22);
     label_logout.setText("ABMELDEN");
     label_logout.setForeground(Color.BLUE);
@@ -398,13 +392,13 @@ public class NordwindTool extends JFrame {
     panel_home.add(label_logout);
     
     //TABELLEN PANEL
-    button_resetList.setBounds(9, 416, 278, 41);
+    button_resetList.setBounds(10, 420, 280, 40);
     button_resetList.setText("Auswahl zurücksetzen");
     button_resetList.setMargin(new Insets(2, 2, 2, 2));
     button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
     panel_tables.add(button_resetList);
     
-    list_tablesScrollPane.setBounds(6, 11, 286, 388);
+    list_tablesScrollPane.setBounds(10, 20, 280, 388);
     list_tablesModel.addElement("artikel");
     list_tablesModel.addElement("bestelldetails");
     list_tablesModel.addElement("bestellungen");
@@ -441,7 +435,8 @@ public class NordwindTool extends JFrame {
     label_anzahl.setText("Anzahl:"); 
     label_rabatt.setText("Rabatt:");
     label_telefon.setText("Telefon:");   
-    label_plzOrt.setText("PLZ & Ort:");    
+    label_plz.setText("PLZ:"); 
+    label_ort.setText("Ort:");   
     label_kontaktperson.setText("Kontaktperson:");       
     label_kundencode.setText("Kundencode:"); 
     label_durchwahl.setText("Durchwahl:");
@@ -455,8 +450,7 @@ public class NordwindTool extends JFrame {
     label_beschreibung.setText("Beschreibung:");  
     label_kategoriename.setText("Kategoriename:");
     label_position.setText("Position:");
-    label_telefax.setText("Telefax:");             
-    label_vorgesetzte.setText("Vorgesetzte:");  
+    label_telefax.setText("Telefax:");          
     label_firmennr.setText("Firmennr.:"); 
     label_firma.setText("Firma:");
     
@@ -477,7 +471,6 @@ public class NordwindTool extends JFrame {
     textfield_beschreibung.setToolTipText("Beschreibung angeben");
     textfield_kategoriename.setToolTipText("Kategoriename angeben");
     textfield_position.setToolTipText("Position angeben");
-    textfield_vorgesetzte.setToolTipText("Vorgesetzte angeben");
     textfield_firma.setToolTipText("Firmenname angeben");
     
     numberfield_bestellteEinheiten.setToolTipText("Bestellte Einheiten angeben");
@@ -503,7 +496,6 @@ public class NordwindTool extends JFrame {
     combobox_anredeModel.addElement("Herr");
     combobox_anredeModel.addElement("Frau");
     combobox_anredeModel.addElement("Dr."); 
-    panel_personal.add(combobox_anrede);
     label_about_versionAutor.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
     String msg = "<html>Nordwind-Tool 0.9.3, 24.10.19<br>Made by Julian Krieger</html>";
     label_about_versionAutor.setText(msg);
@@ -517,7 +509,7 @@ public class NordwindTool extends JFrame {
     label_about_versionAutor.setBounds(0,10,200,50);
     panel_about.add(panel_links);
     panel_links.setBorder(titledBorder_links);
-    panel_links.setBounds(20,60,200,60);
+    panel_links.setBounds(20,60,200,80);
     
     
     label_githubProject.setBounds(0,10,200,25);
@@ -528,6 +520,18 @@ public class NordwindTool extends JFrame {
     Hashtable<TextAttribute, Object> label_githubProject_map = new Hashtable<TextAttribute, Object>();
     label_githubProject_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_githubProject.setFont(new Font(label_githubProject_map));
+    panel_links.add(label_githubProject);
+    /***/
+    label_readMe.setBounds(0,50,200,25);
+    label_readMe.setForeground(Color.BLUE);
+    label_readMe.setText("ReadMe lesen");
+    label_readMe.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+    label_readMe.setHorizontalAlignment(JLabel.CENTER);
+    Hashtable<TextAttribute, Object> label_readMe_map = new Hashtable<TextAttribute, Object>();
+    label_readMe_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+    label_readMe.setFont(new Font(label_readMe_map));
+    panel_links.add(label_readMe);
+    
     
     label_githubUser.setBounds(0,30,200,25);
     label_githubUser.setForeground(Color.BLUE);
@@ -538,15 +542,12 @@ public class NordwindTool extends JFrame {
     label_githubUser_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_githubUser.setFont(new Font(label_githubUser_map));
     
-    panel_links.add(label_githubProject);
     panel_links.add(label_githubUser);
     
-    optionpane_about.setPreferredSize(new Dimension(0,120));
-    optionpane_about.setSize(0,120);
-    panel_about.setPreferredSize(new Dimension(0,120));
-    panel_about.setSize(0,120);
-    
-    
+    optionpane_about.setPreferredSize(new Dimension(0,140));
+    optionpane_about.setSize(0,140);
+    panel_about.setPreferredSize(new Dimension(0,140));
+    panel_about.setSize(0,140);
     
     
     /*-------------------MENÜ KONFIGURIEREN-----------------------------------*/
@@ -572,11 +573,11 @@ public class NordwindTool extends JFrame {
     
     /*---------------------STARTBEDINGUNGEN-----------------------------------*/
     cl_filter.show(panel_filter, "NULL");
-    label_filter.setVisible(false);
     setJMenuBar(menu_bar);
     setVisible(true);
     label_loginstatus.setBackground(null);
     menu_control();
+    //titledBorder_filter.setBorderPainted(false);
     
     
     /*--------------------------LISTENER--------------------------------------*/ 
@@ -587,7 +588,10 @@ public class NordwindTool extends JFrame {
     //Menü: "menu_dml"
     item_query.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        label_function.setText("ABFRAGEN");
+        label_function.setText("Abfragen erstellen");
+        mode = "abfragen";
+        button_mode = "Datensätze abfragen";
+        
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
@@ -596,7 +600,10 @@ public class NordwindTool extends JFrame {
     
     item_create.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        label_function.setText("ERSTELLEN");
+        label_function.setText("Datensätze anlegen");
+        mode = "erstellen";
+        button_mode = "Datensatz anlegen";
+        
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
@@ -605,7 +612,10 @@ public class NordwindTool extends JFrame {
     
     item_edit.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        label_function.setText("EDITIEREN");
+        label_function.setText("Datensätze editieren");
+        mode = "editieren";
+        button_mode = "Datensätze suchen";
+        
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
@@ -683,7 +693,18 @@ public class NordwindTool extends JFrame {
        }
         }
     });
-                   
+    
+    label_readMe.addMouseListener(new MouseAdapter(){
+      public void mouseClicked(MouseEvent e){
+        try { 
+         String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
+         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+       }
+       catch (java.io.IOException ex) {
+           System.out.println(ex.getMessage());
+       }
+        }
+    });               
     list_tables.addListSelectionListener(new ListSelectionListener() { 
       public void valueChanged(ListSelectionEvent evt) { 
         list_tables_ValueChanged(evt);
@@ -693,6 +714,12 @@ public class NordwindTool extends JFrame {
     button_resetList.addActionListener(new ActionListener() { 
       public void actionPerformed(ActionEvent evt) { 
         button_resetList_ActionPerformed(evt);
+      }
+    });
+    
+    button_submit.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent evt) { 
+        button_submit_ActionPerformed(evt);
       }
     });
   
@@ -717,6 +744,10 @@ public class NordwindTool extends JFrame {
   public void button_resetList_ActionPerformed(ActionEvent evt) {
     list_tables.clearSelection();
   }
+  
+  public void button_submit_ActionPerformed(ActionEvent evt) {
+    
+  }
 
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
@@ -727,7 +758,6 @@ public class NordwindTool extends JFrame {
   public void optionpane_about_ShowDialog() {
     optionpane_about.showMessageDialog(this, panel_about, "Über 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
   }
-  
   
   
   public void login_process(){
@@ -824,22 +854,18 @@ public class NordwindTool extends JFrame {
   public void reset_filter(){
     cl_filter.show(panel_filter, "NULL");
     list_tables.clearSelection();
-    
-      
   }
   public void enable_listPanel(){
     panel_tables.setEnabled(true);
     panel_tables.setVisible(true);
-    label_tablesList.setVisible(true);
-    label_tablesList.setEnabled(true);
+    panel_tables.setBorder(titledBorder_tables);
   }
   
   public void disable_listPanel(){
     panel_tables.setEnabled(false);
     panel_tables.setVisible(false);
-    label_tablesList.setVisible(false);
-    label_tablesList.setEnabled(false);
     label_function.setText(null);
+    panel_tables.setBorder(emptyBorder_tables);
   }
     
   public void clearFilter(){
@@ -867,461 +893,452 @@ public class NordwindTool extends JFrame {
           ftf.setText(null);
         }
       }
-    
     }
   }
         
   
   public void openFilterPanel(int index){
     clearFilter();
-    label_filter.setVisible(true);
+    panel_filter.setBorder(titledBorder_filter);
+    
+    int i;
+    int x;
+    int p;
+    int f;
+    
     switch (index){
       case -1:
         cl_filter.show(panel_filter, "NULL");
-        label_filter.setVisible(false);
+        panel_filter.setBorder(emptyBorder_filter);
+        panel_null.add(button_submit);
+        button_submit.setBounds(1000,1000,0,0);
+        //titledBorder_filter.setBorderPainted(false);
         break;
         
       case 0: 
-        label_artikelnr.setBounds(10, 25, 100, 20);
             
         label_mindestbestand.setText("Mindestbestand:");
         label_auslaufartikel.setText("Auslaufartikel:");
-        
+        /*******************************************************/
         panel_artikel.add(label_artikelnr);
-        
-        numberfield_artikelnr.setBounds(125,25,50,20);
         panel_artikel.add(numberfield_artikelnr);
-        
-        label_artikelname.setBounds(10, 60, 100, 20);
-        
         panel_artikel.add(label_artikelname);
-        
-        textfield_artikelname.setBounds(125,60,150,20);
         panel_artikel.add(textfield_artikelname);
-        
-        label_lieferantennr.setBounds(10, 95, 100, 20);
-        panel_artikel.add(label_lieferantennr);
-        
-        numberfield_lieferantennr.setBounds(125,95,50,20);
-        panel_artikel.add(numberfield_lieferantennr);
-        
-        label_kategoriennr.setBounds(10, 130, 100, 20);
-        panel_artikel.add(label_kategoriennr);
-        
-        numberfield_kategorienr.setBounds(125,130,50,20);
-        panel_artikel.add(numberfield_kategorienr);
-        
-        label_liefereinheit.setBounds(10, 165, 100, 20);
-        panel_artikel.add(label_liefereinheit);
-        
-        textfield_liefereinheit.setBounds(125,165,150,20);
-        panel_artikel.add(textfield_liefereinheit);
-        
-        label_einzelpreis.setBounds(10, 200, 100, 20);
-        panel_artikel.add(label_einzelpreis);
-        
-        numberfield_einzelpreis.setBounds(125,200,50,20);
+        panel_artikel.add(label_lieferantennr); 
+        panel_artikel.add(numberfield_lieferantennr); 
+        panel_artikel.add(label_kategoriennr);     
+        panel_artikel.add(numberfield_kategorienr); 
+        panel_artikel.add(label_liefereinheit); 
+        panel_artikel.add(textfield_liefereinheit);  
+        panel_artikel.add(label_einzelpreis); 
         panel_artikel.add(numberfield_einzelpreis);
-        
-        label_lagerbestand.setBounds(10, 235, 100, 20);
-        panel_artikel.add(label_lagerbestand);
-        
-        numberfield_lagerbestand.setBounds(125,235,50,20);
+        panel_artikel.add(label_lagerbestand); 
         panel_artikel.add(numberfield_lagerbestand);
-        
-        label_bestellteEinheiten.setBounds(10, 270, 100, 20);
-        panel_artikel.add(label_bestellteEinheiten);
-        
-        numberfield_bestellteEinheiten.setBounds(125,270,50,20);
-        panel_artikel.add(numberfield_bestellteEinheiten);
-        
-        label_mindestbestand.setBounds(10, 305, 100, 20);
+        panel_artikel.add(label_bestellteEinheiten);  
+        panel_artikel.add(numberfield_bestellteEinheiten);  
         panel_artikel.add(label_mindestbestand);
-        
-        numberfield_mindestbestand.setBounds(125,305,50,20);
-        panel_artikel.add(numberfield_mindestbestand);
-        
-        label_auslaufartikel.setBounds(10, 340, 100, 20);
-        panel_artikel.add(label_auslaufartikel);
-        
-        checkbox_auslaufartikel.setBounds(125, 340, 20, 20);
+        panel_artikel.add(numberfield_mindestbestand);   
+        panel_artikel.add(label_auslaufartikel);  
         panel_artikel.add(checkbox_auslaufartikel);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_artikel.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_artikel.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode);
         
         cl_filter.show(panel_filter, "ARTIKEL");
         break;
         
       case 1:
-        label_bestellnr.setBounds(10, 25, 100, 20);
-        panel_bestelldetails.add(label_bestellnr);
-        
-        numberfield_bestellnr.setBounds(125,25,50,20);
-        panel_bestelldetails.add(numberfield_bestellnr);
-        
-        label_artikelnr.setBounds(10, 60, 100, 20);
-        panel_bestelldetails.add(label_artikelnr);
-        
-        numberfield_artikelnr.setBounds(125,60,50,20);
-        panel_bestelldetails.add(numberfield_artikelnr);
-        
-        label_einzelpreis.setBounds(10, 95, 100, 20);
-        panel_bestelldetails.add(label_einzelpreis);  
-        
-        numberfield_einzelpreis.setBounds(125,95,50,20);
-        panel_bestelldetails.add(numberfield_einzelpreis);
-        
-        label_anzahl.setBounds(10, 130, 100, 20);
-        panel_bestelldetails.add(label_anzahl);
-        
-        numberfield_anzahl.setBounds(125,130,50,20);
-        panel_bestelldetails.add(numberfield_anzahl);
-        
-        label_rabatt.setBounds(10, 165, 100, 20);
-        panel_bestelldetails.add(label_rabatt);
-        
-        numberfield_rabatt.setBounds(125,165,50,20);
+        panel_bestelldetails.add(label_bestellnr); 
+        panel_bestelldetails.add(numberfield_bestellnr);  
+        panel_bestelldetails.add(label_artikelnr); 
+        panel_bestelldetails.add(numberfield_artikelnr);   
+        panel_bestelldetails.add(label_einzelpreis);   
+        panel_bestelldetails.add(numberfield_einzelpreis); 
+        panel_bestelldetails.add(label_anzahl); 
+        panel_bestelldetails.add(numberfield_anzahl);   
+        panel_bestelldetails.add(label_rabatt); 
         panel_bestelldetails.add(numberfield_rabatt);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_bestelldetails.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_bestelldetails.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode);
         
         cl_filter.show(panel_filter, "BESTELLDETAILS");
         break;
         
       case 2:
-        label_bestellnr.setBounds(10, 25,100,20);
         panel_bestellungen.add(label_bestellnr);
-        
-        numberfield_bestellnr.setBounds(125,25,50,20);
         panel_bestellungen.add(numberfield_bestellnr);
-        
-        label_kundencode.setBounds(10, 60, 100, 20);
         panel_bestellungen.add(label_kundencode);
-        
-        textfield_kundencode.setBounds(125,60,150,20);
         panel_bestellungen.add(textfield_kundencode);
-        
-        label_personalnr.setBounds(10, 95, 100, 20);
         panel_bestellungen.add(label_personalnr);
-        
-        numberfield_personalnr.setBounds(125,95,50,20);
         panel_bestellungen.add(numberfield_personalnr);
-        
-        label_bestelldatum.setBounds(10, 130, 100, 20);
         panel_bestellungen.add(label_bestelldatum);     
-        
-        datefield_bestelldatum.setBounds(125,130,100,20);
         panel_bestellungen.add(datefield_bestelldatum);
-            
-        label_lieferdatum.setBounds(10, 165, 100, 20);
         panel_bestellungen.add(label_lieferdatum);
-        
-        datefield_lieferdatum.setBounds(125,165,100,20);
         panel_bestellungen.add(datefield_lieferdatum);
-        
-        label_versanddatum.setBounds(10, 200, 100, 20);
         panel_bestellungen.add(label_versanddatum);
-        
-        datefield_versanddatum.setBounds(125,200,100,20);
         panel_bestellungen.add(datefield_versanddatum);
-        
-        label_versandUeber.setBounds(10, 235, 100, 20);
         panel_bestellungen.add(label_versandUeber);
-        
-        numberfield_versandUeber.setBounds(125,235,50,20);
         panel_bestellungen.add(numberfield_versandUeber);
-        
-        label_frachtkosten.setBounds(10, 270, 100, 20);
         panel_bestellungen.add(label_frachtkosten);
-        
-        numberfield_frachtkosten.setBounds(125,270,50,20);
         panel_bestellungen.add(numberfield_frachtkosten);
-        
-        label_empfaenger.setBounds(10, 305, 100, 20);
         panel_bestellungen.add(label_empfaenger);
-        
-        textfield_empfaenger.setBounds(125,305,150,20);
         panel_bestellungen.add(textfield_empfaenger);
-        
-        label_strasse.setBounds(10, 340, 100, 20);
         panel_bestellungen.add(label_strasse);
-        
-        textfield_strasse.setBounds(125,340,150,20);
         panel_bestellungen.add(textfield_strasse);
-        
-        label_plzOrt.setBounds(10, 375, 100, 20);
-        panel_bestellungen.add(label_plzOrt);
-        
-        textfield_plz.setBounds(125,375,50,20);
+        panel_bestellungen.add(label_plz);
         panel_bestellungen.add(textfield_plz);
-        
-        textfield_ort.setBounds(185,375,90,20);
+        panel_bestellungen.add(label_ort);
         panel_bestellungen.add(textfield_ort);
-        
-        label_land.setBounds(10, 410, 100, 20);
         panel_bestellungen.add(label_land);
-        
-        textfield_land.setBounds(125,410,150,20);
         panel_bestellungen.add(textfield_land);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_bestellungen.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_bestellungen.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode);
  
         cl_filter.show(panel_filter, "BESTELLUNGEN");
         break;
         
       case 3: 
-        label_kategoriennr.setBounds(10, 25, 100, 20);
         panel_kategorien.add(label_kategoriennr);
-        
-        numberfield_kategorienr.setBounds(125,25,50,20);
         panel_kategorien.add(numberfield_kategorienr);
-        
-        label_kategoriename.setBounds(10, 60, 100, 20);
         panel_kategorien.add(label_kategoriename);
-        
-        textfield_kategoriename.setBounds(125,60,150,20);
         panel_kategorien.add(textfield_kategoriename);
-        
-        label_beschreibung.setBounds(10, 95, 100, 20);
         panel_kategorien.add(label_beschreibung);
-        
-        textfield_beschreibung.setBounds(125,95,150,20);
         panel_kategorien.add(textfield_beschreibung);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_kategorien.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_kategorien.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode);
         
         cl_filter.show(panel_filter, "KATEGORIEN");
         break;
         
       case 4:
-        label_kundencode.setBounds(10, 25, 100, 20);
         panel_kunden.add(label_kundencode);
-        
-        textfield_kundencode.setBounds(125,25,150,20);
         panel_kunden.add(textfield_kundencode);
-        
-        label_firma.setBounds(10, 60, 100, 20);
         panel_kunden.add(label_firma);
-        
-        textfield_firma.setBounds(125,60,150,20);
         panel_kunden.add(textfield_firma);
-        
-        label_kontaktperson.setBounds(10, 95, 100, 20);
         panel_kunden.add(label_kontaktperson);
-        
-        textfield_kontaktperson.setBounds(125,95,150,20);
         panel_kunden.add(textfield_kontaktperson);
-        
-        label_position.setBounds(10, 130, 100, 20);
         panel_kunden.add(label_position);
-        
-        textfield_position.setBounds(125,130,150,20);
         panel_kunden.add(textfield_position);
-        
-        label_strasse.setBounds(10, 165, 100, 20);
         panel_kunden.add(label_strasse);
-        
-        textfield_strasse.setBounds(125,165,150,20);
         panel_kunden.add(textfield_strasse);
-        
-        label_plzOrt.setBounds(10, 200, 100, 20);
-        panel_kunden.add(label_plzOrt);
-        
-        textfield_plz.setBounds(125,200,50,20);
+        panel_kunden.add(label_plz);
         panel_kunden.add(textfield_plz);
-        
-        textfield_ort.setBounds(185,200,90,20);
+        panel_kunden.add(label_ort);
         panel_kunden.add(textfield_ort);
-        
-        label_land.setBounds(10, 235, 100, 20);
         panel_kunden.add(label_land);
-        
-        textfield_land.setBounds(125,235,150,20);
         panel_kunden.add(textfield_land);
-        
-        label_telefon.setBounds(10, 270, 100, 20);
         panel_kunden.add(label_telefon);
-        
-        numberfield_telefon.setBounds(125,270,100,20);
         panel_kunden.add(numberfield_telefon);
-        
-        label_telefax.setBounds(10, 305, 100, 20);
         panel_kunden.add(label_telefax);
-        
-        numberfield_telefax.setBounds(125,305,100,20);
         panel_kunden.add(numberfield_telefax);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_kunden.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_kunden.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode);
         
         cl_filter.show(panel_filter, "KUNDEN");
         break;
         
       case 5:
-        label_lieferantennr.setBounds(10, 25, 100, 20);
         panel_lieferanten.add(label_lieferantennr);
-        
-        numberfield_lieferantennr.setBounds(125,25,50,20);
         panel_lieferanten.add(numberfield_lieferantennr);
-        
-        label_firma.setBounds(10, 60, 100, 20);
         panel_lieferanten.add(label_firma);
-        
-        textfield_firma.setBounds(125,60,150,20);
         panel_lieferanten.add(textfield_firma);
-        
-        label_kontaktperson.setBounds(10, 95, 100, 20);
         panel_lieferanten.add(label_kontaktperson);
-        
-        textfield_kontaktperson.setBounds(125,95,150,20);
         panel_lieferanten.add(textfield_kontaktperson);
-        
-        label_position.setBounds(10, 130, 100, 20);
         panel_lieferanten.add(label_position);
-        
-        textfield_position.setBounds(125,130,150,20);
         panel_lieferanten.add(textfield_position);
-        
-        label_strasse.setBounds(10, 165, 100, 20);
         panel_lieferanten.add(label_strasse);
-        
-        textfield_strasse.setBounds(125,165,150,20);
         panel_lieferanten.add(textfield_strasse);
-        
-        label_plzOrt.setBounds(10, 200, 100, 20);
-        panel_lieferanten.add(label_plzOrt);
-        
-        textfield_plz.setBounds(125,200,50,20);
+        panel_lieferanten.add(label_plz);
         panel_lieferanten.add(textfield_plz);
-        
-        textfield_ort.setBounds(185,200,90,20);
+        panel_lieferanten.add(label_ort);
         panel_lieferanten.add(textfield_ort);
-        
-        label_land.setBounds(10, 235, 100, 20);
         panel_lieferanten.add(label_land);
-        
-        textfield_land.setBounds(125,235,150,20);
         panel_lieferanten.add(textfield_land);
-        
-        label_telefon.setBounds(10, 270, 100, 20);
         panel_lieferanten.add(label_telefon);
-        
-        numberfield_telefon.setBounds(125,270,100,20);
         panel_lieferanten.add(numberfield_telefon);
-        
-        label_telefax.setBounds(10, 305, 100, 20);
         panel_lieferanten.add(label_telefax);
-        
-        numberfield_telefax.setBounds(125,305,100,20);
         panel_lieferanten.add(numberfield_telefax);
-        
-        label_homepage.setBounds(10, 340, 100, 20);
         panel_lieferanten.add(label_homepage); 
-        
-        textfield_homepage.setBounds(125,340,150,20);
         panel_lieferanten.add(textfield_homepage);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_lieferanten.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_lieferanten.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode); 
         
         cl_filter.show(panel_filter, "LIEFERANTEN");
         break;
         
       case 6:
-        label_personalnr.setBounds(10, 25, 100, 20);
         panel_personal.add(label_personalnr);  
-        
-        numberfield_personalnr.setBounds(125, 25, 50,  20);
         panel_personal.add(numberfield_personalnr);
-        
-        label_vorname.setBounds(10, 60, 100, 20);
         panel_personal.add(label_vorname); 
-        
-        textfield_vorname.setBounds(125,60,150,20);
         panel_personal.add(textfield_vorname);    
-        
-        label_nachname.setBounds(10, 95, 100, 20);
         panel_personal.add(label_nachname);
-        
-        textfield_nachname.setBounds(125,95,150,20);
         panel_personal.add(textfield_nachname);
-        
-        label_position.setBounds(10, 130, 100, 20);
         panel_personal.add(label_position);
-        
-        textfield_position.setBounds(125,130,150,20);
         panel_personal.add(textfield_position);
-    
-        label_anrede.setBounds(10, 165, 100, 20);
         panel_personal.add(label_anrede);
-        
-        combobox_anrede.setBounds(125, 165, 150, 20);
-        
-        label_geburtsdatum.setBounds(10, 200, 100, 20);
+        panel_personal.add(combobox_anrede);
         panel_personal.add(label_geburtsdatum);
-        
-        datefield_geburtsdatum.setBounds(125,200,100,20);
         panel_personal.add(datefield_geburtsdatum);
-        
-        label_einstellung.setBounds(10, 235, 100, 20);
         panel_personal.add(label_einstellung);
-        
-        datefield_einstellung.setBounds(125,235,100,20);
         panel_personal.add(datefield_einstellung);
-        
-        label_strasse.setBounds(10, 270, 100, 20);
         panel_personal.add(label_strasse);
-        
-        textfield_strasse.setBounds(125,270,150,20);
         panel_personal.add(textfield_strasse);
-        
-        label_plzOrt.setBounds(10, 305, 100, 20);
-        panel_personal.add(label_plzOrt);
-        
-        textfield_plz.setBounds(125,305,50,20);
+        panel_personal.add(label_plz);
         panel_personal.add(textfield_plz);
-        
-        textfield_ort.setBounds(185,305,90,20);
+        panel_personal.add(label_ort);
         panel_personal.add(textfield_ort);
-        
-        label_land.setBounds(10, 340, 100, 20);
         panel_personal.add(label_land);
-        
-        textfield_land.setBounds(125,340,150,20);
         panel_personal.add(textfield_land);
-        
-        label_telefon.setBounds(10, 375, 100, 20);
         panel_personal.add(label_telefon);
-        
-        numberfield_telefon.setBounds(125,375,100,20);
         panel_personal.add(numberfield_telefon);
-        
-        label_durchwahl.setBounds(10, 410, 100, 20);
         panel_personal.add(label_durchwahl);
-        
-        numberfield_durchwahl.setBounds(125,410,100,20);
         panel_personal.add(numberfield_durchwahl);
-        
-        label_bemerkungen.setBounds(10, 445, 100, 20);
-        panel_personal.add(label_bemerkungen);
-        
-        textfield_bemerkungen.setBounds(125,445,150,20);
-        panel_personal.add(textfield_bemerkungen);
-        
-        label_vorgesetzte.setBounds(10, 480, 100, 20);
-        panel_personal.add(label_vorgesetzte);
-        
-        textfield_vorgesetzte.setBounds(125,480,150,20);
-        panel_personal.add(textfield_vorgesetzte);
-        
       
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_personal.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_personal.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode); 
+        
         cl_filter.show(panel_filter, "PERSONAL");
         break;
         
       case 7:
-        label_firmennr.setBounds(10, 25, 100, 20);
         panel_versandfirmen.add(label_firmennr);
-        
-        numberfield_firmennr.setBounds(125,25,50,20);
         panel_versandfirmen.add(numberfield_firmennr);
-        
-        label_firma.setBounds(10, 60, 100, 20);
         panel_versandfirmen.add(label_firma);
-        
-        textfield_firma.setBounds(125,60,150,20);
         panel_versandfirmen.add(textfield_firma);
-        
-        label_telefon.setBounds(10, 95, 100, 20);
         panel_versandfirmen.add(label_telefon);
-        
-        numberfield_telefon.setBounds(125,95,100,20);
         panel_versandfirmen.add(numberfield_telefon);
+        
+        i = 2;
+        x = 0;
+        p = 10;
+        f = 0;
+          
+        for (Component c: panel_versandfirmen.getComponents()) {
+          if(i % 2 == 0){
+            c.setBounds(p, position[x],100,20);
+            p = 125;
+        }
+          else if(i % 2 == 1){
+            if(c instanceof JNumberField){
+              f = 50;
+            }
+            else if(c instanceof JTextField){
+              f = 150;
+            }
+            else if(c instanceof JCheckBox){
+              f = 20;
+            }
+            c.setBounds(p, position[x], f,20);
+            x++;
+            p = 10;
+          }
+          i++;
+        }
+        
+        panel_versandfirmen.add(button_submit);
+        button_submit.setBounds(50, position[x],200,20);
+        button_submit.setText(button_mode); 
                 
         cl_filter.show(panel_filter, "VERSANDFIRMEN"); 
         break;
