@@ -34,7 +34,7 @@ public class NordwindTool extends JFrame {
   private JLabel label_filter = new JLabel();
   private JLabel label_tablesList = new JLabel(); 
   private JPanel panel_home = new JPanel(null, true);
-        private JLabel label_function = new JLabel();
+  private JLabel label_function = new JLabel();
   private JTextField textfield_loginname = new JTextField();
   private JLabel label_logout = new JLabel();
   
@@ -528,7 +528,6 @@ public class NordwindTool extends JFrame {
     Hashtable<TextAttribute, Object> label_githubProject_map = new Hashtable<TextAttribute, Object>();
     label_githubProject_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_githubProject.setFont(new Font(label_githubProject_map));
-    /************************************************/
     
     label_githubUser.setBounds(0,30,200,25);
     label_githubUser.setForeground(Color.BLUE);
@@ -539,10 +538,8 @@ public class NordwindTool extends JFrame {
     label_githubUser_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_githubUser.setFont(new Font(label_githubUser_map));
     
-    
     panel_links.add(label_githubProject);
     panel_links.add(label_githubUser);
-    
     
     optionpane_about.setPreferredSize(new Dimension(0,120));
     optionpane_about.setSize(0,120);
@@ -594,7 +591,6 @@ public class NordwindTool extends JFrame {
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
-        System.out.println("ABFRAGEN");
       }
     }); 
     
@@ -604,7 +600,6 @@ public class NordwindTool extends JFrame {
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
-        System.out.println("ANLEGEN");
       }
     });
     
@@ -614,7 +609,6 @@ public class NordwindTool extends JFrame {
         reset_filter();     
         enable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
-        System.out.println("EDITIEREN");
       }
     });
     
@@ -623,7 +617,6 @@ public class NordwindTool extends JFrame {
         reset_filter();     
         disable_listPanel();
         //VARIABLE STRING REINBRINGEN MODUS
-        System.out.println("HOME");
       }
     });
     
@@ -644,7 +637,6 @@ public class NordwindTool extends JFrame {
     item_about.addActionListener(new ActionListener() {;
       public void actionPerformed(ActionEvent e) {
         optionpane_about_ShowDialog();
-        System.out.println("UEBER NORDWIND - TOOL");
       }
     });
     
@@ -956,7 +948,6 @@ public class NordwindTool extends JFrame {
         panel_artikel.add(checkbox_auslaufartikel);
         
         cl_filter.show(panel_filter, "ARTIKEL");
-        System.out.println("CASE 0");
         break;
         
       case 1:
@@ -991,7 +982,6 @@ public class NordwindTool extends JFrame {
         panel_bestelldetails.add(numberfield_rabatt);
         
         cl_filter.show(panel_filter, "BESTELLDETAILS");
-        System.out.println("CASE 1");
         break;
         
       case 2:
