@@ -355,7 +355,7 @@ public class NordwindTool extends JFrame {
     textfield_loginname.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
     panel_login.add(textfield_loginname);
      
-    button_login.setBounds(525, 320, 230, 25);
+    button_login.setBounds(525, 320, 230, 35);
     button_login.setText("ANMELDEN");
     button_login.setMargin(new Insets(2, 2, 2, 2)); 
     button_login.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
@@ -367,7 +367,7 @@ public class NordwindTool extends JFrame {
     label_login.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
     panel_login.add(label_login);
     
-    label_loginstatus.setBounds(525, 370, 230, 40);
+    label_loginstatus.setBounds(525, 360, 230, 25);
     label_loginstatus.setText("");
     label_loginstatus.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
     label_loginstatus.setOpaque(true);
