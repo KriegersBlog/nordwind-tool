@@ -1,6 +1,6 @@
 object NordwindTool: TFGUIForm
-  Left = 2302
-  Top = 865
+  Left = 2196
+  Top = 149
   BorderIcons = [biSystemMenu]
   Caption = 'Nordwind Tool - Made by Julian Krieger'
   ClientHeight = 680
@@ -163,29 +163,6 @@ object NordwindTool: TFGUIForm
         Border.MatteLeft = 0
         Border.MatteBottom = 0
         Border.MatteRight = 0
-      end
-      object label_login: TJLabel
-        Tag = 1
-        Left = 374
-        Top = 118
-        Width = 233
-        Height = 36
-        Hint = 'jLabel1'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Trebuchet MS'
-        Font.Style = [fsBold]
-        Foreground = clWindowText
-        Background = clBtnFace
-        Text = 'Bitte melden Sie sich an'
-        HorizontalAlignment = CENTER
-        VerticalAlignment = CENTER
-        HorizontalTextPosition = RIGHT
-        VerticalTextPosition = CENTER
-        IconTextGap = 4
-        DisplayedMnemonic = 0
-        DisplayedMnemonicIndex = 0
       end
       object label_loginstatus: TJLabel
         Tag = 1
@@ -854,6 +831,30 @@ object NordwindTool: TFGUIForm
           DisplayedMnemonic = 0
           DisplayedMnemonicIndex = 0
         end
+      end
+      object label_login: TJLabel
+        Tag = 1
+        Left = 374
+        Top = 118
+        Width = 233
+        Height = 36
+        Hint = 'jLabel1'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Trebuchet MS'
+        Font.Style = [fsBold]
+        Foreground = clWindowText
+        Background = clBtnFace
+        Text = 'Bitte melden Sie sich an'
+        Icon = 'images/logo_128.png'
+        HorizontalAlignment = CENTER
+        VerticalAlignment = CENTER
+        HorizontalTextPosition = RIGHT
+        VerticalTextPosition = CENTER
+        IconTextGap = 4
+        DisplayedMnemonic = 0
+        DisplayedMnemonicIndex = 0
       end
     end
   end

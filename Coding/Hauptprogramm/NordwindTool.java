@@ -23,6 +23,8 @@ public class NordwindTool extends JFrame {
   ImageIcon query = new ImageIcon("images/query.png");
   ImageIcon user = new ImageIcon("images/user.png");
   ImageIcon home = new ImageIcon("images/home.png");
+  Image logo = new ImageIcon("images/logo_32.png").getImage();
+  ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
   
   DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
   private JLabel label_about_versionAutor =  new JLabel();
@@ -38,6 +40,8 @@ public class NordwindTool extends JFrame {
   private JPanel panel_versionAutor = new JPanel(null, true);
   private JPanel panel_links = new JPanel(null, true);
   private JPanel panel_about = new JPanel(null, true);
+  private JLabel label_logo = new JLabel();
+  
     
   //OptionPanes
   private JOptionPane optionpane_about = new JOptionPane();
@@ -255,7 +259,7 @@ public class NordwindTool extends JFrame {
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     int frameWidth = 1280; 
-    int frameHeight = 719;
+    int frameHeight = 720;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -335,31 +339,35 @@ public class NordwindTool extends JFrame {
     
     /*-----------------SWING-ELEMENTE KONFIGURIEREN---------------------------*/
     //LOGIN PANEL
-    passwordfield_login.setBounds(380, 218, 230, 40);
+    passwordfield_login.setBounds(525, 270, 230, 40);
     passwordfield_login.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
     passwordfield_login.setToolTipText("Passwort eingeben");
     panel_login.add(passwordfield_login);
     
-    textfield_loginname.setBounds(380, 160, 230, 40);
+    label_logo.setBounds(390,25,500,66);
+    label_logo.setIcon(main_logo);
+    panel_login.add(label_logo);
+    
+    textfield_loginname.setBounds(525, 220, 230, 40);
     textfield_loginname.setText("");
     textfield_loginname.setToolTipText("Anmeldename eingeben");
     textfield_loginname.setHorizontalAlignment(SwingConstants.LEFT);
     textfield_loginname.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
     panel_login.add(textfield_loginname);
      
-    button_login.setBounds(405, 264, 179, 41);
-    button_login.setText("Anmelden");
+    button_login.setBounds(525, 320, 230, 25);
+    button_login.setText("ANMELDEN");
     button_login.setMargin(new Insets(2, 2, 2, 2)); 
     button_login.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
     panel_login.add(button_login);
     
-    label_login.setBounds(374, 118, 233, 36);
+    label_login.setBounds(525, 185, 230, 40);
     label_login.setText("Bitte melden Sie sich an");
     label_login.setHorizontalAlignment(SwingConstants.CENTER);
     label_login.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
     panel_login.add(label_login);
     
-    label_loginstatus.setBounds(405, 314, 179, 20);
+    label_loginstatus.setBounds(525, 370, 230, 40);
     label_loginstatus.setText("");
     label_loginstatus.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
     label_loginstatus.setOpaque(true);
@@ -398,7 +406,7 @@ public class NordwindTool extends JFrame {
     button_resetList.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
     panel_tables.add(button_resetList);
     
-    list_tablesScrollPane.setBounds(10, 20, 280, 388);
+    list_tablesScrollPane.setBounds(10, 20, 280, 388);    
     list_tablesModel.addElement("artikel");
     list_tablesModel.addElement("bestelldetails");
     list_tablesModel.addElement("bestellungen");
@@ -579,7 +587,6 @@ public class NordwindTool extends JFrame {
     menu_control();
     //titledBorder_filter.setBorderPainted(false);
     
-    
     /*--------------------------LISTENER--------------------------------------*/ 
      
     //ACTIONLISTENER
@@ -729,6 +736,9 @@ public class NordwindTool extends JFrame {
     label_function.setHorizontalAlignment(SwingConstants.CENTER);
     panel_home.add(label_function);
     label_function.setBounds(438, 4, 358, 48);
+    
+    this.setIconImage(logo);
+    setUndecorated(false);
     // Ende Komponenten
   // Anfang Methoden
   }
