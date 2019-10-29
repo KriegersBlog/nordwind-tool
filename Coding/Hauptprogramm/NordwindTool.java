@@ -738,7 +738,6 @@ public class NordwindTool extends JFrame {
     label_function.setBounds(438, 4, 358, 48);
     
     this.setIconImage(logo);
-    setUndecorated(false);
     // Ende Komponenten
   // Anfang Methoden
   }
@@ -755,10 +754,13 @@ public class NordwindTool extends JFrame {
     list_tables.clearSelection();
   }
   
+  
+    
+    
   public void button_submit_ActionPerformed(ActionEvent evt) {
     
   }
-
+    
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
       openFilterPanel(list_tables.getSelectedIndex());

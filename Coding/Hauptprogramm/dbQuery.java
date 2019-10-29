@@ -69,7 +69,7 @@ public class dbQuery extends NordwindTool {
     try {
       if(table.equals("artikel")){
         Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
-        String url = "jdbc:mysql://localhost:3306/nordwind_tool";     //Datenbankverbindung angeben
+        String url = "jdbc:mysql://localhost:3306/nordwind";     //Datenbankverbindung angeben
         Connection con = DriverManager.getConnection(url,"java", "java");    // Verbindungsparameter angeben
         command = "insert into artikel(artikelnr, artikelname, lieferantennr, kategorienr, liefereinheit, einzelpreis, lagerbestand, bestellteeinheiten,mindestbestand, auslaufartikel)"
         + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -109,7 +109,7 @@ public class dbQuery extends NordwindTool {
       }
       }
       catch(Exception e){
-        System.out.println("Fehler beim Erstellen in dbQuery.db");  
+        System.out.println(e);  
       }
   }
     
