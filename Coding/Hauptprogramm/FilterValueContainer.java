@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat; 
+import java.util.Date;
+
 public class FilterValueContainer extends NordwindTool {
   int artikelnr;
   int lieferantennr;
@@ -6,7 +10,6 @@ public class FilterValueContainer extends NordwindTool {
   int bestellteEinheiten;
   int mindestbestand;
   int bestellnr;
-  int rabatt;
   int personalnr;
   int versandUeber;
   int telefon;
@@ -32,9 +35,14 @@ public class FilterValueContainer extends NordwindTool {
   String anrede;
   String einstellung;
   
+  Date bestelldatum;
+  Date versanddatum;
+  Date lieferdatum;
+  
   boolean auslaufartikel;
   double einzelpreis;
   double rabatt;  
+  double frachtkosten;
   
   //Konstruktor für 'artikel'
   public FilterValueContainer(int givenArtikelnr, String givenArtikelname, int givenLieferantennr, int givenKategorienr, String givenLiefereinheit, 
@@ -61,20 +69,45 @@ public class FilterValueContainer extends NordwindTool {
     }
   
   //Konstruktor für 'bestellungen'
-  public FilterValueContainer(int givenBestellnr, String givenKundencode, int givenPersonalnr, ){
-    
+  public FilterValueContainer(int givenBestellnr, String givenKundencode, int givenPersonalnr, Date givenBestelldatum, Date givenLieferdatum, Date givenVersanddatum,
+    int givenVersandUeber, double givenFrachtkosten, String givenEmpfaenger, String givenStrasse, String givenPlz, String givenOrt, String givenLand){
+    this.bestellnr = givenBestellnr;
+    this.kundencode = givenKundencode;
+    this.personalnr = givenPersonalnr;
+    this.bestelldatum = givenBestelldatum;
+    this.lieferdatum = givenLieferdatum;
+    this.versanddatum = givenVersanddatum;
+    this.versandUeber = givenVersandUeber;
+    this.frachtkosten = givenFrachtkosten;
+    this.empfaenger = givenEmpfaenger;
+    this.strasse = givenStrasse;
+    this.plz = givenPlz;
+    this.ort = givenOrt;
+    this.land = givenLand;
     }
   
-  //Konstruktor für 'personal'
+  //Konstruktor für 'kategorien'
   public FilterValueContainer(){
-    
+    this.kategorienr = givenKategorienr;
+    this.kategoriename = givenKategoriename;
+    this.beschreibung = givenBeschreibung;
     }
   
-  //Konstruktor für 'lieferanten'
-  public FilterValueContainer(){
-    
+  //Konstruktor für 'kunden'
+  public FilterValueContainer(String givenKundencode, int givenFirma, String givenKontaktperson, int givenPosition, String givenStrasse,
+    String givenOrt, String givenLand, int givenTelefon, int givenTelefax){
+    this.kundencode = givenKundencode;
+    this.firma = givenFirma;
+    this.kontaktperson = givenKontaktperson;
+    this.position = givenPosition;
+    this.strasse = givenStrasse;
+    this.plz = givenPlz;
+    this.ort = givenOrt;
+    this.land = givenLand;
+    this.telefon = givenTelefon;
+    this.telefax = givenTelefax;
     }
-  
+             /*
   //Konstruktor für 'kunden'
   public FilterValueContainer(){
     
@@ -88,4 +121,5 @@ public class FilterValueContainer extends NordwindTool {
   //Konstruktor für 'bestellungen'
   public FilterValueContainer(){
     
-    }
+    }  */
+  }
