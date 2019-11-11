@@ -758,7 +758,17 @@ public class NordwindTool extends JFrame {
     
     
   public void button_submit_ActionPerformed(ActionEvent evt) {
+    if(mode.equals("abfragen")){
+        
+  
+    }
+    else if(mode.equals("anlegen"){
     
+  
+    }
+    else if(mode.equals("editieren"){
+    
+    }
   }
     
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
@@ -924,7 +934,6 @@ public class NordwindTool extends JFrame {
         panel_filter.setBorder(emptyBorder_filter);
         panel_null.add(button_submit);
         button_submit.setBounds(1000,1000,0,0);
-        //titledBorder_filter.setBorderPainted(false);
         break;
         
       case 0: 

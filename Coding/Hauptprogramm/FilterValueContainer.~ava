@@ -15,7 +15,7 @@ public class FilterValueContainer extends NordwindTool {
   int telefon;
   int telefax; 
   int durchwahl;
-  
+  int firmennummer;
   String artikelname; 
   String liefereinheit;
   String kundencode;
@@ -46,7 +46,7 @@ public class FilterValueContainer extends NordwindTool {
   
   //Konstruktor für 'artikel'
   public FilterValueContainer(int givenArtikelnr, String givenArtikelname, int givenLieferantennr, int givenKategorienr, String givenLiefereinheit, 
-  double givenEinzelpreis, int givenLagerbestand, int givenBestellteEinheiten, int givenMindestbestand, boolean givenAuslaufartikel){
+    double givenEinzelpreis, int givenLagerbestand, int givenBestellteEinheiten, int givenMindestbestand, boolean givenAuslaufartikel){
     this.artikelnr = givenArtikelnr;
     this.artikelname = givenArtikelname;
     this.lieferantennr = givenLieferantennr;
@@ -87,17 +87,17 @@ public class FilterValueContainer extends NordwindTool {
     }
   
   //Konstruktor für 'kategorien'
-  public FilterValueContainer(){
+  public FilterValueContainer(int givenKategorienr, String givenKategoriename, String givenBeschreibung){
     this.kategorienr = givenKategorienr;
     this.kategoriename = givenKategoriename;
     this.beschreibung = givenBeschreibung;
     }
   
   //Konstruktor für 'kunden'
-  public FilterValueContainer(String givenKundencode, int givenFirma, String givenKontaktperson, int givenPosition, String givenStrasse,
-    String givenOrt, String givenLand, int givenTelefon, int givenTelefax){
+  public FilterValueContainer(String givenKundencode, int givenFirma, String givenKontaktperson, String givenPosition, String givenStrasse,
+    String givenPlz, String givenOrt, String givenLand, int givenTelefon, int givenTelefax){
     this.kundencode = givenKundencode;
-    this.firma = givenFirma;
+    this.firmennummer = givenFirma;
     this.kontaktperson = givenKontaktperson;
     this.position = givenPosition;
     this.strasse = givenStrasse;
@@ -107,7 +107,7 @@ public class FilterValueContainer extends NordwindTool {
     this.telefon = givenTelefon;
     this.telefax = givenTelefax;
     }
-  
+  /*
   //Konstruktor für 'kunden'
   public FilterValueContainer(){
     
@@ -121,5 +121,5 @@ public class FilterValueContainer extends NordwindTool {
   //Konstruktor für 'bestellungen'
   public FilterValueContainer(){
     
-    }
+    }    */
   }

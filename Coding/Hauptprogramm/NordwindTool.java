@@ -758,7 +758,8 @@ public class NordwindTool extends JFrame {
     
     
   public void button_submit_ActionPerformed(ActionEvent evt) {
-    
+    //AKTIVE TABELLE ABFRAGEN
+    //AM ENDE DAS OBJEKT EINER BESTIMMTEN VARIABLE ÜBERGEBEN*
   }
     
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
@@ -924,7 +925,6 @@ public class NordwindTool extends JFrame {
         panel_filter.setBorder(emptyBorder_filter);
         panel_null.add(button_submit);
         button_submit.setBounds(1000,1000,0,0);
-        //titledBorder_filter.setBorderPainted(false);
         break;
         
       case 0: 
