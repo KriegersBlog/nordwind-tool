@@ -2,7 +2,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat; 
 import java.util.Date;
 
-public class FilterValueContainer extends NordwindTool{
+public class FilterValueContainer{
   int artikelnr;
   int lieferantennr;
   int kategorienr;

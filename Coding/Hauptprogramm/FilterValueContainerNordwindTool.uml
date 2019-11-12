@@ -1,0 +1,43 @@
+﻿[Files]
+File0=C:\Users\Julian\Documents\GitHub\nordwind-tool\Coding\Hauptprogramm\FilterValueContainer.java
+File1=C:\Users\Julian\Documents\GitHub\nordwind-tool\Coding\Hauptprogramm\NordwindTool.java
+
+[Box:  - FilterValueContainer]
+X=947
+Y=81
+MinVis=4
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=6
+FontName=Segoe UI
+
+[Box:  - NordwindTool]
+X=960
+Y=40
+MinVis=4
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=6
+FontName=Segoe UI
+
+[Diagram]
+comments=0
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+ShowConnections=0
+Fontname=Segoe UI
+Fontsize=6
+ShowObjectDiagram=0
+
+[Connections]
+V0=FilterValueContainer#NordwindTool#Inheritends####0#0#0###0#0
+
+[Interactive]
+I0=
+

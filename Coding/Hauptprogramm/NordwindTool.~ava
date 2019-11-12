@@ -237,9 +237,6 @@ public class NordwindTool extends JFrame {
   private JMenuItem item_about = new JMenuItem("Über 'Nordwind - Tool'", info);
   
   
-  
-  
-  
   /*------------------------VARIABLEN-----------------------------------------*/
   String loginname;
   boolean loginstate = false;
@@ -753,16 +750,10 @@ public class NordwindTool extends JFrame {
   public void button_resetList_ActionPerformed(ActionEvent evt) {
     list_tables.clearSelection();
   }
-  
-  
-    
-    
-  public void button_submit_ActionPerformed(ActionEvent evt) {
-    int index = list_tables.getSelectedIndex();
+  public int filterTesten(Component panel){
+    JPanel usedPanel = (JPanel) panel;
     int error_counter = 0;
-    switch (index) {
-      case 0:
-        for (Component cp: panel_artikel.getComponents()) {
+    for (Component cp: usedPanel.getComponents()) {
           if(cp instanceof JNumberField){
             JNumberField nf = (JNumberField) cp;
             if(nf.getText().equals("")){
@@ -779,8 +770,28 @@ public class NordwindTool extends JFrame {
             }          
           }
         }
-        
-        if(error_counter > 0){
+    return(error_counter);
+      } 
+  
+  public void filterLeeren(Component panel){
+    JPanel usedPanel = (JPanel) panel;
+    for (Component cp: usedPanel.getComponents()){
+      if(cp instanceof JNumberField) {
+        JNumberField nf = (JNumberField) cp;
+        if(!nf.isNumeric()){
+        nf.setInt(-1);
+        }
+        if(nf.getInt() == -1){
+          nf.clear(); 
+        }
+      }
+    }  
+  }
+  
+  public void filterAbfrage(int index){
+    switch (index) {
+      case 0:
+        if(filterTesten(panel_artikel) > 0){
           optionpane_error_ShowDialog();
         }
         else {
@@ -788,54 +799,17 @@ public class NordwindTool extends JFrame {
           numberfield_kategorienr.getInt(), textfield_liefereinheit.getText(), numberfield_einzelpreis.getDouble(), numberfield_lagerbestand.getInt(), 
           numberfield_bestellteEinheiten.getInt(), numberfield_mindestbestand.getInt(), checkbox_auslaufartikel.isSelected());
           }
-          for (Component cp: panel_artikel.getComponents()){
-            if(cp instanceof JNumberField) {
-              JNumberField nf = (JNumberField) cp;
-              if(!nf.isNumeric()){
-                nf.setInt(-1);
-              }
-              if(nf.getInt() == -1){
-                nf.clear(); 
-              }
-            }
-          }
+        filterLeeren(panel_artikel);  
         break;
-      case 1: 
-        for (Component cp: panel_bestelldetails.getComponents()) {
-          if(cp instanceof JNumberField){
-            JNumberField nf = (JNumberField) cp;
-            if(nf.getText().equals("")){
-              nf.setInt(-1);
-            }
-            else if(!nf.isNumeric()){
-              error_counter++;
-            }
-          } 
-          else if(cp instanceof JTextField){
-            JTextField tf = (JTextField) cp;
-            if(tf.getText().equals("")){
-              tf.setText(null);
-            }          
-          }
-        }
-        if(error_counter > 0){
+      case 1:
+        if(filterTesten(panel_bestelldetails) > 0){
           optionpane_error_ShowDialog();
         }
         else {
           FilterValueContainer bestelldetails = new FilterValueContainer("bestelldetails", numberfield_bestellnr.getInt(), numberfield_artikelnr.getInt(),
           numberfield_einzelpreis.getDouble(), numberfield_rabatt.getDouble());
         }
-        for (Component cp: panel_bestelldetails.getComponents()){
-          if(cp instanceof JNumberField) {
-            JNumberField nf = (JNumberField) cp;
-            if(!nf.isNumeric()){
-              nf.setInt(-1);
-            }
-            if(nf.getInt() == -1){
-              nf.clear(); 
-            }
-          }
-        }
+        filterLeeren(panel_bestelldetails);
         break;
       case 2: 
         
@@ -858,6 +832,10 @@ public class NordwindTool extends JFrame {
       default: 
         
     }
+    }   
+  public void button_submit_ActionPerformed(ActionEvent evt) {
+    filterAbfrage(list_tables.getSelectedIndex());
+    
     //AKTIVE TABELLE ABFRAGEN
     //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode ÜBERGEBEN*
   }
