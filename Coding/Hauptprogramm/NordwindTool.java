@@ -45,7 +45,7 @@ public class NordwindTool extends JFrame {
     
   //OptionPanes
   private JOptionPane optionpane_about = new JOptionPane();
-  
+  private JOptionPane optionpane_error = new JOptionPane();
   //Main - Panel
   private JPanel panel_main = new JPanel(new CardLayout());
   private JPanel panel_home = new JPanel(null, true);
@@ -640,13 +640,13 @@ public class NordwindTool extends JFrame {
     //Menü: "menu_admin"
     item_rightAdministration.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        System.out.println("RECHTEVERWALTUNG");
+        System.out.println("HIER ENSTEHT DAS MODUL 'RECHTEVERWALTUNG'");
       }
     }); 
     
     item_userAdministration.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        System.out.println("BENUTZERVERWALTUNG");
+        System.out.println("HIER ENSTEHT DAS MODUL 'BENUTZERVERWALTUNG'");
       }
     });
     
@@ -684,7 +684,7 @@ public class NordwindTool extends JFrame {
          java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
        }
        catch (java.io.IOException ex) {
-           System.out.println(ex.getMessage());
+           System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
        }
         }
     });
@@ -696,7 +696,7 @@ public class NordwindTool extends JFrame {
          java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
        }
        catch (java.io.IOException ex) {
-           System.out.println(ex.getMessage());
+           System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
        }
         }
     });
@@ -708,7 +708,7 @@ public class NordwindTool extends JFrame {
          java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
        }
        catch (java.io.IOException ex) {
-           System.out.println(ex.getMessage());
+           System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
        }
         }
     });               
@@ -758,9 +758,110 @@ public class NordwindTool extends JFrame {
     
     
   public void button_submit_ActionPerformed(ActionEvent evt) {
+    int index = list_tables.getSelectedIndex();
+    int error_counter = 0;
+    switch (index) {
+      case 0:
+        for (Component cp: panel_artikel.getComponents()) {
+          if(cp instanceof JNumberField){
+            JNumberField nf = (JNumberField) cp;
+            if(nf.getText().equals("")){
+              nf.setInt(-1);
+            }
+            else if(!nf.isNumeric()){
+              error_counter++;
+            }
+          } 
+          else if(cp instanceof JTextField){
+            JTextField tf = (JTextField) cp;
+            if(tf.getText().equals("")){
+              tf.setText(null);
+            }          
+          }
+        }
+        
+        if(error_counter > 0){
+          optionpane_error_ShowDialog();
+        }
+        else {
+          FilterValueContainer artikel = new FilterValueContainer("artikel", numberfield_artikelnr.getInt(), textfield_artikelname.getText(), numberfield_lieferantennr.getInt(),
+          numberfield_kategorienr.getInt(), textfield_liefereinheit.getText(), numberfield_einzelpreis.getDouble(), numberfield_lagerbestand.getInt(), 
+          numberfield_bestellteEinheiten.getInt(), numberfield_mindestbestand.getInt(), checkbox_auslaufartikel.isSelected());
+          }
+          for (Component cp: panel_artikel.getComponents()){
+            if(cp instanceof JNumberField) {
+              JNumberField nf = (JNumberField) cp;
+              if(!nf.isNumeric()){
+                nf.setInt(-1);
+              }
+              if(nf.getInt() == -1){
+                nf.clear(); 
+              }
+            }
+          }
+        break;
+      case 1: 
+        for (Component cp: panel_bestelldetails.getComponents()) {
+          if(cp instanceof JNumberField){
+            JNumberField nf = (JNumberField) cp;
+            if(nf.getText().equals("")){
+              nf.setInt(-1);
+            }
+            else if(!nf.isNumeric()){
+              error_counter++;
+            }
+          } 
+          else if(cp instanceof JTextField){
+            JTextField tf = (JTextField) cp;
+            if(tf.getText().equals("")){
+              tf.setText(null);
+            }          
+          }
+        }
+        if(error_counter > 0){
+          optionpane_error_ShowDialog();
+        }
+        else {
+          FilterValueContainer bestelldetails = new FilterValueContainer("bestelldetails", numberfield_bestellnr.getInt(), numberfield_artikelnr.getInt(),
+          numberfield_einzelpreis.getDouble(), numberfield_rabatt.getDouble());
+        }
+        for (Component cp: panel_bestelldetails.getComponents()){
+          if(cp instanceof JNumberField) {
+            JNumberField nf = (JNumberField) cp;
+            if(!nf.isNumeric()){
+              nf.setInt(-1);
+            }
+            if(nf.getInt() == -1){
+              nf.clear(); 
+            }
+          }
+        }
+        break;
+      case 2: 
+        
+        break;
+      case 3: 
+        
+        break;
+      case 4: 
+        
+        break;
+      case 5: 
+        
+        break;
+      case 6: 
+        
+        break;
+      case 7: 
+        
+        break;
+      default: 
+        
+    }
     //AKTIVE TABELLE ABFRAGEN
-    //AM ENDE DAS OBJEKT EINER BESTIMMTEN VARIABLE ÜBERGEBEN*
+    //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode ÜBERGEBEN*
   }
+      
     
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
@@ -770,6 +871,9 @@ public class NordwindTool extends JFrame {
   
   public void optionpane_about_ShowDialog() {
     optionpane_about.showMessageDialog(this, panel_about, "Über 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
+  }
+  public void optionpane_error_ShowDialog() {
+    optionpane_about.showMessageDialog(null, "Bitte gültige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
   }
   
   
@@ -848,7 +952,7 @@ public class NordwindTool extends JFrame {
         insert = false;
         text = "Diese Funktion ist nur für angemeldete Benutzer verfügbar";
         label_loginname.setText(null); //LEEREN - DATENSCHUTZ
-        }    
+      }    
     
     menu_dml.setEnabled(insert); 
     menu_admin.setEnabled(insert);

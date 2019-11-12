@@ -2,7 +2,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat; 
 import java.util.Date;
 
-public class FilterValueContainer extends NordwindTool {
+public class FilterValueContainer extends NordwindTool{
   int artikelnr;
   int lieferantennr;
   int kategorienr;
@@ -34,7 +34,7 @@ public class FilterValueContainer extends NordwindTool {
   String nachname;
   String anrede;
   String einstellung;
-  
+  String objektname;
   Date bestelldatum;
   Date versanddatum;
   Date lieferdatum;
@@ -45,7 +45,7 @@ public class FilterValueContainer extends NordwindTool {
   double frachtkosten;
   
   //Konstruktor für 'artikel'
-  public FilterValueContainer(int givenArtikelnr, String givenArtikelname, int givenLieferantennr, int givenKategorienr, String givenLiefereinheit, 
+  public FilterValueContainer(String objektname, int givenArtikelnr, String givenArtikelname, int givenLieferantennr, int givenKategorienr, String givenLiefereinheit, 
   double givenEinzelpreis, int givenLagerbestand, int givenBestellteEinheiten, int givenMindestbestand, boolean givenAuslaufartikel){
     this.artikelnr = givenArtikelnr;
     this.artikelname = givenArtikelname;
@@ -57,19 +57,20 @@ public class FilterValueContainer extends NordwindTool {
     this.bestellteEinheiten = givenBestellteEinheiten;
     this.mindestbestand = givenMindestbestand;
     this.auslaufartikel = givenAuslaufartikel;  
-  
+    this.objektname = objektname;
   }
   
   //Konstruktor für 'bestelldetails'
-  public FilterValueContainer(int givenBestellnr, int givenArtikelnr, double givenEinzelpreis, double givenRabatt){
+  public FilterValueContainer(String objektname, int givenBestellnr, int givenArtikelnr, double givenEinzelpreis, double givenRabatt){
     this.bestellnr = givenBestellnr;
     this.artikelnr = givenArtikelnr;
     this.einzelpreis = givenEinzelpreis;
     this.rabatt = givenRabatt;
+    this.objektname = objektname;
     }
   
   //Konstruktor für 'bestellungen'
-  public FilterValueContainer(int givenBestellnr, String givenKundencode, int givenPersonalnr, Date givenBestelldatum, Date givenLieferdatum, Date givenVersanddatum,
+  public FilterValueContainer(String objektname, int givenBestellnr, String givenKundencode, int givenPersonalnr, Date givenBestelldatum, Date givenLieferdatum, Date givenVersanddatum,
     int givenVersandUeber, double givenFrachtkosten, String givenEmpfaenger, String givenStrasse, String givenPlz, String givenOrt, String givenLand){
     this.bestellnr = givenBestellnr;
     this.kundencode = givenKundencode;
@@ -84,17 +85,18 @@ public class FilterValueContainer extends NordwindTool {
     this.plz = givenPlz;
     this.ort = givenOrt;
     this.land = givenLand;
+    this.objektname = objektname;
     }
   
   //Konstruktor für 'kategorien'
-  public FilterValueContainer(int givenKategorienr, String givenKategoriename, String givenBeschreibung){
+  public FilterValueContainer(String objektname, int givenKategorienr, String givenKategoriename, String givenBeschreibung){
     this.kategorienr = givenKategorienr;
     this.kategoriename = givenKategoriename;
     this.beschreibung = givenBeschreibung;
     }
   
   //Konstruktor für 'kunden'
-  public FilterValueContainer(String givenKundencode, int givenFirma, String givenKontaktperson, String givenPosition, String givenStrasse,
+  public FilterValueContainer(String objektname, String givenKundencode, int givenFirma, String givenKontaktperson, String givenPosition, String givenStrasse,
     String givenPlz, String givenOrt, String givenLand, int givenTelefon, int givenTelefax){
     this.kundencode = givenKundencode;
     this.firmennummer = givenFirma;
