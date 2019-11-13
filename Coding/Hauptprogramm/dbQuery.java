@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class dbQuery extends NordwindTool {
+public class dbQuery{
   
   //Returns true if the username is free
   public static boolean checkName(String username){
@@ -34,7 +34,7 @@ public class dbQuery extends NordwindTool {
     return true;
     }
   
-  //Gibt Passwort des Nutzers zurück
+  //Gibt Passwort des Nutzers zurï¿½ck
   public static String getPassword(String username){
     Statement stmt; //DK why, but its needed
     ResultSet rs; // Liefert Ergebnisse
@@ -124,7 +124,7 @@ public class dbQuery extends NordwindTool {
       String query = " insert into benutzer (benutzername, passwort, vorname, nachname, email)"
         + " values (?, ?, ?, ?, ?)";
       
-      //PARAMETER IN BEFEHL EINFÜGEN
+      //PARAMETER IN BEFEHL EINFï¿½GEN
       PreparedStatement preparedStmt = con.prepareStatement(query);
       preparedStmt.setString(1, username);
       preparedStmt.setString(2, password);
@@ -132,7 +132,7 @@ public class dbQuery extends NordwindTool {
       preparedStmt.setString(4, surname);
       preparedStmt.setString(5, email);
 
-      //BEFEHL AUSFÜHREN
+      //BEFEHL AUSFï¿½HREN
       preparedStmt.execute();
     
       //VERBINDUNG MIT DB TRENNEN
@@ -155,16 +155,16 @@ public class dbQuery extends NordwindTool {
         //BEFEHL ANLEGEN
         String query = " delete from benutzer where benutzername ='"+username+"'";
         
-        //PARAMETER IN BEFEHL EINFÜGEN
+        //PARAMETER IN BEFEHL EINFï¿½GEN
         PreparedStatement preparedStmt = con.prepareStatement(query);
-        //BEFEHL AUSFÜHREN
+        //BEFEHL AUSFï¿½HREN
         preparedStmt.execute();
       
         //VERBINDUNG MIT DB TRENNEN
         con.close();
             
       } catch(Exception e) {
-        System.out.println("Fehler bei der Löschung des Benutzers!");
+        System.out.println("Fehler bei der Lï¿½schung des Benutzers!");
       
         }
       }
