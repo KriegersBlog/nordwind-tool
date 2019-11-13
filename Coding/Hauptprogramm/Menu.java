@@ -34,6 +34,19 @@ public class Menu{
         //Fuer menu_info
          JMenuItem item_about = new JMenuItem("�ber 'Nordwind - Tool'", info);
 
+        private JLabel label_about_versionAutor =  new JLabel();
+        private JLabel label_githubProject = new JLabel();
+        private JLabel label_readMe = new JLabel();
+        private JLabel label_githubUser = new JLabel();
+        TitledBorder titledBorder_versionAutor = new TitledBorder("Version und Autor");
+        TitledBorder titledBorder_links = new TitledBorder("Links");
+
+
+        private JPanel panel_versionAutor = new JPanel(null, true);
+        private JPanel panel_links = new JPanel(null, true);
+        private JPanel panel_about = new JPanel(null, true);
+        private JLabel label_logo = new JLabel();
+
         menu_dml.add(item_query);
         menu_dml.add(item_create);
         menu_dml.add(item_edit);
@@ -51,6 +64,62 @@ public class Menu{
         menu_bar.add(menu_dml);
         menu_bar.add(menu_admin);
         menu_bar.add(menu_info);
+
+
+
+
+        label_about_versionAutor.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+        String msg = "<html>Nordwind-Tool 0.9.3, 24.10.19<br>Made by Julian Krieger</html>";
+        label_about_versionAutor.setText(msg);
+        label_about_versionAutor.setHorizontalAlignment(JLabel.CENTER);
+
+
+        panel_about.add(panel_versionAutor);
+        panel_versionAutor.setBorder(titledBorder_versionAutor);
+        panel_versionAutor.setBounds(20,0,200,60);
+        panel_versionAutor.add(label_about_versionAutor);
+        label_about_versionAutor.setBounds(0,10,200,50);
+        panel_about.add(panel_links);
+        panel_links.setBorder(titledBorder_links);
+        panel_links.setBounds(20,60,200,80);
+
+
+        label_githubProject.setBounds(0,10,200,25);
+        label_githubProject.setForeground(Color.BLUE);
+        label_githubProject.setText("Projekt auf Github");
+        label_githubProject.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+        label_githubProject.setHorizontalAlignment(JLabel.CENTER);
+        Hashtable<TextAttribute, Object> label_githubProject_map = new Hashtable<TextAttribute, Object>();
+        label_githubProject_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label_githubProject.setFont(new Font(label_githubProject_map));
+        panel_links.add(label_githubProject);
+        /***/
+        label_readMe.setBounds(0,50,200,25);
+        label_readMe.setForeground(Color.BLUE);
+        label_readMe.setText("ReadMe lesen");
+        label_readMe.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+        label_readMe.setHorizontalAlignment(JLabel.CENTER);
+        Hashtable<TextAttribute, Object> label_readMe_map = new Hashtable<TextAttribute, Object>();
+        label_readMe_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label_readMe.setFont(new Font(label_readMe_map));
+        panel_links.add(label_readMe);
+
+
+        label_githubUser.setBounds(0,30,200,25);
+        label_githubUser.setForeground(Color.BLUE);
+        label_githubUser.setText("Autor auf Github");
+        label_githubUser.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
+        label_githubUser.setHorizontalAlignment(JLabel.CENTER);
+        Hashtable<TextAttribute, Object> label_githubUser_map = new Hashtable<TextAttribute, Object>();
+        label_githubUser_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label_githubUser.setFont(new Font(label_githubUser_map));
+
+        panel_links.add(label_githubUser);
+
+        optionpane_about.setPreferredSize(new Dimension(0,140));
+        optionpane_about.setSize(0,140);
+        panel_about.setPreferredSize(new Dimension(0,140));
+        panel_about.setSize(0,140);
 
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -144,6 +213,17 @@ public class Menu{
             public void mouseClicked(MouseEvent e){
                 try {
                     String url = "https://github.com/KriegersBlog";
+                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (java.io.IOException ex) {
+                    System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
+                }
+            }
+        });
+        label_readMe.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                try {
+                    String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 }
                 catch (java.io.IOException ex) {

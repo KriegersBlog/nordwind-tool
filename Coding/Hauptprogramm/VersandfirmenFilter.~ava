@@ -1,0 +1,39 @@
+package Hauptprogramm;
+// Autor: Julian Krieger
+// Datum: 13.11.2019
+
+import javax.swing.*;
+
+public class VersandfirmenFilter extends Filter{
+
+    public void createFilter(JPanel panel){
+        //OBJEKTE ERSTELLEN
+        JLabel label_firmennr = new JLabel();
+        label_firmennr.setText("Firmennr.:");
+        JNumberField numberfield_firmennr = new JNumberField();
+        numberfield_firmennr.setToolTipText("Firmennummer angeben");
+
+        JLabel label_firma = new JLabel();
+        label_firma.setText("Firma:");
+        JTextField textfield_firma = new JTextField();
+        textfield_firma.setToolTipText("Firmenname angeben");
+
+        JLabel label_telefon = new JLabel();
+        label_telefon.setText("Telefon:");
+        JNumberField numberfield_telefon = new JNumberField();
+        numberfield_telefon.setToolTipText("Telefon angeben");
+
+        panel_versandfirmen.add(label_firmennr);
+        panel_versandfirmen.add(numberfield_firmennr);
+        panel_versandfirmen.add(label_firma);
+        panel_versandfirmen.add(textfield_firma);
+        panel_versandfirmen.add(label_telefon);
+        panel_versandfirmen.add(numberfield_telefon);
+    }
+}
+
+
+
+
+
+

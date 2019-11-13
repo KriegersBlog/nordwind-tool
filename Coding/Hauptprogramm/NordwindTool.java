@@ -1,6 +1,4 @@
 package Hauptprogramm;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -21,23 +19,12 @@ public class NordwindTool extends JFrame {
 
   Image logo = new ImageIcon("images/logo_32.png").getImage();
   ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
-  
 
-  private JLabel label_about_versionAutor =  new JLabel();
-  private JLabel label_githubProject = new JLabel();
-  private JLabel label_readMe = new JLabel();
-  private JLabel label_githubUser = new JLabel();
-  TitledBorder titledBorder_versionAutor = new TitledBorder("Version und Autor");
-  TitledBorder titledBorder_links = new TitledBorder("Links");
+
   TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
   TitledBorder titledBorder_tables = new TitledBorder("Tabellenauswahl");
   EmptyBorder emptyBorder_filter = new EmptyBorder(0,0,0,0);
   EmptyBorder emptyBorder_tables = new EmptyBorder(0,0,0,0);
-  private JPanel panel_versionAutor = new JPanel(null, true);
-  private JPanel panel_links = new JPanel(null, true);
-  private JPanel panel_about = new JPanel(null, true);
-  private JLabel label_logo = new JLabel();
-  
     
   //OptionPanes
   private JOptionPane optionpane_about = new JOptionPane();
@@ -72,13 +59,12 @@ public class NordwindTool extends JFrame {
   private JPanel panel_artikel = new JPanel(null, true);
 
   
-  private JButton button_submit = new JButton();
+
   
   /*------------------------VARIABLEN-----------------------------------------*/
   String loginname;
   boolean loginstate = false;
-  int[] position = {10, 45, 80, 115, 150, 185, 220, 255, 290, 325, 360,
-    395, 430, 465, 500, 535};
+
   String button_mode = null;
   String mode = null; 
   
@@ -115,9 +101,6 @@ public class NordwindTool extends JFrame {
     panel_home.setBounds(0, 0, 1366, 680);
     panel_home.setOpaque(false);
     panel_main.add(panel_home, "HOME");
-    
-
-    
     
     /*           FILTER PANEL          */ 
     panel_filter.setBounds(370, 100, 300, 512);
@@ -235,92 +218,17 @@ public class NordwindTool extends JFrame {
     combobox_anredeModel.addElement("Herr");
     combobox_anredeModel.addElement("Frau");
     combobox_anredeModel.addElement("Dr."); 
-    label_about_versionAutor.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-    String msg = "<html>Nordwind-Tool 0.9.3, 24.10.19<br>Made by Julian Krieger</html>";
-    label_about_versionAutor.setText(msg);
-    label_about_versionAutor.setHorizontalAlignment(JLabel.CENTER);
-    
-  
-    panel_about.add(panel_versionAutor);
-    panel_versionAutor.setBorder(titledBorder_versionAutor);
-    panel_versionAutor.setBounds(20,0,200,60);
-    panel_versionAutor.add(label_about_versionAutor);
-    label_about_versionAutor.setBounds(0,10,200,50);
-    panel_about.add(panel_links);
-    panel_links.setBorder(titledBorder_links);
-    panel_links.setBounds(20,60,200,80);
-    
-    
-    label_githubProject.setBounds(0,10,200,25);
-    label_githubProject.setForeground(Color.BLUE);
-    label_githubProject.setText("Projekt auf Github");
-    label_githubProject.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-    label_githubProject.setHorizontalAlignment(JLabel.CENTER);
-    Hashtable<TextAttribute, Object> label_githubProject_map = new Hashtable<TextAttribute, Object>();
-    label_githubProject_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    label_githubProject.setFont(new Font(label_githubProject_map));
-    panel_links.add(label_githubProject);
-    /***/
-    label_readMe.setBounds(0,50,200,25);
-    label_readMe.setForeground(Color.BLUE);
-    label_readMe.setText("ReadMe lesen");
-    label_readMe.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-    label_readMe.setHorizontalAlignment(JLabel.CENTER);
-    Hashtable<TextAttribute, Object> label_readMe_map = new Hashtable<TextAttribute, Object>();
-    label_readMe_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    label_readMe.setFont(new Font(label_readMe_map));
-    panel_links.add(label_readMe);
-    
-    
-    label_githubUser.setBounds(0,30,200,25);
-    label_githubUser.setForeground(Color.BLUE);
-    label_githubUser.setText("Autor auf Github");
-    label_githubUser.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
-    label_githubUser.setHorizontalAlignment(JLabel.CENTER);
-    Hashtable<TextAttribute, Object> label_githubUser_map = new Hashtable<TextAttribute, Object>();
-    label_githubUser_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    label_githubUser.setFont(new Font(label_githubUser_map));
-    
-    panel_links.add(label_githubUser);
-    
-    optionpane_about.setPreferredSize(new Dimension(0,140));
-    optionpane_about.setSize(0,140);
-    panel_about.setPreferredSize(new Dimension(0,140));
-    panel_about.setSize(0,140);
-    
-    
-    /*-------------------MEN� KONFIGURIEREN-----------------------------------*/
-    //Items zu "menu_dml" hinzuf�gen
 
-    
-    
+
+
     /*---------------------STARTBEDINGUNGEN-----------------------------------*/
     cl_filter.show(panel_filter, "NULL");
     setJMenuBar(menu_bar);
     setVisible(true);
     label_loginstatus.setBackground(null);
     menu_control();
-    //titledBorder_filter.setBorderPainted(false);
     
-    /*--------------------------LISTENER--------------------------------------*/ 
-     
-    //ACTIONLISTENER
-    
-    //Actionlistener f�r Men�items
-    //Men�: "menu_dml"
 
-    
-    label_readMe.addMouseListener(new MouseAdapter(){
-      public void mouseClicked(MouseEvent e){
-        try { 
-         String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
-         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-       }
-       catch (java.io.IOException ex) {
-           System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
-       }
-        }
-    });               
     list_tables.addListSelectionListener(new ListSelectionListener() { 
       public void valueChanged(ListSelectionEvent evt) { 
         list_tables_ValueChanged(evt);
@@ -566,11 +474,6 @@ public class NordwindTool extends JFrame {
     clearFilter();
     panel_filter.setBorder(titledBorder_filter);
     
-    int i;
-    int x;
-    int p;
-    int f;
-    
     switch (index){
       case -1:
         cl_filter.show(panel_filter, "NULL");
@@ -578,412 +481,46 @@ public class NordwindTool extends JFrame {
         panel_null.add(button_submit);
         button_submit.setBounds(1000,1000,0,0);
         break;
-        
-      case 0: 
-            
 
-        /*******************************************************/
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_artikel.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_artikel.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode);
-        
+      case 0:
+        ArtikelFilter artikel = new ArtikelFilter(panel_artikel);
         cl_filter.show(panel_filter, "ARTIKEL");
         break;
-        
+
       case 1:
-        panel_bestelldetails.add(label_bestellnr); 
-        panel_bestelldetails.add(numberfield_bestellnr);  
-        panel_bestelldetails.add(label_artikelnr); 
-        panel_bestelldetails.add(numberfield_artikelnr);   
-        panel_bestelldetails.add(label_einzelpreis);   
-        panel_bestelldetails.add(numberfield_einzelpreis); 
-        panel_bestelldetails.add(label_anzahl); 
-        panel_bestelldetails.add(numberfield_anzahl);   
-        panel_bestelldetails.add(label_rabatt); 
-        panel_bestelldetails.add(numberfield_rabatt);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_bestelldetails.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_bestelldetails.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode);
-        
+        BestelldetailsFilter bestelldetails = new BestelldetailsFilter(panel_bestelldetails);
         cl_filter.show(panel_filter, "BESTELLDETAILS");
         break;
-        
+
       case 2:
-        panel_bestellungen.add(label_bestellnr);
-        panel_bestellungen.add(numberfield_bestellnr);
-        panel_bestellungen.add(label_kundencode);
-        panel_bestellungen.add(textfield_kundencode);
-        panel_bestellungen.add(label_personalnr);
-        panel_bestellungen.add(numberfield_personalnr);
-        panel_bestellungen.add(label_bestelldatum);     
-        panel_bestellungen.add(datefield_bestelldatum);
-        panel_bestellungen.add(label_lieferdatum);
-        panel_bestellungen.add(datefield_lieferdatum);
-        panel_bestellungen.add(label_versanddatum);
-        panel_bestellungen.add(datefield_versanddatum);
-        panel_bestellungen.add(label_versandUeber);
-        panel_bestellungen.add(numberfield_versandUeber);
-        panel_bestellungen.add(label_frachtkosten);
-        panel_bestellungen.add(numberfield_frachtkosten);
-        panel_bestellungen.add(label_empfaenger);
-        panel_bestellungen.add(textfield_empfaenger);
-        panel_bestellungen.add(label_strasse);
-        panel_bestellungen.add(textfield_strasse);
-        panel_bestellungen.add(label_plz);
-        panel_bestellungen.add(textfield_plz);
-        panel_bestellungen.add(label_ort);
-        panel_bestellungen.add(textfield_ort);
-        panel_bestellungen.add(label_land);
-        panel_bestellungen.add(textfield_land);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_bestellungen.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_bestellungen.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode);
- 
+        BestellungenFilter bestellungen = new BestellungenFilter(panel_bestellungen);
         cl_filter.show(panel_filter, "BESTELLUNGEN");
         break;
-        
-      case 3: 
-        panel_kategorien.add(label_kategoriennr);
-        panel_kategorien.add(numberfield_kategorienr);
-        panel_kategorien.add(label_kategoriename);
-        panel_kategorien.add(textfield_kategoriename);
-        panel_kategorien.add(label_beschreibung);
-        panel_kategorien.add(textfield_beschreibung);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_kategorien.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_kategorien.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode);
-        
+
+      case 3:
+       KategorienFilter bestellungen = new KategorienFilter(panel_kategorien);
         cl_filter.show(panel_filter, "KATEGORIEN");
         break;
-        
+
       case 4:
-        panel_kunden.add(label_kundencode);
-        panel_kunden.add(textfield_kundencode);
-        panel_kunden.add(label_firma);
-        panel_kunden.add(textfield_firma);
-        panel_kunden.add(label_kontaktperson);
-        panel_kunden.add(textfield_kontaktperson);
-        panel_kunden.add(label_position);
-        panel_kunden.add(textfield_position);
-        panel_kunden.add(label_strasse);
-        panel_kunden.add(textfield_strasse);
-        panel_kunden.add(label_plz);
-        panel_kunden.add(textfield_plz);
-        panel_kunden.add(label_ort);
-        panel_kunden.add(textfield_ort);
-        panel_kunden.add(label_land);
-        panel_kunden.add(textfield_land);
-        panel_kunden.add(label_telefon);
-        panel_kunden.add(numberfield_telefon);
-        panel_kunden.add(label_telefax);
-        panel_kunden.add(numberfield_telefax);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_kunden.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_kunden.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode);
-        
+        KundenFilter kunden = new KundenFilter(panel_kunden);
         cl_filter.show(panel_filter, "KUNDEN");
         break;
         
       case 5:
-        panel_lieferanten.add(label_lieferantennr);
-        panel_lieferanten.add(numberfield_lieferantennr);
-        panel_lieferanten.add(label_firma);
-        panel_lieferanten.add(textfield_firma);
-        panel_lieferanten.add(label_kontaktperson);
-        panel_lieferanten.add(textfield_kontaktperson);
-        panel_lieferanten.add(label_position);
-        panel_lieferanten.add(textfield_position);
-        panel_lieferanten.add(label_strasse);
-        panel_lieferanten.add(textfield_strasse);
-        panel_lieferanten.add(label_plz);
-        panel_lieferanten.add(textfield_plz);
-        panel_lieferanten.add(label_ort);
-        panel_lieferanten.add(textfield_ort);
-        panel_lieferanten.add(label_land);
-        panel_lieferanten.add(textfield_land);
-        panel_lieferanten.add(label_telefon);
-        panel_lieferanten.add(numberfield_telefon);
-        panel_lieferanten.add(label_telefax);
-        panel_lieferanten.add(numberfield_telefax);
-        panel_lieferanten.add(label_homepage); 
-        panel_lieferanten.add(textfield_homepage);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_lieferanten.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
+        LieferantenFilter lieferanten = new LieferantenFilter(panel_lieferanten);
         panel_lieferanten.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode); 
-        
         cl_filter.show(panel_filter, "LIEFERANTEN");
         break;
         
       case 6:
-        panel_personal.add(label_personalnr);  
-        panel_personal.add(numberfield_personalnr);
-        panel_personal.add(label_vorname); 
-        panel_personal.add(textfield_vorname);    
-        panel_personal.add(label_nachname);
-        panel_personal.add(textfield_nachname);
-        panel_personal.add(label_position);
-        panel_personal.add(textfield_position);
-        panel_personal.add(label_anrede);
-        panel_personal.add(combobox_anrede);
-        panel_personal.add(label_geburtsdatum);
-        panel_personal.add(datefield_geburtsdatum);
-        panel_personal.add(label_einstellung);
-        panel_personal.add(datefield_einstellung);
-        panel_personal.add(label_strasse);
-        panel_personal.add(textfield_strasse);
-        panel_personal.add(label_plz);
-        panel_personal.add(textfield_plz);
-        panel_personal.add(label_ort);
-        panel_personal.add(textfield_ort);
-        panel_personal.add(label_land);
-        panel_personal.add(textfield_land);
-        panel_personal.add(label_telefon);
-        panel_personal.add(numberfield_telefon);
-        panel_personal.add(label_durchwahl);
-        panel_personal.add(numberfield_durchwahl);
-      
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_personal.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_personal.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode); 
-        
+        PersonalFilter personal = new PersonalFilter(panel_personal);
         cl_filter.show(panel_filter, "PERSONAL");
         break;
         
       case 7:
-        panel_versandfirmen.add(label_firmennr);
-        panel_versandfirmen.add(numberfield_firmennr);
-        panel_versandfirmen.add(label_firma);
-        panel_versandfirmen.add(textfield_firma);
-        panel_versandfirmen.add(label_telefon);
-        panel_versandfirmen.add(numberfield_telefon);
-        
-        i = 2;
-        x = 0;
-        p = 10;
-        f = 0;
-          
-        for (Component c: panel_versandfirmen.getComponents()) {
-          if(i % 2 == 0){
-            c.setBounds(p, position[x],100,20);
-            p = 125;
-        }
-          else if(i % 2 == 1){
-            if(c instanceof JNumberField){
-              f = 50;
-            }
-            else if(c instanceof JTextField){
-              f = 150;
-            }
-            else if(c instanceof JCheckBox){
-              f = 20;
-            }
-            c.setBounds(p, position[x], f,20);
-            x++;
-            p = 10;
-          }
-          i++;
-        }
-        
-        panel_versandfirmen.add(button_submit);
-        button_submit.setBounds(50, position[x],200,20);
-        button_submit.setText(button_mode); 
-                
-        cl_filter.show(panel_filter, "VERSANDFIRMEN"); 
+        VersandfirmenFilter versandfirmen = new VersandfirmenFilter(panel_versandfirmen);
+        cl_filter.show(panel_filter, "VERSANDFIRMEN");
         break;
           
       default:
