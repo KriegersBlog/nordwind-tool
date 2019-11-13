@@ -1,3 +1,4 @@
+package Hauptprogramm;
 import java.sql.*;
 
 public class dbQuery{
