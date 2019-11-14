@@ -27,7 +27,7 @@ public class NordwindTool extends JFrame {
   EmptyBorder emptyBorder_tables = new EmptyBorder(0,0,0,0);
     
   //OptionPanes
-  private JOptionPane optionpane_about = new JOptionPane();
+
   private JOptionPane optionpane_error = new JOptionPane();
   //Main - Panel
   private JPanel panel_main = new JPanel(new CardLayout());
@@ -246,6 +246,16 @@ public class NordwindTool extends JFrame {
         button_submit_ActionPerformed(evt);
       }
     });
+    passwordfield_login.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        login_process();
+      }
+    });
+    label_logout.addMouseListener(new MouseAdapter(){
+      public void mouseClicked(MouseEvent e){
+        logout();
+      }
+    });
   
     // Anfang Komponenten    
     label_function.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
@@ -367,12 +377,7 @@ public class NordwindTool extends JFrame {
     }  
   }
   
-  public void optionpane_about_ShowDialog() {
-    optionpane_about.showMessageDialog(this, panel_about, "�ber 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
-  }
-  public void optionpane_error_ShowDialog() {
-    optionpane_about.showMessageDialog(null, "Bitte g�ltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
-  }
+
   
   public void login(){
     loginstate = true;

@@ -1,3 +1,4 @@
+package Hauptprogramm;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat; 
 import java.util.Date;
@@ -44,7 +45,7 @@ public class FilterValueContainer{
   double rabatt;  
   double frachtkosten;
   
-  //Konstruktor für 'artikel'
+  //Konstruktor fï¿½r 'artikel'
   public FilterValueContainer(String objektname, int givenArtikelnr, String givenArtikelname, int givenLieferantennr, int givenKategorienr, String givenLiefereinheit, 
   double givenEinzelpreis, int givenLagerbestand, int givenBestellteEinheiten, int givenMindestbestand, boolean givenAuslaufartikel){
     this.artikelnr = givenArtikelnr;
@@ -60,7 +61,7 @@ public class FilterValueContainer{
     this.objektname = objektname;
   }
   
-  //Konstruktor für 'bestelldetails'
+  //Konstruktor fï¿½r 'bestelldetails'
   public FilterValueContainer(String objektname, int givenBestellnr, int givenArtikelnr, double givenEinzelpreis, double givenRabatt){
     this.bestellnr = givenBestellnr;
     this.artikelnr = givenArtikelnr;
@@ -69,7 +70,7 @@ public class FilterValueContainer{
     this.objektname = objektname;
     }
   
-  //Konstruktor für 'bestellungen'
+  //Konstruktor fï¿½r 'bestellungen'
   public FilterValueContainer(String objektname, int givenBestellnr, String givenKundencode, int givenPersonalnr, Date givenBestelldatum, Date givenLieferdatum, Date givenVersanddatum,
     int givenVersandUeber, double givenFrachtkosten, String givenEmpfaenger, String givenStrasse, String givenPlz, String givenOrt, String givenLand){
     this.bestellnr = givenBestellnr;
@@ -88,14 +89,14 @@ public class FilterValueContainer{
     this.objektname = objektname;
     }
   
-  //Konstruktor für 'kategorien'
+  //Konstruktor fï¿½r 'kategorien'
   public FilterValueContainer(String objektname, int givenKategorienr, String givenKategoriename, String givenBeschreibung){
     this.kategorienr = givenKategorienr;
     this.kategoriename = givenKategoriename;
     this.beschreibung = givenBeschreibung;
     }
   
-  //Konstruktor für 'kunden'
+  //Konstruktor fï¿½r 'kunden'
   public FilterValueContainer(String objektname, String givenKundencode, int givenFirma, String givenKontaktperson, String givenPosition, String givenStrasse,
     String givenPlz, String givenOrt, String givenLand, int givenTelefon, int givenTelefax){
     this.kundencode = givenKundencode;
@@ -110,17 +111,17 @@ public class FilterValueContainer{
     this.telefax = givenTelefax;
     }
   /*
-  //Konstruktor für 'kunden'
+  //Konstruktor fï¿½r 'kunden'
   public FilterValueContainer(){
     
     }
   
-  //Konstruktor für 'kategorien'
+  //Konstruktor fï¿½r 'kategorien'
   public FilterValueContainer(){
     
     }
   
-  //Konstruktor für 'bestellungen'
+  //Konstruktor fï¿½r 'bestellungen'
   public FilterValueContainer(){
     
     }    */
