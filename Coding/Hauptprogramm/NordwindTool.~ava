@@ -189,6 +189,15 @@ public class NordwindTool extends JFrame {
     label_loginstatus.setBackground(null);
     menu_control();
     
+
+    list_tables.addListSelectionListener(new ListSelectionListener() { 
+      public void valueChanged(ListSelectionEvent evt) { 
+        list_tables_ValueChanged(evt);
+      }
+    });
+    
+    
+    
     button_submit.addActionListener(new ActionListener() { 
       public void actionPerformed(ActionEvent evt) { 
         button_submit_ActionPerformed(evt);
@@ -225,7 +234,9 @@ public class NordwindTool extends JFrame {
   
   /*------------------LISTENER METHODEN---------------------------------------*/
   
-  
+  public void button_resetList_ActionPerformed(ActionEvent evt) {
+    list_tables.clearSelection();
+  }
   public int filterTesten(Component panel){
     JPanel usedPanel = (JPanel) panel;
     int error_counter = 0;
@@ -317,7 +328,11 @@ public class NordwindTool extends JFrame {
   }
       
     
-  
+  public void list_tables_ValueChanged(ListSelectionEvent evt) {
+    if (!evt.getValueIsAdjusting()) {
+      openFilterPanel(list_tables.getSelectedIndex());
+    }  
+  }
   
 
   
@@ -375,7 +390,19 @@ public class NordwindTool extends JFrame {
     cl_filter.show(panel_filter, "NULL");
     list_tables.clearSelection();
   }
+  public void enable_listPanel(){
+    panel_tables.setEnabled(true);
+    panel_tables.setVisible(true);
+    panel_tables.setBorder(titledBorder_tables);
+  }
   
+  public void disable_listPanel(){
+    panel_tables.setEnabled(false);
+    panel_tables.setVisible(false);
+    label_function.setText(null);
+    panel_tables.setBorder(emptyBorder_tables);
+  }
+    
   public void clearFilter(){
     for (Component panel: panel_filter.getComponents()) {
       JPanel cp_panel = (JPanel) panel;
