@@ -169,32 +169,35 @@ public class Menu{
         //Konfiguration des OptionPanes
         optionpane_about.setPreferredSize(new Dimension(0,140));
         optionpane_about.setSize(0,140);
-
+        Liste liste_tabellen = new Liste();
 
         /* ALLE ACTIONLISTENER */
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Liste liste_tabellen = new Liste();
                 liste_tabellen.enable_listPanel();
             }
         });
 
         item_create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Liste liste_tabellen = new Liste();
+            //    Liste liste_tabellen = new Liste();
                 liste_tabellen.enable_listPanel();
             }
         });
 
         item_edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Liste liste_tabellen = new Liste();
+             //   Liste liste_tabellen = new Liste();
                 liste_tabellen.enable_listPanel();
-                liste_tabellen.clearList();
             }
         });
 
-
+        item_home.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                liste_tabellen.disable_listPanel();
+                liste_tabellen.clearList();
+            }
+        });
 
 
 

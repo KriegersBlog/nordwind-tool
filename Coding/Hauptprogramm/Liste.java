@@ -19,7 +19,7 @@ public class Liste{
 
   public Liste(){
   //Erstellen der Liste + Reset Vutton
-  JPanel panel_table = new JPanel(null, true);
+  JPanel panel_table = new JPanel(null, false);
   this.main_panel = panel_table;
   JList list_tables = new JList();
   this.main_list = list_tables;
@@ -77,22 +77,27 @@ public class Liste{
   
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
-      //Wenn Tabellenmodus Artikel -> ArtikelFilter Objekt starten, gib ihm
-
-
-     /* openFilterPanel(this.main_list.getSelectedIndex()); */
+      NordwindTool.openFilterPanel(this.main_list.getSelectedIndex());
     }  
   }
 
     public void enable_listPanel(){
-    this.main_list.clearSelection();
+    for(Component c: this.main_panel.getComponents()) {
+      c.setEnabled(true);
+      c.setVisible(true);
+    }
     this.main_panel.setEnabled(true);
     this.main_panel.setVisible(true);
     NordwindTool.setTablePanel(this.main_panel);
     this.main_panel.setBorder(this.main_titledBorder);
+    this.main_list.clearSelection();
   }
   
   public void disable_listPanel(){
+    for(Component c: this.main_panel.getComponents()){
+      c.setEnabled(false);
+      c.setVisible(false);
+    }
     this.main_panel.setEnabled(false);
     this.main_panel.setVisible(false);
     this.main_panel.setBorder(this.main_emptyBorder);
