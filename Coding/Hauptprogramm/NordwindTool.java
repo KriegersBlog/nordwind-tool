@@ -13,52 +13,47 @@ import java.awt.font.TextAttribute;
 // Datum: 15.10.2019
 
 public class NordwindTool extends JFrame {
-  
-  /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
-  // Anfang Attribute                                                        
+    //Attribute der Klasse
+    JPanel main_panel_filter;
+    String loginname;
+    boolean loginstate = false;
+    String button_mode = null;
+    String mode = null;
 
+  /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
+  //Bilder und Grafiken
   Image logo = new ImageIcon("images/logo_32.png").getImage();
   ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
 
+  //Borders
   TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
   EmptyBorder emptyBorder_filter = new EmptyBorder(0,0,0,0);
 
+  //Panels
 
-  private JOptionPane optionpane_error = new JOptionPane();
-  //Main - Panel
-  private JPanel panel_main = new JPanel(new CardLayout());
+  static JPanel panel_main = new JPanel(new CardLayout());
   private JPanel panel_home = new JPanel(null, true);
   private JLabel label_function = new JLabel();
-  private JTextField textfield_loginname = new JTextField();
   private JLabel label_logout = new JLabel();
-  private JLabel label_loginname = new JLabel();
-
-    static JPanel  panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
-  //RESULT - PANEL
+  static JLabel label_loginname = new JLabel();
+  static JPanel  panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
   private JPanel panel_results = new JPanel(null, true);
 
-  
-  
-  //Filterpanels
+  //OptionPanes
+  private JOptionPane optionpane_error = new JOptionPane();
 
- JPanel main_panel_filter;
-  /*------------------------VARIABLEN-----------------------------------------*/
-  String loginname;
-  boolean loginstate = false;
+  //CardLayout
+  static CardLayout cl_main = (CardLayout) panel_main.getLayout();
 
-  String button_mode = null;
-  String mode = null; 
-  
-  //Card Layouts
-  CardLayout cl_main = (CardLayout) panel_main.getLayout();
-  // Ende Attribute
-  
-  
+  //LoginScreen
+  Login loginscreen = new Login();
+
+
   public NordwindTool() { 
     /*-----------------FRAME-INITIALISIERUNG----------------------------------*/
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    int frameWidth = 1280; 
+    int frameWidth = 1280;
     int frameHeight = 720;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -69,56 +64,51 @@ public class NordwindTool extends JFrame {
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
-    
-    /*------------------PANELS KONFIGURIEREN----------------------------------*/
 
+
+
+    //LOGINSCREEN SETZEN
+
+    /*------------------PANELS KONFIGURIEREN----------------------------------*/
+    panel_main.add(loginscreen.getPanel(), "LOGIN");
       /*           MAIN PANEL            */
     panel_main.setBounds(0, 0, 1366, 680);
     panel_main.setOpaque(false);
     cp.add(panel_main);
-    
+
     /*           HOME PANEL            */
     panel_home.setBounds(0, 0, 1366, 680);
     panel_home.setOpaque(false);
     panel_main.add(panel_home, "HOME");
-    
-    /*           FILTER PANEL          */ 
+
+    /*           FILTER PANEL          */
     panel_filter.setBounds(360, 576, 300, 532);
     panel_filter.setOpaque(true);
     panel_home.add(panel_filter);
 
 
-    
-
-    
-
-    
     //HOME PANEL
     label_loginname.setBounds(1008, 2, 182, 20);
     label_loginname.setHorizontalAlignment(SwingConstants.RIGHT);
     panel_home.add(label_loginname);
-    
+
     panel_results.setBounds(721, 104, 500, 536);
     panel_results.setOpaque(true);
     panel_results.setBackground(new Color(0xFFAFAF));
     panel_home.add(panel_results);
-    
+
     label_logout.setBounds(1196, 0, 70, 22);
     label_logout.setText("ABMELDEN");
     label_logout.setForeground(Color.BLUE);
     label_logout.setHorizontalAlignment(SwingConstants.CENTER);
-    Hashtable<TextAttribute, Object> label_abmelden_map = new Hashtable<TextAttribute, Object>();
-    label_abmelden_map.put(TextAttribute.FAMILY, "Trebuchet MS");
-    label_abmelden_map.put(TextAttribute.SIZE, new Integer(12));
-    label_abmelden_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     Hashtable<TextAttribute, Object> label_logout_map = new Hashtable<TextAttribute, Object>();
     label_logout_map.put(TextAttribute.FAMILY, "Trebuchet MS");
     label_logout_map.put(TextAttribute.SIZE, new Integer(12));
     label_logout_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     label_logout.setFont(new Font(label_logout_map));
     panel_home.add(label_logout);
-    
-   
+
+
 
 
     /*---------------------STARTBEDINGUNGEN-----------------------------------*/
@@ -127,7 +117,7 @@ public class NordwindTool extends JFrame {
     setVisible(true);
 
     //menu_control();
-    
+
 
 
     label_logout.addMouseListener(new MouseAdapter(){
@@ -135,23 +125,21 @@ public class NordwindTool extends JFrame {
         logout();
       }
     });
-  
-    // Anfang Komponenten    
+
+    // Anfang Komponenten
     label_function.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
     label_function.setText(null);
     label_function.setHorizontalAlignment(SwingConstants.CENTER);
     panel_home.add(label_function);
     label_function.setBounds(438, 4, 358, 48);
-    
+
     this.setIconImage(logo);
-    // Ende Komponenten
-  // Anfang Methoden
-  }
+  } // ENDE DES KONSTRUKTORS
   
   /*------------------------MAIN METHODE--------------------------------------*/
   
   public static void main(String[] args) {
-    new NordwindTool();
+    NordwindTool mainFrame = new NordwindTool();
   }
   
   /*------------------LISTENER METHODEN---------------------------------------*/
@@ -206,7 +194,7 @@ public class NordwindTool extends JFrame {
 
   
   public void logout(){
-    loginstate = false;
+    cl_main.show(panel_main, "LOGIN");
     //menu_control();
     }
   
@@ -289,6 +277,20 @@ public class NordwindTool extends JFrame {
     }
   }
   // Ende Methoden
+  public static void activateHome(){
+    cl_main.show(panel_main, "HOME");
+
+
+  }
+  public static void setLoginName(String logintext){
+    label_loginname.setText(logintext);
+  }
+
+
+
+
+
+
 }
   /*
   public void filterAbfrage(int index){
