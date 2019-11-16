@@ -63,9 +63,6 @@ public class LieferantenFilter extends Filter{
         JTextField textfield_homepage = new JTextField();
         textfield_homepage.setToolTipText("Homepage angeben");
 
-        //Submit Button erstellen
-        private JButton button_submit = new JButton();
-        button_submit.setText(");
 
         panel.add(label_lieferantennr);
         panel.add(numberfield_lieferantennr);

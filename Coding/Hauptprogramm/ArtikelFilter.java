@@ -69,9 +69,6 @@ public class ArtikelFilter extends Filter{
     JCheckBox checkbox_auslaufartikel = new JCheckBox();
     checkbox_auslaufartikel.setToolTipText("Ist das Produkt ein Auslaufartikel?");
 
-    //Submit Button erstellen
-    private JButton button_submit = new JButton();
-    button_submit.setText(");
     
     panel.add(label_artikelnr);
     panel.add(numberfield_artikelnr);                 

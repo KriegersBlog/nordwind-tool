@@ -15,16 +15,14 @@ import java.awt.font.TextAttribute;
 public class NordwindTool extends JFrame {
   
   /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
-  // Anfang Attribute
+  // Anfang Attribute                                                        
 
   Image logo = new ImageIcon("images/logo_32.png").getImage();
   ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
 
-
   TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
   EmptyBorder emptyBorder_filter = new EmptyBorder(0,0,0,0);
 
-  //OptionPanes
 
   private JOptionPane optionpane_error = new JOptionPane();
   //Main - Panel
@@ -33,19 +31,17 @@ public class NordwindTool extends JFrame {
   private JLabel label_function = new JLabel();
   private JTextField textfield_loginname = new JTextField();
   private JLabel label_logout = new JLabel();
-  
+  private JLabel label_loginname = new JLabel();
+
+    static JPanel  panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
   //RESULT - PANEL
   private JPanel panel_results = new JPanel(null, true);
 
   
   
   //Filterpanels
-  private JPanel panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
 
-
-  
-
-  
+ JPanel main_panel_filter;
   /*------------------------VARIABLEN-----------------------------------------*/
   String loginname;
   boolean loginstate = false;
@@ -55,7 +51,6 @@ public class NordwindTool extends JFrame {
   
   //Card Layouts
   CardLayout cl_main = (CardLayout) panel_main.getLayout();
-  CardLayout cl_filter = (CardLayout) panel_filter.getLayout();
   // Ende Attribute
   
   
@@ -76,8 +71,8 @@ public class NordwindTool extends JFrame {
     cp.setLayout(null);
     
     /*------------------PANELS KONFIGURIEREN----------------------------------*/
-    
-    /*           MAIN PANEL            */
+
+      /*           MAIN PANEL            */
     panel_main.setBounds(0, 0, 1366, 680);
     panel_main.setOpaque(false);
     cp.add(panel_main);
@@ -94,9 +89,7 @@ public class NordwindTool extends JFrame {
 
 
     
-    label_logo.setBounds(390,25,500,66);
-    label_logo.setIcon(main_logo);
-    panel_login.add(label_logo);
+
     
 
     
@@ -129,22 +122,14 @@ public class NordwindTool extends JFrame {
 
 
     /*---------------------STARTBEDINGUNGEN-----------------------------------*/
-    cl_filter.show(panel_filter, "NULL");
-    setJMenuBar(menu_bar);
+    Menu hauptmenu = new Menu();
+    setJMenuBar(hauptmenu.getMenuBar());
     setVisible(true);
-    label_loginstatus.setBackground(null);
-    menu_control();
+
+    //menu_control();
     
-    button_submit.addActionListener(new ActionListener() { 
-      public void actionPerformed(ActionEvent evt) { 
-        button_submit_ActionPerformed(evt);
-      }
-    });
-    passwordfield_login.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        login_process();
-      }
-    });
+
+
     label_logout.addMouseListener(new MouseAdapter(){
       public void mouseClicked(MouseEvent e){
         logout();
@@ -209,118 +194,21 @@ public class NordwindTool extends JFrame {
       }
     }  
   }
-  
-  public void filterAbfrage(int index){
-    switch (index) {
-      case 0:
-        if(filterTesten(panel_artikel) > 0){
-          optionpane_error_ShowDialog();
-        }
-        else {
-          FilterValueContainer artikel = new FilterValueContainer("artikel", numberfield_artikelnr.getInt(), textfield_artikelname.getText(), numberfield_lieferantennr.getInt(),
-          numberfield_kategorienr.getInt(), textfield_liefereinheit.getText(), numberfield_einzelpreis.getDouble(), numberfield_lagerbestand.getInt(), 
-          numberfield_bestellteEinheiten.getInt(), numberfield_mindestbestand.getInt(), checkbox_auslaufartikel.isSelected());
-          }
-        filterLeeren(panel_artikel);  
-        break;
-      case 1:
-        if(filterTesten(panel_bestelldetails) > 0){
-          optionpane_error_ShowDialog();
-        }
-        else {
-          FilterValueContainer bestelldetails = new FilterValueContainer("bestelldetails", numberfield_bestellnr.getInt(), numberfield_artikelnr.getInt(),
-          numberfield_einzelpreis.getDouble(), numberfield_rabatt.getDouble());
-        }
-        filterLeeren(panel_bestelldetails);
-        break;
-      case 2: 
-        
-        break;
-      case 3: 
-        
-        break;
-      case 4: 
-        
-        break;
-      case 5: 
-        
-        break;
-      case 6: 
-        
-        break;
-      case 7: 
-        
-        break;
-      default: 
-        
-    }
-    }   
-  public void button_submit_ActionPerformed(ActionEvent evt) {
-    filterAbfrage(list_tables.getSelectedIndex());
-    
-    //AKTIVE TABELLE ABFRAGEN
-    //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
+  public JPanel getMain_panel_filter(){
+      return main_panel_filter;
   }
 
 
-  public void login(){
-    loginstate = true;
-    menu_control();
-    
-    //LOGINMASKE LEEREN
-    textfield_loginname.setText("");
-    passwordfield_login.setText("");
-    label_loginstatus.setText("");
-    label_loginstatus.setBackground(null);
-    item_home.setText("Home");
-    
-    cl_main.show(panel_main, "HOME");
-    label_loginname.setText("Angemeldet als '" + loginname + "'");
-    disable_listPanel();
-    list_tables.clearSelection();
+  public void optionpane_error_ShowDialog() {
+   // *OBJEKTVONFILTER*.main_optionpane.showMessageDialog(null, "Bitte gueltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
   }
+
+
   
   public void logout(){
     loginstate = false;
-    menu_control();
+    //menu_control();
     }
-    
-  public void menu_control(){   
-    boolean insert;
-    String text;
-    if(loginstate == true){
-      insert = true;
-      text = null;
-      }
-    
-      else{
-        insert = false;
-        text = "Diese Funktion ist nur f�r angemeldete Benutzer verf�gbar";
-        label_loginname.setText(null); //LEEREN - DATENSCHUTZ
-      }    
-    
-    menu_dml.setEnabled(insert); 
-    menu_admin.setEnabled(insert);
-    
-    item_query.setEnabled(insert);  
-    item_create.setEnabled(insert);
-    item_edit.setEnabled(insert);
-    item_home.setEnabled(insert);
-    
-    menu_dml.setToolTipText(text);
-    menu_admin.setToolTipText(text);
-    
-    cl_main.show(panel_main, "LOGIN");
-    } 
-  
-  public static void reset_filter(){
-    for(Component c: panel_filter.getComponents()){
-      c.setEnabled(false);
-      c.setVisible(false);
-      c = null;
-    }
-    // NameDesObjektsDerKlasseListe.clearList();
-  }
   
   public void clearFilter(){
       for (Component c: panel_filter.getComponents()) {
@@ -346,18 +234,22 @@ public class NordwindTool extends JFrame {
         }
       }
   }
-        
-  
+
+    public static void reset_filter() {
+        for (Component c : panel_filter.getComponents()) {
+            c.setEnabled(false);
+            c.setVisible(false);
+            c = null;
+        }
+    }
+
   public void openFilterPanel(int index){
     clearFilter();
     panel_filter.setBorder(titledBorder_filter);
     
     switch (index){
       case -1:
-        cl_filter.show(panel_filter, "NULL");
         panel_filter.setBorder(emptyBorder_filter);
-        panel_null.add(button_submit);
-        button_submit.setBounds(1000,1000,0,0);
         break;
 
       case 0:
@@ -373,8 +265,8 @@ public class NordwindTool extends JFrame {
         break;
 
       case 3:
-       KategorienFilter bestellungen = new KategorienFilter(panel_filter);
-        break;
+       KategorieFilter kategorie = new KategorieFilter(panel_filter);
+       break;
 
       case 4:
         KundenFilter kunden = new KundenFilter(panel_filter);
@@ -398,3 +290,49 @@ public class NordwindTool extends JFrame {
   }
   // Ende Methoden
 }
+  /*
+  public void filterAbfrage(int index){
+    switch (index) {
+      case 0:
+        if(filterTesten(panel_artikel) > 0){
+          optionpane_error_ShowDialog();
+        }
+        else {
+          FilterValueContainer artikel = new FilterValueContainer("artikel", numberfield_artikelnr.getInt(), textfield_artikelname.getText(), numberfield_lieferantennr.getInt(),
+          numberfield_kategorienr.getInt(), textfield_liefereinheit.getText(), numberfield_einzelpreis.getDouble(), numberfield_lagerbestand.getInt(),
+          numberfield_bestellteEinheiten.getInt(), numberfield_mindestbestand.getInt(), checkbox_auslaufartikel.isSelected());
+          }
+        filterLeeren(panel_artikel);
+        break;
+      case 1:
+        if(filterTesten(panel_bestelldetails) > 0){
+          optionpane_error_ShowDialog();
+        }
+        else {
+          FilterValueContainer bestelldetails = new FilterValueContainer("bestelldetails", numberfield_bestellnr.getInt(), numberfield_artikelnr.getInt(),
+          numberfield_einzelpreis.getDouble(), numberfield_rabatt.getDouble());
+        }
+        filterLeeren(panel_bestelldetails);
+        break;
+      case 2:
+
+        break;
+      case 3:
+
+        break;
+      case 4:
+
+        break;
+      case 5:
+
+        break;
+      case 6:
+
+        break;
+      case 7:
+
+        break;
+      default:
+
+    }
+  } */

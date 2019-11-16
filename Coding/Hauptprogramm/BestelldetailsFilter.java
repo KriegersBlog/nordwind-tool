@@ -39,10 +39,6 @@ public class BestelldetailsFilter extends Filter{
         JNumberField numberfield_rabatt = new JNumberField();
         numberfield_rabatt.setToolTipText("Rabatt angeben");
 
-        //Submit Button erstellen
-        private JButton button_submit = new JButton();
-        button_submit.setText(");
-
         panel.add(label_bestellnr);
         panel.add(numberfield_bestellnr);
         panel.add(label_artikelnr);

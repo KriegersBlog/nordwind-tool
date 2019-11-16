@@ -82,9 +82,6 @@ public class BestellungenFilter extends Filter{
         JTextField textfield_land = new JTextField();
         textfield_land.setToolTipText("Land angeben");
 
-        //Submit Button erstellen
-        private JButton button_submit = new JButton();
-        button_submit.setText(");
 
         panel.add(label_bestellnr);
         panel.add(numberfield_bestellnr);

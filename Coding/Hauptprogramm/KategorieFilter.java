@@ -24,10 +24,6 @@ public class KategorieFilter extends Filter{
         JTextField textfield_beschreibung = new JTextField();
         textfield_beschreibung.setToolTipText("Beschreibung angeben");
 
-        //Submit Button erstellen
-        JButton button_submit = new JButton();
-        button_submit.setText("");
-
         panel.add(label_kategoriennr);
         panel.add(numberfield_kategorienr);
         panel.add(label_kategoriename);

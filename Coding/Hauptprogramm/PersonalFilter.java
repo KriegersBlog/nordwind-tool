@@ -76,9 +76,7 @@ public class PersonalFilter extends Filter{
         JNumberField numberfield_durchwahl = new JNumberField();
         numberfield_durchwahl.setToolTipText("Durchwahl angeben");
 
-        //Submit Button erstellen
-        JButton button_submit = new JButton();
-        button_submit.setText("");
+
 
         panel.add(label_personalnr);
         panel.add(numberfield_personalnr);

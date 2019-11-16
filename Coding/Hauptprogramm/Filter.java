@@ -6,10 +6,34 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.awt.Component;
+import java.awt.event.*;
+
 public class Filter{
     //Universales Format für Daten erstellen
     DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private int[] position = {10, 45, 80, 115, 150, 185, 220, 255, 290, 325, 360,395, 430, 465, 500, 535};
+    public JButton button_submit = new JButton();
+
+    public Filter(){
+        button_submit.setText("");
+        button_submit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                button_submit_ActionPerformed(evt);
+            }
+        });
+    }
+
+
+
+    public void button_submit_ActionPerformed(ActionEvent evt) {
+       // filterAbfrage(*OBJEKTLISTEAUSMAIN*.getMainList().getSelectedIndex());
+
+        //AKTIVE TABELLE ABFRAGEN
+        //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
+    }
+
+
+
 
     public void setFilterBounds(JPanel panel){
         int i = 2;

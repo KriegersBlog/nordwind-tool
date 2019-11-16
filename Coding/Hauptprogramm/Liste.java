@@ -95,9 +95,12 @@ public class Liste{
     this.main_panel.setBorder(this.main_emptyBorder);
   }
 
+  public JList getMain_list(){
+    return this.main_list;
+  }
+
   public void clearList(){
     this.main_list.clearSelection();
   }
-    
 }
 

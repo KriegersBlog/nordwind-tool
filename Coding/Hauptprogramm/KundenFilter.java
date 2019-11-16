@@ -59,11 +59,7 @@ public class KundenFilter extends Filter{
         JNumberField numberfield_telefax = new JNumberField();
         numberfield_telefax.setToolTipText("Telefax angeben");
 
-        //Submit Button erstellen
-        private JButton button_submit = new JButton();
-        button_submit.setText(");
 
-        
         panel.add(label_kundencode);
         panel.add(textfield_kundencode);
         panel.add(label_firma);

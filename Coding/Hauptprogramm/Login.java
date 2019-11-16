@@ -11,11 +11,12 @@ public class Login{
     public Login(){
         //LOGIN - PANEL
         JPanel panel_login = new JPanel(null, true);
-        JLabel label_loginname = new JLabel();
         JLabel label_login = new JLabel();
         JLabel label_loginstatus = new JLabel();
         JPasswordField passwordfield_login = new JPasswordField();
         JButton button_login = new JButton();
+        ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
+
 
         /*           LOGIN PANEL            */
         panel_login.setBounds(0, 0, 1366, 680);
@@ -45,12 +46,26 @@ public class Login{
         label_login.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         panel_login.add(label_login);
 
+
+        label_logo.setBounds(390,25,500,66);
+        label_logo.setIcon(main_logo);
+        panel_login.add(label_logo);
+
+        private JLabel label_logo = new JLabel();
         label_loginstatus.setBounds(525, 360, 230, 25);
         label_loginstatus.setText("");
         label_loginstatus.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
         label_loginstatus.setOpaque(true);
         label_loginstatus.setHorizontalAlignment(SwingConstants.CENTER);
         panel_login.add(label_loginstatus);
+        label_loginstatus.setBackground(null);
+
+        passwordfield_login.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login_process();
+            }
+        });
+
     }
     button_login.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -97,6 +112,22 @@ public class Login{
                 label_loginstatus.setText("Benutzer existiert nicht!");
             }
         }
+    }
+    public void login(){
+        loginstate = true;
+        menu_control();
+
+        //LOGINMASKE LEEREN
+        textfield_loginname.setText("");
+        passwordfield_login.setText("");
+        label_loginstatus.setText("");
+        label_loginstatus.setBackground(null);
+        item_home.setText("Home");
+
+        cl_main.show(panel_main, "HOME");
+        label_loginname.setText("Angemeldet als '" + loginname + "'");
+        disable_listPanel();
+        list_tables.clearSelection();
     }
 
 }

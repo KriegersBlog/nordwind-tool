@@ -23,9 +23,6 @@ public class VersandfirmenFilter extends Filter{
         JNumberField numberfield_telefon = new JNumberField();
         numberfield_telefon.setToolTipText("Telefon angeben");
 
-        //Submit Button erstellen
-        private JButton button_submit = new JButton();
-        button_submit.setText(");
 
         panel.add(label_firmennr);
         panel.add(numberfield_firmennr);

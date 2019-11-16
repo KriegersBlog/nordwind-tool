@@ -12,6 +12,25 @@ import java.awt.event.*;
 
 public class Menu{
     JOptionPane main_optionpane;
+    JPanel main_aboutPanel;
+    JMenuBar main_menuBar;
+
+    JMenu main_menu_dml;
+    JMenu main_menu_admin;
+    JMenu main_menu_info;
+    JMenuItem main_item_query;
+    JMenuItem main_item_create;
+    JMenuItem main_item_edit;
+    JMenuItem main_item_home;
+    //Menü Admin
+    JMenuItem main_item_rightAdministration;
+    JMenuItem main_item_userAdministration;
+
+    //Menü Info
+    JMenuItem main_item_about;
+
+
+
 
     public Menu(){
         /* OBJEKTE ERSTELLEN */
@@ -27,35 +46,46 @@ public class Menu{
 
         //Erstellen der Menüleiste
         JMenuBar menu_bar = new JMenuBar();
+        this.main_menuBar = menu_bar;
 
         //Menues erstellen
          JMenu menu_dml = new JMenu("Funktionen");
+         this.main_menu_dml = menu_dml;
          JMenu menu_admin = new JMenu("Admin");
+         this.main_menu_admin = menu_admin;
          JMenu menu_info = new JMenu("Info");
+         this.main_menu_info = menu_info;
 
         /* Menüitems */
         //Menü DML
          JMenuItem item_query = new JMenuItem("Abfragen erstellen", query);
+         this.main_item_query = item_query;
          JMenuItem item_create = new JMenuItem("Datens�tze anlegen", create);
+         this.main_item_create = item_create;
          JMenuItem item_edit = new JMenuItem("Datens�tze editieren", edit);
+         this.main_item_edit = item_edit;
          JMenuItem item_home = new JMenuItem("Home", home);
+         this.main_item_home = item_home;
         //Menü Admin
          JMenuItem item_rightAdministration = new JMenuItem("Rechteverwaltung", admin);
+         this.main_item_rightAdministration = item_rightAdministration;
          JMenuItem item_userAdministration = new JMenuItem("Benutzerverwaltung", user);
+         this.main_item_userAdministration = item_userAdministration;
 
         //Menü Info
          JMenuItem item_about = new JMenuItem("�ber 'Nordwind - Tool'", info);
+         this.main_item_about = item_about;
 
         //Menüitem Info -> Alle Objekte
         JLabel label_about_versionAutor =  new JLabel();
         JLabel label_githubProject = new JLabel();
         JLabel label_readMe = new JLabel();
         JLabel label_githubUser = new JLabel();
-        JLabel label_logo = new JLabel();
 
         JPanel panel_versionAutor = new JPanel(null, true);
         JPanel panel_links = new JPanel(null, true);
         JPanel panel_about = new JPanel(null, true);
+        this.main_aboutPanel = panel_about;
         JOptionPane optionpane_about = new JOptionPane();
         main_optionpane = optionpane_about;
         TitledBorder titledBorder_versionAutor = new TitledBorder("Version und Autor");
@@ -240,10 +270,40 @@ public class Menu{
         });
     }
 
+    public JMenuBar getMenuBar(){
+        return this.main_menuBar;
+    }
+
+    public void menu_control(boolean loginstate){
+        boolean insert;
+        String text;
+        if(loginstate == true){
+            insert = true;
+            text = null;
+        }
+
+        else{
+            insert = false;
+            text = "Diese Funktion ist nur f�r angemeldete Benutzer verf�gbar";
+            //label_loginname.setText(null); //LEEREN - DATENSCHUTZ
+        }
+
+        this.main_menu_dml.setEnabled(insert);
+        this.main_menu_admin.setEnabled(insert);
+
+        this.main_item_query.setEnabled(insert);
+        this.main_item_create.setEnabled(insert);
+        this.main_item_edit.setEnabled(insert);
+        this.main_item_home.setEnabled(insert);
+
+        this.main_menu_dml.setToolTipText(text);
+        this.main_menu_admin.setToolTipText(text);
+
+        //cl_main.show(panel_main, "LOGIN");
+    }
+
     public void optionpane_about_ShowDialog() {
-        this.main_optionpane.showMessageDialog(this, panel_about, "�ber 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
+        this.main_optionpane.showMessageDialog(null, main_aboutPanel,"Ueber 'Nordwind-Tool'", this.main_optionpane.PLAIN_MESSAGE, null);
     }
-    public void optionpane_error_ShowDialog() {
-        this.main_optionpane.showMessageDialog(null, "Bitte gueltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
-    }
+
 }
