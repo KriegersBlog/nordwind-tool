@@ -22,10 +22,8 @@ public class NordwindTool extends JFrame {
 
 
   TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
-  TitledBorder titledBorder_tables = new TitledBorder("Tabellenauswahl");
   EmptyBorder emptyBorder_filter = new EmptyBorder(0,0,0,0);
-  EmptyBorder emptyBorder_tables = new EmptyBorder(0,0,0,0);
-    
+
   //OptionPanes
 
   private JOptionPane optionpane_error = new JOptionPane();
@@ -39,20 +37,11 @@ public class NordwindTool extends JFrame {
   //RESULT - PANEL
   private JPanel panel_results = new JPanel(null, true);
 
-  //Liste aller Tabellen
   
   
   //Filterpanels
-  private JPanel panel_filter = new JPanel(new CardLayout()); //Haupt-Panel, auf dem alle Panels angzeigt werden 
-  private JPanel panel_bestellungen = new JPanel(null, true);
-  private JPanel panel_kategorien = new JPanel(null, true);
-  private JPanel panel_kunden = new JPanel(null, true);
-  private JPanel panel_lieferanten = new JPanel(null, true);
-  private JPanel panel_personal = new JPanel(null, true); 
-  private JPanel panel_versandfirmen = new JPanel(null, true);
-  private JPanel panel_null = new JPanel(null, true);
-  private JPanel panel_bestelldetails = new JPanel(null, true);
-  private JPanel panel_artikel = new JPanel(null, true);
+  private JPanel panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
+
 
   
 
@@ -99,53 +88,10 @@ public class NordwindTool extends JFrame {
     panel_main.add(panel_home, "HOME");
     
     /*           FILTER PANEL          */ 
-    panel_filter.setBounds(370, 100, 300, 512);
+    panel_filter.setBounds(360, 576, 300, 532);
     panel_filter.setOpaque(true);
     panel_home.add(panel_filter);
-    //Objekte zum Panel hinzuf�gen
-    panel_filter.add(panel_artikel, "ARTIKEL");
-    panel_filter.add(panel_bestelldetails, "BESTELLDETAILS");
-    panel_filter.add(panel_bestellungen, "BESTELLUNGEN");
-    panel_filter.add(panel_kategorien, "KATEGORIEN");
-    panel_filter.add(panel_kunden, "KUNDEN");
-    panel_filter.add(panel_lieferanten, "LIEFERANTEN");
-    panel_filter.add(panel_personal, "PERSONAL");
-    panel_filter.add(panel_versandfirmen, "VERSANDFIRMEN"); 
-    panel_filter.add(panel_null, "NULL");
-    
-    /*        TABELLEN PANEL          */ 
-    
-    
-    /*      ALLE FILTER PANELS       */
-    panel_artikel.setBounds(328, 576, 300, 400);
-    panel_artikel.setOpaque(true);
-    
-    panel_bestelldetails.setBounds(360, 576, 300, 532);
-    panel_bestelldetails.setOpaque(true);
-    
-    panel_bestellungen.setBounds(336, 584, 300, 400);
-    panel_bestellungen.setOpaque(true);
-    
-    panel_kategorien.setBounds(352, 576, 300, 400);
-    panel_kategorien.setOpaque(true);
-    
-    panel_kunden.setBounds(362, 577, 300, 400);
-    panel_kunden.setOpaque(true);
-    
-    panel_lieferanten.setBounds(355, 576, 300, 400);
-    panel_lieferanten.setOpaque(true);
-    
-    panel_personal.setBounds(0, 32, 300, 400);
-    panel_personal.setOpaque(true);
-    
-    panel_versandfirmen.setBounds(368, 571, 300, 400);
-    panel_versandfirmen.setOpaque(true);
-    
-    panel_null.setBounds(376, 576, 300, 400);
-    panel_null.setOpaque(true);
-    
-    
-    /*-----------------SWING-ELEMENTE KONFIGURIEREN---------------------------*/
+
 
     
     label_logo.setBounds(390,25,500,66);
@@ -315,12 +261,8 @@ public class NordwindTool extends JFrame {
     //AKTIVE TABELLE ABFRAGEN
     //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
   }
-      
-    
-  
-  
 
-  
+
   public void login(){
     loginstate = true;
     menu_control();
@@ -371,15 +313,17 @@ public class NordwindTool extends JFrame {
     cl_main.show(panel_main, "LOGIN");
     } 
   
-  public void reset_filter(){
-    cl_filter.show(panel_filter, "NULL");
-    list_tables.clearSelection();
+  public static void reset_filter(){
+    for(Component c: panel_filter.getComponents()){
+      c.setEnabled(false);
+      c.setVisible(false);
+      c = null;
+    }
+    // NameDesObjektsDerKlasseListe.clearList();
   }
   
   public void clearFilter(){
-    for (Component panel: panel_filter.getComponents()) {
-      JPanel cp_panel = (JPanel) panel;
-      for (Component c: cp_panel.getComponents()) {
+      for (Component c: panel_filter.getComponents()) {
         if(c instanceof JTextField){
           JTextField tf = (JTextField) c;
           tf.setText(null); 
@@ -401,7 +345,6 @@ public class NordwindTool extends JFrame {
           ftf.setText(null);
         }
       }
-    }
   }
         
   
@@ -418,44 +361,35 @@ public class NordwindTool extends JFrame {
         break;
 
       case 0:
-        ArtikelFilter artikel = new ArtikelFilter(panel_artikel);
-        cl_filter.show(panel_filter, "ARTIKEL");
+        ArtikelFilter artikel = new ArtikelFilter(panel_filter);
         break;
 
       case 1:
-        BestelldetailsFilter bestelldetails = new BestelldetailsFilter(panel_bestelldetails);
-        cl_filter.show(panel_filter, "BESTELLDETAILS");
+        BestelldetailsFilter bestelldetails = new BestelldetailsFilter(panel_filter);
         break;
 
       case 2:
-        BestellungenFilter bestellungen = new BestellungenFilter(panel_bestellungen);
-        cl_filter.show(panel_filter, "BESTELLUNGEN");
+        BestellungenFilter bestellungen = new BestellungenFilter(panel_filter);
         break;
 
       case 3:
-       KategorienFilter bestellungen = new KategorienFilter(panel_kategorien);
-        cl_filter.show(panel_filter, "KATEGORIEN");
+       KategorienFilter bestellungen = new KategorienFilter(panel_filter);
         break;
 
       case 4:
-        KundenFilter kunden = new KundenFilter(panel_kunden);
-        cl_filter.show(panel_filter, "KUNDEN");
+        KundenFilter kunden = new KundenFilter(panel_filter);
         break;
         
       case 5:
-        LieferantenFilter lieferanten = new LieferantenFilter(panel_lieferanten);
-        panel_lieferanten.add(button_submit);
-        cl_filter.show(panel_filter, "LIEFERANTEN");
+        LieferantenFilter lieferanten = new LieferantenFilter(panel_filter);
         break;
         
       case 6:
-        PersonalFilter personal = new PersonalFilter(panel_personal);
-        cl_filter.show(panel_filter, "PERSONAL");
+        PersonalFilter personal = new PersonalFilter(panel_filter);
         break;
         
       case 7:
-        VersandfirmenFilter versandfirmen = new VersandfirmenFilter(panel_versandfirmen);
-        cl_filter.show(panel_filter, "VERSANDFIRMEN");
+        VersandfirmenFilter versandfirmen = new VersandfirmenFilter(panel_filter);
         break;
           
       default:

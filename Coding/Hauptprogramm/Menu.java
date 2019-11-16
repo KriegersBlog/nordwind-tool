@@ -11,6 +11,8 @@ import java.awt.font.TextAttribute;
 import java.awt.event.*;
 
 public class Menu{
+    JOptionPane main_optionpane;
+
     public Menu(){
         /* OBJEKTE ERSTELLEN */
 
@@ -55,7 +57,7 @@ public class Menu{
         JPanel panel_links = new JPanel(null, true);
         JPanel panel_about = new JPanel(null, true);
         JOptionPane optionpane_about = new JOptionPane();
-
+        main_optionpane = optionpane_about;
         TitledBorder titledBorder_versionAutor = new TitledBorder("Version und Autor");
         TitledBorder titledBorder_links = new TitledBorder("Links");
 
@@ -156,44 +158,37 @@ public class Menu{
 
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                label_function.setText("Abfragen erstellen");
-                mode = "abfragen";
-                button_mode = "Datens�tze abfragen";
-
-                reset_filter();
-                enable_listPanel();
+                Liste tabellenliste = new Liste();
+                tabellenliste.enable_listPanel();
+                NordwindTool.reset_filter();
             }
         });
 
 
         item_create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                label_function.setText("Datens�tze anlegen");
-                mode = "erstellen";
-                button_mode = "Datensatz anlegen";
+                Liste tabellenliste = new Liste();
+                tabellenliste.enable_listPanel();
 
-                reset_filter();
-                enable_listPanel();
+                NordwindTool.reset_filter();
             }
         });
 
 
         item_edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                label_function.setText("Datens�tze editieren");
-                mode = "editieren";
-                button_mode = "Datens�tze suchen";
-
-                reset_filter();
-                enable_listPanel();
+        Liste tabellenliste = new Liste();
+                tabellenliste.enable_listPanel();
+                NordwindTool.reset_filter();
             }
         });
 
 
         item_home.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                reset_filter();
-                disable_listPanel();
+        Liste tabellenliste = new Liste();
+                NordwindTool.reset_filter();
+                tabellenliste.disable_listPanel();
             }
         });
 
@@ -246,9 +241,9 @@ public class Menu{
     }
 
     public void optionpane_about_ShowDialog() {
-        // Hier Optionpane des objekts nehmen optionpane_about.showMessageDialog(this, panel_about, "�ber 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
+        this.main_optionpane.showMessageDialog(this, panel_about, "�ber 'Nordwind-Tool'", optionpane_about.PLAIN_MESSAGE, null);
     }
     public void optionpane_error_ShowDialog() {
-        optionpane_about.showMessageDialog(null, "Bitte g�ltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
+        this.main_optionpane.showMessageDialog(null, "Bitte gueltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
     }
 }

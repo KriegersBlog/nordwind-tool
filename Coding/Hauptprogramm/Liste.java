@@ -2,29 +2,41 @@ package Hauptprogramm;
 // Autor:Julian Krieger
 // Datum: 13.11.2019
 import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.event.*;
+import java.util.*;
+import java.awt.*; //Font + Color
+import javax.swing.border.*;
+
 
 public class Liste{
   JPanel main_panel;
   JList main_list;
+  TitledBorder main_titledBorder;
+  EmptyBorder main_emptyBorder;
   public Liste(){
   
   //Erstellen der Liste + Reset Vutton
   JPanel panel_table = new JPanel(null, true);
-  this.main_panel = panel_table; 
-     
+  this.main_panel = panel_table;
   JList list_tables = new JList();
   this.main_list = list_tables;
+  TitledBorder titled_border = new TitledBorder("Tabellenauswahl");
+  this.main_titledBorder = titled_border;
+
+  EmptyBorder empty_border = new EmptyBorder(0,0,0,0);
+  this.main_emptyBorder = empty_border;
     
   DefaultListModel list_tablesModel = new DefaultListModel();
   JScrollPane list_tablesScrollPane = new JScrollPane(list_tables);
   JButton button_resetList = new JButton(); 
   
-  //Setzen der Parameter für die Tabelle Panels
+  //Setzen der Parameter fr die Tabelle Panels
   panel_table.setBounds(30, 100, 300, 472);
   panel_table.setOpaque(true);
-  panel_home.add(panel_table);
+  //panel_home.add(panel_table);
   
-  //Setzen der Parameter für die Objekte des Tabellenpanels
+  //Setzen der Parameter fr die Objekte des Tabellenpanels
   button_resetList.setBounds(10, 420, 280, 40);
   button_resetList.setText("Auswahl zur?cksetzen");
   button_resetList.setMargin(new Insets(2, 2, 2, 2));
@@ -64,21 +76,27 @@ public class Liste{
   
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
-      openFilterPanel(this.main_list.getSelectedIndex());
+      //Wenn Tabellenmodus Artikel -> ArtikelFilter Objekt starten, gib ihm
+
+
+     /* openFilterPanel(this.main_list.getSelectedIndex()); */
     }  
   }
   
   public void enable_listPanel(){
     this.main_panel.setEnabled(true);
     this.main_panel.setVisible(true);
-    this.main_panel.setBorder(titledBorder_tables);
+    this.main_panel.setBorder(this.main_titledBorder);
   }
   
   public void disable_listPanel(){
     this.main_panel.setEnabled(false);
     this.main_panel.setVisible(false);
-    label_function.setText(null);
-    this.main_panel.setBorder(emptyBorder_tables);
+    this.main_panel.setBorder(this.main_emptyBorder);
+  }
+
+  public void clearList(){
+    this.main_list.clearSelection();
   }
     
 }
