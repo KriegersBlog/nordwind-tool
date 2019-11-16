@@ -174,9 +174,30 @@ public class Menu{
         /* ALLE ACTIONLISTENER */
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("HIER ENSTEHT DAS MODUL 'RECHTEVERWALTUNG'");
+                Liste liste_tabellen = new Liste();
+                liste_tabellen.enable_listPanel();
             }
         });
+
+        item_create.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Liste liste_tabellen = new Liste();
+                liste_tabellen.enable_listPanel();
+            }
+        });
+
+        item_edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Liste liste_tabellen = new Liste();
+                liste_tabellen.enable_listPanel();
+                liste_tabellen.clearList();
+            }
+        });
+
+
+
+
+
         label_githubProject.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 try {

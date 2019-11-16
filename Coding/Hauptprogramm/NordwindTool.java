@@ -22,6 +22,7 @@ public class NordwindTool extends JFrame {
     boolean loginstate = false;
     String button_mode = null;
     String mode = null;
+    JPanel main_panel_table;
 
     /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
     //Bilder und Grafiken
@@ -34,7 +35,7 @@ public class NordwindTool extends JFrame {
 
     //Panels
     static JPanel panel_main = new JPanel(new CardLayout());
-    private JPanel panel_home = new JPanel(null, true);
+    static JPanel panel_home = new JPanel(null, true);
     private JLabel label_function = new JLabel();
     private JLabel label_logout = new JLabel();
     static JLabel label_loginname = new JLabel();
@@ -179,7 +180,9 @@ public class NordwindTool extends JFrame {
     public JPanel getMain_panel_filter() {
         return main_panel_filter;
     }
-
+    public static void setTablePanel(JPanel panel){
+        panel_home.add(panel);
+    }
 
     public void optionpane_error_ShowDialog() {
         // *OBJEKTVONFILTER*.main_optionpane.showMessageDialog(null, "Bitte gueltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);

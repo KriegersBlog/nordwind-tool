@@ -55,7 +55,6 @@ public class Liste{
   list_tablesModel.addElement("personal");
   list_tablesModel.addElement("versandfirmen");  
   panel_table.add(list_tablesScrollPane);
-  
   list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
   list_tables.setModel(list_tablesModel);
 
@@ -84,10 +83,12 @@ public class Liste{
      /* openFilterPanel(this.main_list.getSelectedIndex()); */
     }  
   }
-  
-  public void enable_listPanel(){
+
+    public void enable_listPanel(){
+    this.main_list.clearSelection();
     this.main_panel.setEnabled(true);
     this.main_panel.setVisible(true);
+    NordwindTool.setTablePanel(this.main_panel);
     this.main_panel.setBorder(this.main_titledBorder);
   }
   
@@ -100,7 +101,6 @@ public class Liste{
   public JList getMain_list(){
     return this.main_list;
   }
-
   public void clearList(){
     this.main_list.clearSelection();
   }
