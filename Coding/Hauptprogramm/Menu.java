@@ -60,9 +60,9 @@ public class Menu{
         //Menü DML
          JMenuItem item_query = new JMenuItem("Abfragen erstellen", query);
          this.main_item_query = item_query;
-         JMenuItem item_create = new JMenuItem("Datens�tze anlegen", create);
+         JMenuItem item_create = new JMenuItem("Datensaetze anlegen", create);
          this.main_item_create = item_create;
-         JMenuItem item_edit = new JMenuItem("Datens�tze editieren", edit);
+         JMenuItem item_edit = new JMenuItem("Datensaetze editieren", edit);
          this.main_item_edit = item_edit;
          JMenuItem item_home = new JMenuItem("Home", home);
          this.main_item_home = item_home;
@@ -172,7 +172,11 @@ public class Menu{
 
 
         /* ALLE ACTIONLISTENER */
-
+        item_query.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("HIER ENSTEHT DAS MODUL 'RECHTEVERWALTUNG'");
+            }
+        });
         label_githubProject.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 try {
@@ -185,49 +189,12 @@ public class Menu{
             }
         });
 
-
-        item_query.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Liste tabellenliste = new Liste();
-                tabellenliste.enable_listPanel();
-                NordwindTool.reset_filter();
-            }
-        });
-
-
-        item_create.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Liste tabellenliste = new Liste();
-                tabellenliste.enable_listPanel();
-
-                NordwindTool.reset_filter();
-            }
-        });
-
-
-        item_edit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        Liste tabellenliste = new Liste();
-                tabellenliste.enable_listPanel();
-                NordwindTool.reset_filter();
-            }
-        });
-
-
-        item_home.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        Liste tabellenliste = new Liste();
-                NordwindTool.reset_filter();
-                tabellenliste.disable_listPanel();
-            }
-        });
-
-
         item_rightAdministration.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("HIER ENSTEHT DAS MODUL 'RECHTEVERWALTUNG'");
             }
         });
+
 
 
         item_userAdministration.addActionListener(new ActionListener() {
@@ -284,7 +251,7 @@ public class Menu{
 
         else{
             insert = false;
-            text = "Diese Funktion ist nur f�r angemeldete Benutzer verf�gbar";
+            text = "Diese Funktion ist nur fuer angemeldete Benutzer verf�gbar";
             //label_loginname.setText(null); //LEEREN - DATENSCHUTZ
         }
 

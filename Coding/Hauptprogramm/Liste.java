@@ -1,6 +1,8 @@
-package Hauptprogramm;
 // Autor:Julian Krieger
 // Datum: 13.11.2019
+
+package Hauptprogramm;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -8,14 +10,14 @@ import java.util.*;
 import java.awt.*; //Font + Color
 import javax.swing.border.*;
 
-
 public class Liste{
+  //Attribute der Klasse
   JPanel main_panel;
   JList main_list;
   TitledBorder main_titledBorder;
   EmptyBorder main_emptyBorder;
+
   public Liste(){
-  
   //Erstellen der Liste + Reset Vutton
   JPanel panel_table = new JPanel(null, true);
   this.main_panel = panel_table;
@@ -55,20 +57,20 @@ public class Liste{
   panel_table.add(list_tablesScrollPane);
   
   list_tables.setFont(new Font("Trebuchet MS", Font.BOLD, 36));
-  list_tables.setModel(list_tablesModel);   
-    
-    
-  list_tables.addListSelectionListener(new ListSelectionListener() { 
+  list_tables.setModel(list_tablesModel);
+
+    /***** LISTENER ERSTELLEN *****/
+    list_tables.addListSelectionListener(new ListSelectionListener() {
     public void valueChanged(ListSelectionEvent evt) { 
       list_tables_ValueChanged(evt);
-    }
-  });
+    }});
+
   button_resetList.addActionListener(new ActionListener() { 
     public void actionPerformed(ActionEvent evt) { 
       button_resetList_ActionPerformed(evt);
-    }
-  });
-  }
+    }});
+
+  } //ENDE DES KONSTRUKTORS
     
   public void button_resetList_ActionPerformed(ActionEvent evt) {
     this.main_list.clearSelection();
