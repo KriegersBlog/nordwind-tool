@@ -14,10 +14,11 @@ import java.awt.font.TextAttribute;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.io.IOException;
-
+                                                                             
 public class NordwindTool extends JFrame {
     //Attribute der Klasse
     JPanel main_panel_filter;
+    String fenstername;
     String loginname;
     boolean loginstate = false;
     String button_mode = null;
@@ -30,8 +31,8 @@ public class NordwindTool extends JFrame {
     ImageIcon main_logo = new ImageIcon(getClass().getResource("images/main_logo.png"));
 
     //Borders
-    TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
-    EmptyBorder emptyBorder_filter = new EmptyBorder(0, 0, 0, 0);
+    static TitledBorder titledBorder_filter = new TitledBorder("Filterauswahl");
+    static EmptyBorder emptyBorder_filter = new EmptyBorder(0, 0, 0, 0);
 
     //Panels
     static JPanel panel_main = new JPanel(new CardLayout());
@@ -89,7 +90,7 @@ public class NordwindTool extends JFrame {
       panel_main.add(panel_home, "HOME");
 
       /*           FILTER PANEL          */
-      panel_filter.setBounds(360, 576, 300, 532);
+      panel_filter.setBounds(370, 100, 300, 512);
       panel_filter.setOpaque(true);
       panel_home.add(panel_filter);
 
@@ -126,7 +127,7 @@ public class NordwindTool extends JFrame {
           logout();
         }
       });
-
+        this.fenstername = "mainFenster";
       /***** Startbedingungen *****/
       Menu hauptmenu = new Menu();
       setJMenuBar(hauptmenu.getMenuBar());
@@ -194,7 +195,7 @@ public class NordwindTool extends JFrame {
         //menu_control();
     }
 
-    public void clearFilter() {
+    public static void clearFilter() {
         for (Component c : panel_filter.getComponents()) {
             if (c instanceof JTextField) {
                 JTextField tf = (JTextField) c;
@@ -224,7 +225,7 @@ public class NordwindTool extends JFrame {
     }
 
     public static void openFilterPanel(int index) {
-        clearFilter();
+        NordwindTool.clearFilter();
         panel_filter.setBorder(titledBorder_filter);
 
         switch (index) {
@@ -234,6 +235,7 @@ public class NordwindTool extends JFrame {
 
             case 0:
                 ArtikelFilter artikel = new ArtikelFilter(panel_filter);
+                Filter.setFilterBounds(panel_filter);
                 break;
 
             case 1:

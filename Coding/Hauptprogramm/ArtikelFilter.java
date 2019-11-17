@@ -78,9 +78,9 @@ public class ArtikelFilter extends Filter{
     panel.add(numberfield_lieferantennr);
     panel.add(label_kategoriennr);
     panel.add(numberfield_kategorienr);
+    panel.add(label_liefereinheit);
     panel.add(textfield_liefereinheit);
     panel.add(label_einzelpreis);
-    panel.add(label_liefereinheit);
     panel.add(numberfield_einzelpreis);
     panel.add(label_lagerbestand);
     panel.add(numberfield_lagerbestand);
@@ -92,7 +92,6 @@ public class ArtikelFilter extends Filter{
     panel.add(checkbox_auslaufartikel);
     panel.add(button_submit);
 
-    setFilterBounds(panel);
     }
 }
 

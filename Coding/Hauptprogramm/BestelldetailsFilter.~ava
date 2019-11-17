@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.awt.Component;
 import java.awt.event.*;
-                              
+
 public class BestelldetailsFilter extends Filter{
 
     public BestelldetailsFilter(JPanel panel){
@@ -44,8 +44,8 @@ public class BestelldetailsFilter extends Filter{
         numberfield_rabatt.setToolTipText("Rabatt angeben");
 
         panel.add(label_bestellnr);
-        panel.add(numberfield_bestellnr);
-       /* panel.add(label_artikelnr);
+       /* panel.add(numberfield_bestellnr);
+        panel.add(label_artikelnr);
         panel.add(numberfield_artikelnr);
         panel.add(label_einzelpreis);
         panel.add(numberfield_einzelpreis);

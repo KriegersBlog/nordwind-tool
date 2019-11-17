@@ -1,6 +1,5 @@
 // Autor:Julian Krieger
 // Datum: 13.11.2019
-
 package Hauptprogramm;
 
 import javax.swing.*;
@@ -77,6 +76,8 @@ public class Liste{
   
   public void list_tables_ValueChanged(ListSelectionEvent evt) {
     if (!evt.getValueIsAdjusting()) {
+      System.out.println("TESTTESTETST");
+      NordwindTool.reset_filter();
       NordwindTool.openFilterPanel(this.main_list.getSelectedIndex());
     }  
   }

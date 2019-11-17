@@ -14,7 +14,7 @@ import java.awt.font.TextAttribute;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.io.IOException;
-
+                                                                             
 public class NordwindTool extends JFrame {
     //Attribute der Klasse
     JPanel main_panel_filter;
@@ -235,6 +235,7 @@ public class NordwindTool extends JFrame {
 
             case 0:
                 ArtikelFilter artikel = new ArtikelFilter(panel_filter);
+                Filter.setFilterBounds(panel_filter);
                 break;
 
             case 1:
