@@ -11,7 +11,6 @@ import java.awt.event.*;
 public class Filter{
     //Universales Format für Daten erstellen
     DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
     public JButton button_submit = new JButton();
 
     public Filter(){
@@ -36,7 +35,7 @@ public class Filter{
 
 
     public static void setFilterBounds(JPanel panel){
-        int[] position = {10, 45, 80, 115, 150, 185, 220, 255, 290, 325, 360,395, 430, 465, 500, 535};
+        int[] position = {20, 55, 90, 125, 160, 195, 230, 265, 300, 335, 370,405, 440, 475, 510, 545};
         int i = 2;
         int x = 0;
         int p = 10;
@@ -48,7 +47,6 @@ public class Filter{
                 p = 125;
             }
             else if(i % 2 == 1){
-                System.out.println("123");
                 if(c instanceof JNumberField){
                     f = 50;
                     System.out.println("50");
@@ -60,12 +58,12 @@ public class Filter{
                     f = 20;
                 }
                 c.setBounds(p, position[x], f,20);
-                System.out.println("P:"+p + "Position"+position[x] +"F:"+ f + "+20");
                 x++;
                 p = 10;
             }
             i++;
         }
+        x = 0;
     }
 }
 

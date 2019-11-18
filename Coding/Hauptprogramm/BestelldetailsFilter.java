@@ -45,7 +45,7 @@ public class BestelldetailsFilter extends Filter{
 
         panel.add(label_bestellnr);
         panel.add(numberfield_bestellnr);
-       /* panel.add(label_artikelnr);
+        panel.add(label_artikelnr);
         panel.add(numberfield_artikelnr);
         panel.add(label_einzelpreis);
         panel.add(numberfield_einzelpreis);
@@ -53,7 +53,8 @@ public class BestelldetailsFilter extends Filter{
         panel.add(numberfield_anzahl);
         panel.add(label_rabatt);
         panel.add(numberfield_rabatt);
-        panel.add(button_submit);    */
+        panel.add(button_submit);    
+        setFilterBounds(panel);
 
     }
 }

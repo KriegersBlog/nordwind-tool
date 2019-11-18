@@ -40,7 +40,7 @@ public class NordwindTool extends JFrame {
     private JLabel label_function = new JLabel();
     private JLabel label_logout = new JLabel();
     static JLabel label_loginname = new JLabel();
-    static JPanel panel_filter = new JPanel(); //Haupt-Panel, auf dem alle Panels angzeigt werden
+    static JPanel panel_filter = new JPanel(null, true);
     private JPanel panel_results = new JPanel(null, true);
 
     //OptionPanes
@@ -220,6 +220,7 @@ public class NordwindTool extends JFrame {
         for (Component c : panel_filter.getComponents()) {
             c.setEnabled(false);
             c.setVisible(false);
+            panel_filter.remove(c);
             c = null;
         }
     }
@@ -235,7 +236,7 @@ public class NordwindTool extends JFrame {
 
             case 0:
                 ArtikelFilter artikel = new ArtikelFilter(panel_filter);
-                Filter.setFilterBounds(panel_filter);
+                //Filter.setFilterBounds(panel_filter);
                 break;
 
             case 1:

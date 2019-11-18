@@ -90,7 +90,8 @@ public class ArtikelFilter extends Filter{
     panel.add(numberfield_mindestbestand);
     panel.add(label_auslaufartikel);
     panel.add(checkbox_auslaufartikel);
-    panel.add(button_submit);
+    panel.add(button_submit);    
+    setFilterBounds(panel);
 
     }
 }
