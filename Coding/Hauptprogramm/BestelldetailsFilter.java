@@ -1,16 +1,17 @@
-package Hauptprogramm;
 // Autor: Julian Krieger
 // Datum: 13.11.2019
+
+package Hauptprogramm;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.awt.Component;
 import java.awt.event.*;
-                              
-public class BestelldetailsFilter extends Filter{
 
-    public BestelldetailsFilter(JPanel panel){
+public class BestelldetailsFilter extends Filter {
+
+    public BestelldetailsFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
 
         //Bestellnummer erstellen
@@ -53,7 +54,7 @@ public class BestelldetailsFilter extends Filter{
         panel.add(numberfield_anzahl);
         panel.add(label_rabatt);
         panel.add(numberfield_rabatt);
-        panel.add(button_submit);    
+        panel.add(button_submit);
         setFilterBounds(panel);
 
     }

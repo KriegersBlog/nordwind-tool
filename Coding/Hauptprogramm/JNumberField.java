@@ -1,13 +1,13 @@
+// Diese Klasse ist nicht von JK erstellt worden! Eingebunden durch die JEClases.jar,
+// welche mit dem JavaEditor mitgeliefert wird
+
 package Hauptprogramm;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.regex.Pattern;
 import javax.swing.JTextField;
-
-// 
-// Decompiled by Procyon v0.5.36
-// 
 
 public class JNumberField extends JTextField
 {

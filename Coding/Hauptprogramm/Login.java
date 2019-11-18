@@ -82,7 +82,6 @@ public class Login{
 
     }
 
-
     public JPanel getPanel(){
         return this.main_panel;
     }
@@ -128,6 +127,7 @@ public class Login{
         }
     }
       public void login(){
+        NordwindTool.getMenuObject().menu_control(true);
         String text = "Angemeldet als '" + this.main_textfield_loginname.getText() + "'";
         NordwindTool.setLoginName(text);
         this.main_textfield_loginname.setText("");

@@ -1,6 +1,7 @@
-package Hauptprogramm;
 // Autor: Julian Krieger
 // Datum: 13.11.2019
+
+package Hauptprogramm;
 
 import javax.swing.*;
 import java.util.*;
@@ -10,11 +11,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.font.TextAttribute;
 import java.awt.event.*;
 
-public class Menu{
+public class Menu {
     JOptionPane main_optionpane;
     JPanel main_aboutPanel;
     JMenuBar main_menuBar;
-
     JMenu main_menu_dml;
     JMenu main_menu_admin;
     JMenu main_menu_info;
@@ -22,17 +22,11 @@ public class Menu{
     JMenuItem main_item_create;
     JMenuItem main_item_edit;
     JMenuItem main_item_home;
-    //Menü Admin
     JMenuItem main_item_rightAdministration;
     JMenuItem main_item_userAdministration;
-
-    //Menü Info
     JMenuItem main_item_about;
 
-
-
-
-    public Menu(){
+    public Menu() {
         /* OBJEKTE ERSTELLEN */
 
         //Icons für Menüitems
@@ -49,35 +43,35 @@ public class Menu{
         this.main_menuBar = menu_bar;
 
         //Menues erstellen
-         JMenu menu_dml = new JMenu("Funktionen");
-         this.main_menu_dml = menu_dml;
-         JMenu menu_admin = new JMenu("Admin");
-         this.main_menu_admin = menu_admin;
-         JMenu menu_info = new JMenu("Info");
-         this.main_menu_info = menu_info;
+        JMenu menu_dml = new JMenu("Funktionen");
+        this.main_menu_dml = menu_dml;
+        JMenu menu_admin = new JMenu("Admin");
+        this.main_menu_admin = menu_admin;
+        JMenu menu_info = new JMenu("Info");
+        this.main_menu_info = menu_info;
 
         /* Menüitems */
         //Menü DML
-         JMenuItem item_query = new JMenuItem("Abfragen erstellen", query);
-         this.main_item_query = item_query;
-         JMenuItem item_create = new JMenuItem("Datensaetze anlegen", create);
-         this.main_item_create = item_create;
-         JMenuItem item_edit = new JMenuItem("Datensaetze editieren", edit);
-         this.main_item_edit = item_edit;
-         JMenuItem item_home = new JMenuItem("Home", home);
-         this.main_item_home = item_home;
+        JMenuItem item_query = new JMenuItem("Abfragen erstellen", query);
+        this.main_item_query = item_query;
+        JMenuItem item_create = new JMenuItem("Datensaetze anlegen", create);
+        this.main_item_create = item_create;
+        JMenuItem item_edit = new JMenuItem("Datensaetze editieren", edit);
+        this.main_item_edit = item_edit;
+        JMenuItem item_home = new JMenuItem("Home", home);
+        this.main_item_home = item_home;
         //Menü Admin
-         JMenuItem item_rightAdministration = new JMenuItem("Rechteverwaltung", admin);
-         this.main_item_rightAdministration = item_rightAdministration;
-         JMenuItem item_userAdministration = new JMenuItem("Benutzerverwaltung", user);
-         this.main_item_userAdministration = item_userAdministration;
+        JMenuItem item_rightAdministration = new JMenuItem("Rechteverwaltung", admin);
+        this.main_item_rightAdministration = item_rightAdministration;
+        JMenuItem item_userAdministration = new JMenuItem("Benutzerverwaltung", user);
+        this.main_item_userAdministration = item_userAdministration;
 
         //Menü Info
-         JMenuItem item_about = new JMenuItem("�ber 'Nordwind - Tool'", info);
-         this.main_item_about = item_about;
+        JMenuItem item_about = new JMenuItem("�ber 'Nordwind - Tool'", info);
+        this.main_item_about = item_about;
 
         //Menüitem Info -> Alle Objekte
-        JLabel label_about_versionAutor =  new JLabel();
+        JLabel label_about_versionAutor = new JLabel();
         JLabel label_githubProject = new JLabel();
         JLabel label_readMe = new JLabel();
         JLabel label_githubUser = new JLabel();
@@ -119,10 +113,10 @@ public class Menu{
         label_about_versionAutor.setText(msg);
         label_about_versionAutor.setHorizontalAlignment(JLabel.CENTER);
 
-        label_about_versionAutor.setBounds(0,10,200,50);
+        label_about_versionAutor.setBounds(0, 10, 200, 50);
 
         //Label "label_githubProject"
-        label_githubProject.setBounds(0,10,200,25);
+        label_githubProject.setBounds(0, 10, 200, 25);
         label_githubProject.setForeground(Color.BLUE);
         label_githubProject.setText("Projekt auf Github");
         label_githubProject.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
@@ -133,7 +127,7 @@ public class Menu{
         panel_links.add(label_githubProject);
 
         //Label "label_readMe"
-        label_readMe.setBounds(0,50,200,25);
+        label_readMe.setBounds(0, 50, 200, 25);
         label_readMe.setForeground(Color.BLUE);
         label_readMe.setText("ReadMe lesen");
         label_readMe.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
@@ -144,7 +138,7 @@ public class Menu{
         panel_links.add(label_readMe);
 
         //Label "label_githubUser"
-        label_githubUser.setBounds(0,30,200,25);
+        label_githubUser.setBounds(0, 30, 200, 25);
         label_githubUser.setForeground(Color.BLUE);
         label_githubUser.setText("Autor auf Github");
         label_githubUser.setFont(new Font("Trebuchet MS", Font.BOLD, 12));
@@ -155,40 +149,43 @@ public class Menu{
         panel_links.add(label_githubUser);
         //Panels
         panel_versionAutor.setBorder(titledBorder_versionAutor);
-        panel_versionAutor.setBounds(20,0,200,60);
+        panel_versionAutor.setBounds(20, 0, 200, 60);
         panel_versionAutor.add(label_about_versionAutor);
 
         panel_links.setBorder(titledBorder_links);
-        panel_links.setBounds(20,60,200,80);
+        panel_links.setBounds(20, 60, 200, 80);
 
         panel_about.add(panel_versionAutor);
         panel_about.add(panel_links);
-        panel_about.setPreferredSize(new Dimension(0,140));
-        panel_about.setSize(0,140);
+        panel_about.setPreferredSize(new Dimension(0, 140));
+        panel_about.setSize(0, 140);
 
         //Konfiguration des OptionPanes
-        optionpane_about.setPreferredSize(new Dimension(0,140));
-        optionpane_about.setSize(0,140);
+        optionpane_about.setPreferredSize(new Dimension(0, 140));
+        optionpane_about.setSize(0, 140);
         Liste liste_tabellen = new Liste();
 
         /* ALLE ACTIONLISTENER */
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 NordwindTool.reset_filter();
+                NordwindTool.modus = "Abfragen";
                 liste_tabellen.enable_listPanel();
             }
         });
 
         item_create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //    Liste liste_tabellen = new Liste();
+                NordwindTool.reset_filter();
+                NordwindTool.modus = "Einfügen";
                 liste_tabellen.enable_listPanel();
             }
         });
 
         item_edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-             //   Liste liste_tabellen = new Liste();
+                NordwindTool.reset_filter();
+                NordwindTool.modus = "Editieren";
                 liste_tabellen.enable_listPanel();
             }
         });
@@ -201,14 +198,12 @@ public class Menu{
         });
 
 
-
-        label_githubProject.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
+        label_githubProject.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
                 try {
                     String url = "https://github.com/KriegersBlog/nordwind-tool";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-                }
-                catch (java.io.IOException ex) {
+                } catch (java.io.IOException ex) {
                     System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
                 }
             }
@@ -221,7 +216,6 @@ public class Menu{
         });
 
 
-
         item_userAdministration.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("HIER ENSTEHT DAS MODUL 'BENUTZERVERWALTUNG'");
@@ -229,52 +223,50 @@ public class Menu{
         });
 
 
-        item_about.addActionListener(new ActionListener() {;
+        item_about.addActionListener(new ActionListener() {
+            ;
+
             public void actionPerformed(ActionEvent e) {
                 optionpane_about_ShowDialog();
             }
         });
 
 
-        label_githubUser.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
+        label_githubUser.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
                 try {
                     String url = "https://github.com/KriegersBlog";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-                }
-                catch (java.io.IOException ex) {
+                } catch (java.io.IOException ex) {
                     System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
                 }
             }
         });
 
 
-        label_readMe.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
+        label_readMe.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
                 try {
                     String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-                }
-                catch (java.io.IOException ex) {
+                } catch (java.io.IOException ex) {
                     System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
                 }
             }
         });
     }
 
-    public JMenuBar getMenuBar(){
+    public JMenuBar getMenuBar() {
         return this.main_menuBar;
     }
 
-    public void menu_control(boolean loginstate){
+    public void menu_control(boolean loginstate) {
         boolean insert;
         String text;
-        if(loginstate == true){
+        if (loginstate == true) {
             insert = true;
             text = null;
-        }
-
-        else{
+        } else {
             insert = false;
             text = "Diese Funktion ist nur fuer angemeldete Benutzer verf�gbar";
             //label_loginname.setText(null); //LEEREN - DATENSCHUTZ
@@ -295,7 +287,7 @@ public class Menu{
     }
 
     public void optionpane_about_ShowDialog() {
-        this.main_optionpane.showMessageDialog(null, main_aboutPanel,"Ueber 'Nordwind-Tool'", this.main_optionpane.PLAIN_MESSAGE, null);
+        this.main_optionpane.showMessageDialog(null, main_aboutPanel, "Ueber 'Nordwind-Tool'", this.main_optionpane.PLAIN_MESSAGE, null);
     }
 
 }
