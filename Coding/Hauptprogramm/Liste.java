@@ -79,7 +79,7 @@ public class Liste {
 
     public void list_tables_ValueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
-            NordwindTool.reset_filter();
+            Filter.resetFilter();
             NordwindTool.openFilterPanel(this.main_list.getSelectedIndex());
         }
     }

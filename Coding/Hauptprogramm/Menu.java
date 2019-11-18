@@ -25,6 +25,7 @@ public class Menu {
     JMenuItem main_item_rightAdministration;
     JMenuItem main_item_userAdministration;
     JMenuItem main_item_about;
+    static Liste liste_tabellen = new Liste();
 
     public Menu() {
         /* OBJEKTE ERSTELLEN */
@@ -163,12 +164,12 @@ public class Menu {
         //Konfiguration des OptionPanes
         optionpane_about.setPreferredSize(new Dimension(0, 140));
         optionpane_about.setSize(0, 140);
-        Liste liste_tabellen = new Liste();
+
 
         /* ALLE ACTIONLISTENER */
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NordwindTool.reset_filter();
+                Filter.resetFilter();
                 NordwindTool.modus = "Abfragen";
                 liste_tabellen.enable_listPanel();
             }
@@ -176,7 +177,7 @@ public class Menu {
 
         item_create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NordwindTool.reset_filter();
+                Filter.resetFilter();
                 NordwindTool.modus = "Einfügen";
                 liste_tabellen.enable_listPanel();
             }
@@ -184,7 +185,7 @@ public class Menu {
 
         item_edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NordwindTool.reset_filter();
+                Filter.resetFilter();
                 NordwindTool.modus = "Editieren";
                 liste_tabellen.enable_listPanel();
             }
@@ -192,11 +193,9 @@ public class Menu {
 
         item_home.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                liste_tabellen.disable_listPanel();
-                liste_tabellen.clearList();
+                disableList();
             }
         });
-
 
         label_githubProject.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -215,22 +214,17 @@ public class Menu {
             }
         });
 
-
         item_userAdministration.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("HIER ENSTEHT DAS MODUL 'BENUTZERVERWALTUNG'");
             }
         });
 
-
         item_about.addActionListener(new ActionListener() {
-            ;
-
             public void actionPerformed(ActionEvent e) {
                 optionpane_about_ShowDialog();
             }
         });
-
 
         label_githubUser.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -243,7 +237,6 @@ public class Menu {
             }
         });
 
-
         label_readMe.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
@@ -254,6 +247,11 @@ public class Menu {
                 }
             }
         });
+    }
+
+    public static void disableList() {
+        liste_tabellen.disable_listPanel();
+        liste_tabellen.clearList();
     }
 
     public JMenuBar getMenuBar() {
@@ -289,5 +287,4 @@ public class Menu {
     public void optionpane_about_ShowDialog() {
         this.main_optionpane.showMessageDialog(null, main_aboutPanel, "Ueber 'Nordwind-Tool'", this.main_optionpane.PLAIN_MESSAGE, null);
     }
-
 }

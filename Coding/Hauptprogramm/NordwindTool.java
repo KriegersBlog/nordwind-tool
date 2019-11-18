@@ -145,7 +145,7 @@ public class NordwindTool extends JFrame {
         NordwindTool mainFrame = new NordwindTool();
     }
 
-    /*------------------LISTENER METHODEN---------------------------------------*/
+    /*-----------------------ANDERE METHODEN-----------------------------------*/
 
     public static JPanel getMain_panel_filter() {
         return panel_filter;
@@ -155,49 +155,18 @@ public class NordwindTool extends JFrame {
         panel_home.add(panel);
     }
 
-    public static Menu getMenuObject(){
+    public static Menu getMenuObject() {
         return hauptmenu;
     }
 
-
-
     public void logout() {
         cl_main.show(panel_main, "LOGIN");
+        Menu.disableList();
         hauptmenu.menu_control(false);
     }
 
-    public static void clearFilter() {
-        for (Component c : panel_filter.getComponents()) {
-            if (c instanceof JTextField) {
-                JTextField tf = (JTextField) c;
-                tf.setText(null);
-            } else if (c instanceof JNumberField) {
-                JNumberField nf = (JNumberField) c;
-                nf.clear();
-            } else if (c instanceof JComboBox) {
-                JComboBox cb = (JComboBox) c;
-                cb.setSelectedIndex(0);
-            } else if (c instanceof JCheckBox) {
-                JCheckBox cb = (JCheckBox) c;
-                cb.setSelected(false);
-            } else if (c instanceof JFormattedTextField) {
-                JFormattedTextField ftf = (JFormattedTextField) c;
-                ftf.setText(null);
-            }
-        }
-    }
-
-    public static void reset_filter() {
-        for (Component c : panel_filter.getComponents()) {
-            c.setEnabled(false);
-            c.setVisible(false);
-            panel_filter.remove(c);
-            c = null;
-        }
-    }
-
     public static void openFilterPanel(int index) {
-        NordwindTool.clearFilter();
+        Filter.clearFilter();
         panel_filter.setBorder(titledBorder_filter);
 
         switch (index) {

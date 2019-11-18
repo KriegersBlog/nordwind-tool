@@ -13,7 +13,7 @@ public class Filter {
     //Universales Format für Daten erstellen
     DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     public JButton button_submit = new JButton();
-    public JOptionPane optionpane_error = new JOptionPane();
+    public static JOptionPane optionpane_error = new JOptionPane();
 
     public Filter() {
         button_submit.setText("");
@@ -25,7 +25,7 @@ public class Filter {
     }
 
     public void button_submit_ActionPerformed(ActionEvent evt) {
-        // filterAbfrage(*OBJEKTLISTEAUSMAIN*.getMainList().getSelectedIndex());
+        filterAbfrage(0);
         System.out.println("Modus: " + NordwindTool.modus);
         //AKTIVE TABELLE ABFRAGEN
         //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
@@ -79,11 +79,12 @@ public class Filter {
         }
         return (error_counter);
     }
-    public void error_message(){
+
+    public static void error_message() {
         optionpane_error.showMessageDialog(null, "Bitte gueltige Zahlenwerte eingeben!", "Fehler!", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void clearNumberFields() {
+    public static void clearNumberFields() {
         JPanel panel_filter = NordwindTool.getMain_panel_filter();
         for (Component cp : panel_filter.getComponents()) {
             if (cp instanceof JNumberField) {
@@ -98,10 +99,45 @@ public class Filter {
         }
     }
 
-    public void filterAbfrage(int index) {
+    public static void clearFilter() {
         JPanel panel_filter = NordwindTool.getMain_panel_filter();
-        if (filterTesten(panel_filter) > 0) {
+        for (Component c : panel_filter.getComponents()) {
+            if (c instanceof JTextField) {
+                JTextField tf = (JTextField) c;
+                tf.setText(null);
+            } else if (c instanceof JNumberField) {
+                JNumberField nf = (JNumberField) c;
+                nf.clear();
+            } else if (c instanceof JComboBox) {
+                JComboBox cb = (JComboBox) c;
+                cb.setSelectedIndex(0);
+            } else if (c instanceof JCheckBox) {
+                JCheckBox cb = (JCheckBox) c;
+                cb.setSelected(false);
+            } else if (c instanceof JFormattedTextField) {
+                JFormattedTextField ftf = (JFormattedTextField) c;
+                ftf.setText(null);
+            }
+        }
+    }
+
+    public static void resetFilter() {
+        JPanel panel_filter = NordwindTool.getMain_panel_filter();
+        for (Component c : panel_filter.getComponents()) {
+            c.setEnabled(false);
+            c.setVisible(false);
+            panel_filter.remove(c);
+            c = null;
+        }
+    }
+
+    public static void filterAbfrage(int index) {
+        JPanel panel_filter = NordwindTool.getMain_panel_filter();
+        int test = filterTesten(panel_filter);
+        System.out.println(test);
+        if (test > 0) {
             error_message();
+            clearNumberFields();
         } else {
             switch (index) {
                 case 0:

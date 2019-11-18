@@ -1,19 +1,21 @@
 package Hauptprogramm;
 // Autor: Julian Krieger
 // Datum: 13.11.2019
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.font.TextAttribute;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Login{
+public class Login {
     JPanel main_panel;
     String loginname;
     JTextField main_textfield_loginname;
     JLabel main_label_loginstatus;
     JPasswordField main_passwordfield_login;
-    public Login(){
+
+    public Login() {
         //LOGIN - PANEL
         JPanel panel_login = new JPanel(null, true);
         this.main_panel = panel_login;
@@ -55,7 +57,7 @@ public class Login{
         panel_login.add(label_login);
 
         JLabel label_logo = new JLabel();
-        label_logo.setBounds(390,25,500,66);
+        label_logo.setBounds(390, 25, 500, 66);
         label_logo.setIcon(main_logo);
         panel_login.add(label_logo);
 
@@ -82,51 +84,44 @@ public class Login{
 
     }
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return this.main_panel;
     }
 
-    public void login_process(){
+    public void login_process() {
         loginname = this.main_textfield_loginname.getText();
 
-        if(loginname.length() == 0){
+        if (loginname.length() == 0) {
             this.main_label_loginstatus.setText("Bitte Benutzernamen eingeben");
-        }
-
-        else {
-            if(!dbQuery.checkName(loginname)){
+        } else {
+            if (!dbQuery.checkName(loginname)) {
                 char[] passwordfield_input = this.main_passwordfield_login.getPassword();
-                if(passwordfield_input.length == 0){
+                if (passwordfield_input.length == 0) {
                     this.main_label_loginstatus.setText("Bitte Passwort eingeben");
-                }
-
-                else{
-                    try{
-                        if(PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))){
+                } else {
+                    try {
+                        if (PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))) {
                             login();
-                        }
-
-                        else{
+                        } else {
                             this.main_label_loginstatus.setBackground(Color.RED);
                             this.main_label_loginstatus.setText("Falsches Passwort");
                             Arrays.fill(passwordfield_input, '0'); //F�LLT ARRAY MIT 0 UM PASSW�RTER ZU L�SCHEN
                             this.main_passwordfield_login.selectAll();
                             this.main_passwordfield_login.requestFocusInWindow();
                         }
-                    }
-                    catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println("Schwerwiegender Passwortfehler, bitte wenden Sie sich an einen Admin");
                         this.main_label_loginstatus.setText("Fehler: Bitte an Admin wenden");
                     }
                 }
-            }
-            else{
+            } else {
                 this.main_label_loginstatus.setBackground(Color.RED);
                 this.main_label_loginstatus.setText("Benutzer existiert nicht!");
             }
         }
     }
-      public void login(){
+
+    public void login() {
         NordwindTool.getMenuObject().menu_control(true);
         String text = "Angemeldet als '" + this.main_textfield_loginname.getText() + "'";
         NordwindTool.setLoginName(text);
