@@ -17,15 +17,7 @@ import java.io.IOException;
 
 public class NordwindTool extends JFrame {
     //Statische Attribute
-    public static String modus;
-
-    //Objektabhängige Attribute
-    JPanel main_panel_filter;
-    String fenstername;
-    String loginname;
-    boolean loginstate = false;
-    JPanel main_panel_table;
-    Menu main_menu;
+    static String modus;
     static ArtikelFilter main_artikelFilter;
     static BestelldetailsFilter main_bestellDetailsFilter;
     static BestellungenFilter main_bestellungenFilter;
@@ -34,6 +26,15 @@ public class NordwindTool extends JFrame {
     static LieferantenFilter main_lieferantenFilter;
     static PersonalFilter main_personalFilter;
     static VersandfirmenFilter main_versandfirmenFilter;
+
+    //Objektabhängige Attribute
+    JPanel main_panel_filter;
+    String fenstername;
+    String loginname;
+    boolean loginstate = false;
+    JPanel main_panel_table;
+    Menu main_menu;
+
 
     /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
     //Bilder und Grafiken

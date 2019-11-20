@@ -178,7 +178,7 @@ public class Menu {
         item_create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Filter.resetFilter();
-                NordwindTool.modus = "Einfügen";
+                NordwindTool.modus = "Anlegen";
                 liste_tabellen.enable_listPanel();
             }
         });

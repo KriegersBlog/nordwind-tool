@@ -26,7 +26,7 @@ public class Filter {
 
     public void button_submit_ActionPerformed(ActionEvent evt) {
         filterAbfrage(0);
-        System.out.println("Modus: " + NordwindTool.modus);
+
         //AKTIVE TABELLE ABFRAGEN
         //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
     }
@@ -133,39 +133,109 @@ public class Filter {
 
     public static void filterAbfrage(int index) {
         JPanel panel_filter = NordwindTool.getMain_panel_filter();
-        int test = filterTesten(panel_filter);
-        System.out.println(test);
-        if (test > 0) {
+        int error_counter = filterTesten(panel_filter);
+        if (error_counter > 0) {
             error_message();
             clearNumberFields();
         } else {
             switch (index) {
                 case 0:
-                    //Alle Felder von ArtikelFilter ausfragen
-                    NordwindTool.getMain_artikelFilter().getValues();
+                    ArtikelFilter filter = NordwindTool.getMain_artikelFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
                     clearNumberFields();
                     break;
+
                 case 1:
-                   // NordwindTool.getMain_bestelldetailsFilter().getValues();
+                    BestelldetailsFilter filter = NordwindTool.getMain_bestelldetailsFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 case 2:
-
+                    BestellungenFilter filter = NordwindTool.getMain_bestellungenFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+                break;
+
                 case 3:
-
+                    KategorieFilter filter = NordwindTool.getMain_kategorieFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 case 4:
-
+                    KundenFilter filter = NordwindTool.getMain_kundenFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 case 5:
-
+                    LieferantenFilter filter = NordwindTool.getMain_lieferantenFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 case 6:
-
+                    PersonalFilter filter = NordwindTool.getMain_personalFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 case 7:
-
+                    VersandfirmenFilter filter = NordwindTool.getMain_versandfirmenFilter();
+                    if (NordwindTool.modus.equals("Abfragen")) {
+                        filter.createQuery();
+                    } else if (NordwindTool.modus.equals("Editieren")) {
+                        filter.editRecord();
+                    } else if (NordwindTool.modus.equals("Anlegen")) {
+                        filter.createRecord();
+                    }
+                    clearNumberFields();
                     break;
+
                 default:
 
             }

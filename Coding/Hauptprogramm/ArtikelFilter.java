@@ -18,8 +18,6 @@ public class ArtikelFilter extends Filter {
     JNumberField main_numberfieldMindestbestand;
     JCheckBox main_checkboxAuslaufartikel;
 
-
-
     public ArtikelFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
 
@@ -118,9 +116,16 @@ public class ArtikelFilter extends Filter {
         setFilterBounds(panel);
 
     }
-    public void getValues(){
-       System.out.println(this.main_numberfieldArtikelnr.getInt());
-       System.out.println(this.main_textfieldArtikelname.getText());
+    public void createRecord(){
+
+    }
+
+    public void createQuery(){
+
+    }
+
+    public void editRecord(){
+
     }
 }
 
