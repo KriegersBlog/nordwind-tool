@@ -141,12 +141,12 @@ public class Filter {
         } else {
             switch (index) {
                 case 0:
-
+                    //Alle Felder von ArtikelFilter ausfragen
+                    NordwindTool.getMain_artikelFilter().getValues();
                     clearNumberFields();
                     break;
                 case 1:
-
-                    clearNumberFields();
+                   // NordwindTool.getMain_bestelldetailsFilter().getValues();
                     break;
                 case 2:
 

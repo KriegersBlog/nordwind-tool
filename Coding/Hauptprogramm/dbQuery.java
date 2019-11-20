@@ -1,7 +1,7 @@
 package Hauptprogramm;
 import java.sql.*;
 
-public class dbQuery{
+public class DBQuery{
   
   //Returns true if the username is free
   public static boolean checkName(String username){
@@ -143,7 +143,6 @@ public class dbQuery{
       System.out.println("Fehler bei der Erstellung des Benutzers!");
     }
   }
-
   
   public static void deleteUser(String username){
     if(!checkName(username)){ 

@@ -94,13 +94,13 @@ public class Login {
         if (loginname.length() == 0) {
             this.main_label_loginstatus.setText("Bitte Benutzernamen eingeben");
         } else {
-            if (!dbQuery.checkName(loginname)) {
+            if (!DBQuery.checkName(loginname)) {
                 char[] passwordfield_input = this.main_passwordfield_login.getPassword();
                 if (passwordfield_input.length == 0) {
                     this.main_label_loginstatus.setText("Bitte Passwort eingeben");
                 } else {
                     try {
-                        if (PasswordHasher.validatePassword(passwordfield_input, dbQuery.getPassword(loginname))) {
+                        if (PasswordHasher.validatePassword(passwordfield_input, DBQuery.getPassword(loginname))) {
                             login();
                         } else {
                             this.main_label_loginstatus.setBackground(Color.RED);

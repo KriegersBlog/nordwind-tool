@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class NordwindTool extends JFrame {
     //Statische Attribute
-    static String modus;
+    public static String modus;
 
     //Objektabhängige Attribute
     JPanel main_panel_filter;
@@ -26,6 +26,14 @@ public class NordwindTool extends JFrame {
     boolean loginstate = false;
     JPanel main_panel_table;
     Menu main_menu;
+    static ArtikelFilter main_artikelFilter;
+    static BestelldetailsFilter main_bestellDetailsFilter;
+    static BestellungenFilter main_bestellungenFilter;
+    static KategorieFilter main_kategorieFilter;
+    static KundenFilter main_kundenFilter;
+    static LieferantenFilter main_lieferantenFilter;
+    static PersonalFilter main_personalFilter;
+    static VersandfirmenFilter main_versandfirmenFilter;
 
     /*--------------------OBJEKTE INSTANZIIEREN---------------------------------*/
     //Bilder und Grafiken
@@ -164,6 +172,37 @@ public class NordwindTool extends JFrame {
         Menu.disableList();
         hauptmenu.menu_control(false);
     }
+    public static ArtikelFilter getMain_artikelFilter(){
+       return main_artikelFilter;
+    }
+
+    public static BestelldetailsFilter getMain_bestelldetailsFilter(){
+        return main_bestellDetailsFilter;
+    }
+
+    public static BestellungenFilter getMain_bestellungenFilter(){
+        return main_bestellungenFilter;
+    }
+
+    public static KategorieFilter getMain_kategorieFilter(){
+        return main_kategorieFilter;
+    }
+
+    public static KundenFilter getMain_kundenFilter(){
+        return main_kundenFilter;
+    }
+
+    public static LieferantenFilter getMain_lieferantenFilter(){
+        return main_lieferantenFilter;
+    }
+
+    public static PersonalFilter getMain_personalFilter(){
+        return main_personalFilter;
+    }
+
+    public static VersandfirmenFilter getMain_versandfirmenFilter(){
+        return main_versandfirmenFilter;
+    }
 
     public static void openFilterPanel(int index) {
         Filter.clearFilter();
@@ -176,34 +215,42 @@ public class NordwindTool extends JFrame {
 
             case 0:
                 ArtikelFilter artikel = new ArtikelFilter(panel_filter);
+                main_artikelFilter = artikel;
                 break;
 
             case 1:
                 BestelldetailsFilter bestelldetails = new BestelldetailsFilter(panel_filter);
+                main_bestellDetailsFilter = bestelldetails;
                 break;
 
             case 2:
                 BestellungenFilter bestellungen = new BestellungenFilter(panel_filter);
+                main_bestellungenFilter = bestellungen;
                 break;
 
             case 3:
                 KategorieFilter kategorie = new KategorieFilter(panel_filter);
+                main_kategorieFilter =  kategorie;
                 break;
 
             case 4:
                 KundenFilter kunden = new KundenFilter(panel_filter);
+                main_kundenFilter = kunden;
                 break;
 
             case 5:
                 LieferantenFilter lieferanten = new LieferantenFilter(panel_filter);
+                main_lieferantenFilter = lieferanten;
                 break;
 
             case 6:
                 PersonalFilter personal = new PersonalFilter(panel_filter);
+                main_personalFilter = personal;
                 break;
 
             case 7:
                 VersandfirmenFilter versandfirmen = new VersandfirmenFilter(panel_filter);
+                main_versandfirmenFilter = versandfirmen;
                 break;
 
             default:
