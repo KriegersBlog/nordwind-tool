@@ -71,6 +71,25 @@ public class BestelldetailsFilter extends Filter {
         setFilterBounds(panel);
 
     }
+
+    public void createRecord() {
+        int[] integers = new int[3];
+
+        integers[0] = this.main_numberfieldBestellnr.getInt();
+        integers[1] = this.main_numberfieldArtikelnr.getInt();
+        integers[2] = this.main_numberfieldAnzahl.getInt();
+
+        String[] strings = new String[0];
+
+        double[] doubles = new double[2];
+
+        doubles[0] = this.main_numberfieldEinzelpreis.getDouble();
+        doubles[1] = this.main_numberfieldRabatt.getDouble();
+
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("bestelldetails", integers, strings, doubles, booleans);
+    }
 }
 
 

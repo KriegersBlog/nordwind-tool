@@ -203,7 +203,7 @@ public class Menu {
                     String url = "https://github.com/KriegersBlog/nordwind-tool";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 } catch (java.io.IOException ex) {
-                    System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
+                    System.out.println("Fehler bei Verlinkung. Bitte Admin kontaktieren. | Error Code: 7");
                 }
             }
         });
@@ -243,7 +243,7 @@ public class Menu {
                     String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 } catch (java.io.IOException ex) {
-                    System.out.println("Bitte Admin kontaktieren:" + ex.getMessage());
+                    System.out.println("Fehler bei Verlinkung. Bitte Admin kontaktieren. | Error Code: 8");
                 }
             }
         });
@@ -266,7 +266,7 @@ public class Menu {
             text = null;
         } else {
             insert = false;
-            text = "Diese Funktion ist nur fuer angemeldete Benutzer verf�gbar";
+            text = "Diese Funktion ist nur fuer angemeldete Benutzer verfügbar";
             //label_loginname.setText(null); //LEEREN - DATENSCHUTZ
         }
 

@@ -8,7 +8,7 @@ public class VersandfirmenFilter extends Filter {
     //Attribute
     JNumberField main_numberfieldFirmennr;
     JTextField main_textfieldFirma;
-    JNumberField main_numberfieldTelefon;
+    JTextField main_textfieldTelefon;
 
     public VersandfirmenFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
@@ -26,9 +26,9 @@ public class VersandfirmenFilter extends Filter {
 
         JLabel label_telefon = new JLabel();
         label_telefon.setText("Telefon:");
-        JNumberField numberfield_telefon = new JNumberField();
-        this.main_numberfieldTelefon = numberfield_telefon;
-        numberfield_telefon.setToolTipText("Telefon angeben");
+        JTextField textfield_telefon = new JTextField();
+        this.main_textfieldTelefon = textfield_telefon;
+        textfield_telefon.setToolTipText("Telefon angeben");
 
 
         panel.add(label_firmennr);
@@ -36,10 +36,25 @@ public class VersandfirmenFilter extends Filter {
         panel.add(label_firma);
         panel.add(textfield_firma);
         panel.add(label_telefon);
-        panel.add(numberfield_telefon);
+        panel.add(textfield_telefon);
         panel.add(button_submit);
 
         setFilterBounds(panel);
+    }
+
+    public void createRecord() {
+        int[] integers = new int[1];
+        integers[0] = this.main_numberfieldFirmennr.getInt();
+
+        String[] strings = new String[2];
+        strings[0] = this.main_textfieldFirma.getText();
+        strings[1] = this.main_textfieldTelefon.getText();
+
+        double[] doubles = new double[0];
+
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("versandfirmen", integers, strings, doubles, booleans);
     }
 }
 

@@ -25,7 +25,7 @@ public class Filter {
     }
 
     public void button_submit_ActionPerformed(ActionEvent evt) {
-        filterAbfrage(0);
+        filterAbfrage(Menu.liste_tabellen.main_list.getSelectedIndex());
 
         //AKTIVE TABELLE ABFRAGEN
         //AM ENDE DAS OBJEKT EINER BESTIMMTEN Methode �BERGEBEN*
@@ -151,37 +151,37 @@ public class Filter {
                     clearNumberFields();
                     break;
 
-           /*     case 1:
+                case 1:
                     BestelldetailsFilter bestelldetailsfilter = NordwindTool.getMain_bestelldetailsFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        bestelldetailsfilter.createQuery();
+                     //   bestelldetailsfilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        bestelldetailsfilter.editRecord();
+                    //    bestelldetailsfilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         bestelldetailsfilter.createRecord();
                     }
                     clearNumberFields();
                     break;
-
+/*
                 case 2:
                     BestellungenFilter bestellungenfilter = NordwindTool.getMain_bestellungenFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        bestellungenfilter.createQuery();
+                     //   bestellungenfilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        bestellungenfilter.editRecord();
+                     //   bestellungenfilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         bestellungenfilter.createRecord();
                     }
                     clearNumberFields();
                     break;
                 break;
-
+*/
                 case 3:
                     KategorieFilter kategoriefilter = NordwindTool.getMain_kategorieFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        kategoriefilter.createQuery();
+                    //    kategoriefilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        kategoriefilter.editRecord();
+                     //   kategoriefilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         kategoriefilter.createRecord();
                     }
@@ -191,9 +191,9 @@ public class Filter {
                 case 4:
                     KundenFilter kundenfilter = NordwindTool.getMain_kundenFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        kundenfilter.createQuery();
+                    //    kundenfilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        kundenfilter.editRecord();
+                    //    kundenfilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         kundenfilter.createRecord();
                     }
@@ -203,15 +203,15 @@ public class Filter {
                 case 5:
                     LieferantenFilter lieferantenfilter = NordwindTool.getMain_lieferantenFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        lieferantenfilter.createQuery();
+                    //    lieferantenfilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        lieferantenfilter.editRecord();
+                     //   lieferantenfilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         lieferantenfilter.createRecord();
                     }
                     clearNumberFields();
                     break;
-
+/*
                 case 6:
                     PersonalFilter personalfilter = NordwindTool.getMain_personalFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
@@ -223,13 +223,13 @@ public class Filter {
                     }
                     clearNumberFields();
                     break;
-
+*/
                 case 7:
                     VersandfirmenFilter versandfirmenfilter = NordwindTool.getMain_versandfirmenFilter();
                     if (NordwindTool.modus.equals("Abfragen")) {
-                        versandfirmenfilter.createQuery();
+                     //   versandfirmenfilter.createQuery();
                     } else if (NordwindTool.modus.equals("Editieren")) {
-                        versandfirmenfilter.editRecord();
+                     //   versandfirmenfilter.editRecord();
                     } else if (NordwindTool.modus.equals("Anlegen")) {
                         versandfirmenfilter.createRecord();
                     }
@@ -237,7 +237,7 @@ public class Filter {
                     break;
 
                 default:
-                          */
+                          
             }
         }
     }

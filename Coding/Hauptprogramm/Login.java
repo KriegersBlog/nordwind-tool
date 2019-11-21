@@ -110,8 +110,8 @@ public class Login {
                             this.main_passwordfield_login.requestFocusInWindow();
                         }
                     } catch (Exception e) {
-                        System.out.println("Schwerwiegender Passwortfehler, bitte wenden Sie sich an einen Admin");
-                        this.main_label_loginstatus.setText("Fehler: Bitte an Admin wenden");
+                        System.out.println("Fehler bei Passwortüberprüfung. Bitte an Admin wenden | Error Code: 6");
+                        this.main_label_loginstatus.setText("Fehler! Error Code: 6");
                     }
                 }
             } else {

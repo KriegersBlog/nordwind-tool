@@ -14,8 +14,8 @@ public class KundenFilter extends Filter {
     JTextField main_textfieldPlz;
     JTextField main_textfieldOrt;
     JTextField main_textfieldLand;
-    JNumberField main_numberfieldTelefon;
-    JNumberField main_numberfieldTelefax;
+    JTextField main_textfieldTelefon;
+    JTextField main_textfieldTelefax;
 
     public KundenFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
@@ -69,15 +69,15 @@ public class KundenFilter extends Filter {
 
         JLabel label_telefon = new JLabel();
         label_telefon.setText("Telefon:");
-        JNumberField numberfield_telefon = new JNumberField();
-        this.main_numberfieldTelefon = numberfield_telefon;
-        numberfield_telefon.setToolTipText("Telefon angeben");
+        JTextField textfield_telefon = new JTextField();
+        this.main_textfieldTelefon = textfield_telefon;
+        textfield_telefon.setToolTipText("Telefon angeben");
 
         JLabel label_telefax = new JLabel();
         label_telefax.setText("Telefax:");
-        JNumberField numberfield_telefax = new JNumberField();
-        this.main_numberfieldTelefax = numberfield_telefax;
-        numberfield_telefax.setToolTipText("Telefax angeben");
+        JTextField textfield_telefax = new JTextField();
+        this.main_textfieldTelefax = textfield_telefax;
+        textfield_telefax.setToolTipText("Telefax angeben");
 
 
         panel.add(label_kundencode);
@@ -97,12 +97,34 @@ public class KundenFilter extends Filter {
         panel.add(label_land);
         panel.add(textfield_land);
         panel.add(label_telefon);
-        panel.add(numberfield_telefon);
+        panel.add(textfield_telefon);
         panel.add(label_telefax);
-        panel.add(numberfield_telefax);
+        panel.add(textfield_telefax);
         panel.add(button_submit);
 
         setFilterBounds(panel);
+    }
+    public void createRecord() {
+        int[] integers = new int[0];
+
+        String[] strings = new String[10];
+        strings[0] = this.main_textfieldKundencode.getText();
+        strings[1] = this.main_textfieldFirma.getText();
+        strings[2] = this.main_textfieldKontaktperson.getText();
+        strings[3] = this.main_textfieldPosition.getText();
+        strings[4] = this.main_textfieldStrasse.getText();
+        strings[5] = this.main_textfieldOrt.getText();
+        strings[6] = this.main_textfieldPlz.getText();
+        strings[7] = this.main_textfieldLand.getText();
+        strings[8] = this.main_textfieldTelefon.getText();
+        strings[9] = this.main_textfieldTelefax.getText();
+
+
+        double[] doubles = new double[0];
+
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("kunden", integers, strings, doubles, booleans);
     }
 }
 

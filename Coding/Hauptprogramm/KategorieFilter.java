@@ -40,6 +40,23 @@ public class KategorieFilter extends Filter{
         panel.add(button_submit);
         setFilterBounds(panel);
     }
+
+    public void createRecord() {
+        int[] integers = new int[1];
+
+        integers[0] = this.main_numberfieldKategorienr.getInt();
+
+        String[] strings = new String[2];
+        strings[0] = this.main_textfieldKategoriename.getText();
+        strings[1] = this.main_textfieldBeschreibung.getText();
+
+        double[] doubles = new double[0];
+
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("kategorien", integers, strings, doubles, booleans);
+    }
+
 }
 
 

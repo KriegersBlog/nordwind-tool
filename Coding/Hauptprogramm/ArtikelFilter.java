@@ -116,15 +116,38 @@ public class ArtikelFilter extends Filter {
         setFilterBounds(panel);
 
     }
-    public void createRecord(){
+
+    public void createRecord() {
+        int[] integers = new int[6];
+    
+        integers[0] = this.main_numberfieldArtikelnr.getInt();
+        integers[1] = this.main_numberfieldLieferantennr.getInt();
+        integers[2] = this.main_numberfieldKategorienr.getInt();
+        integers[3] = this.main_numberfieldLagerbestand.getInt();
+        integers[4] = this.main_numberfieldBestellteEinheiten.getInt();
+        integers[5] = this.main_numberfieldMindestbestand.getInt();
+
+        String[] strings = new String[2];
+
+        strings[0] = this.main_textfieldArtikelname.getText();
+        strings[1] = this.main_textfieldLiefereinheit.getText();
+
+        double[] doubles = new double[1];
+
+        doubles[0] = this.main_numberfieldEinzelpreis.getDouble();
+
+        boolean[] booleans = new boolean[1];
+
+        booleans[0] = main_checkboxAuslaufartikel.isSelected();
+
+        DBQuery.createRecord("artikel", integers, strings, doubles, booleans);
+    }
+
+    public void createQuery() {
 
     }
 
-    public void createQuery(){
-
-    }
-
-    public void editRecord(){
+    public void editRecord() {
 
     }
 }

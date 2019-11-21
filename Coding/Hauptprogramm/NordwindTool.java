@@ -13,6 +13,7 @@ import java.util.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.*;
 import javax.imageio.*;
+
 import java.io.IOException;
 
 public class NordwindTool extends JFrame {
@@ -254,8 +255,8 @@ public class NordwindTool extends JFrame {
                 main_versandfirmenFilter = versandfirmen;
                 break;
 
-            default:
-                System.out.println("Fataler Fehler. Bitte Admin kontaktieren");
+            default:                                                                       
+                System.out.println("Fehler bei Filtersteuerung. Bitte Admin kontaktieren | Error Code: 1");
         }
     }
 
