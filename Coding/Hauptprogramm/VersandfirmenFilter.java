@@ -30,7 +30,6 @@ public class VersandfirmenFilter extends Filter {
         this.main_textfieldTelefon = textfield_telefon;
         textfield_telefon.setToolTipText("Telefon angeben");
 
-
         panel.add(label_firmennr);
         panel.add(numberfield_firmennr);
         panel.add(label_firma);

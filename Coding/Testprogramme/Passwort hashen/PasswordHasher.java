@@ -10,7 +10,7 @@ public class PasswordHasher
 {
   public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException 
   {
-    String  originalPassword = "julian";
+    String  originalPassword = "testpassword";
     String generatedSecuredPasswordHash = generateStorngPasswordHash(originalPassword);
     System.out.println(generatedSecuredPasswordHash);
     

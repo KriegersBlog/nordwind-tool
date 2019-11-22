@@ -1,9 +1,13 @@
 package Hauptprogramm;
 
 import java.sql.*;
-import java.util.Date;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class DBQuery {
+    static DateFormat normalDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
     //Returns true if the username is free
     public static boolean checkName(String username) {
@@ -63,7 +67,6 @@ public class DBQuery {
 
     public static void createRecord(String table, int[] ints, String[] strings, double[] doubles, boolean[] bools) {
         String command;
-        String empty = "";
         try {
             if (table.equals("artikel")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
@@ -116,6 +119,7 @@ public class DBQuery {
                     pStatement_artikel.setInt(10, 0);
                 }
                 pStatement_artikel.execute();
+
                 con.close();
 
             } else if (table.equals("bestelldetails")) {
@@ -151,6 +155,81 @@ public class DBQuery {
                 pStatement_bestelldetails.execute();
                 con.close();
 
+            } else if (table.equals("bestellungen")) {
+                Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
+                String url = "jdbc:mysql://localhost:3306/nordwind";     //Datenbankverbindung angeben
+                Connection con = DriverManager.getConnection(url, "java", "java");    // Verbindungsparameter angeben
+
+                command = "insert into bestellungen(bestellnr, kundencode, personalnr, bestelldatum, lieferdatum, versanddatum, versandueber, frachtkosten, empfaenger, strasse, ort, plz, bestimmungsland)"
+                        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement pStatement_bestellungen = con.prepareStatement(command);
+                System.out.println("TEST");
+                if (ints[0] == -1) {
+                    pStatement_bestellungen.setNull(1, Types.INTEGER);
+                } else pStatement_bestellungen.setInt(1, ints[0]);
+
+                if (ints[1] == -1) {
+                    pStatement_bestellungen.setNull(3, Types.INTEGER);
+                } else pStatement_bestellungen.setInt(3, ints[1]);
+
+                if (ints[2] == -1) {
+                    pStatement_bestellungen.setNull(7, Types.INTEGER);
+                } else pStatement_bestellungen.setInt(7, ints[2]);
+
+                if (doubles[0] == -1) {
+                    pStatement_bestellungen.setNull(8, Types.DOUBLE);
+                } else pStatement_bestellungen.setDouble(8, doubles[0]);
+
+                if (strings[0].equals(null)) {
+                    pStatement_bestellungen.setNull(2, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(2, strings[0]);
+
+                if (strings[1].equals("")) {
+                    pStatement_bestellungen.setNull(4, Types.DATE);
+                } else {
+                    Date bestelldatum = Date.valueOf(strings[1]);
+                    pStatement_bestellungen.setDate(4, bestelldatum);
+                }
+
+                if (strings[1].equals("")) {
+                    pStatement_bestellungen.setNull(5, Types.DATE);
+                } else {
+                    Date lieferdatum = Date.valueOf(strings[2]);
+                    pStatement_bestellungen.setDate(5, lieferdatum);
+                }
+
+                if (strings[1].equals("")) {
+                    pStatement_bestellungen.setNull(6, Types.DATE);
+                } else {
+                    Date versanddatum = Date.valueOf(strings[3]);
+                    pStatement_bestellungen.setDate(6, versanddatum);
+                }
+
+                if (strings[4].equals(null)) {
+                    pStatement_bestellungen.setNull(9, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(9, strings[4]);
+
+                if (strings[5].equals(null)) {
+                    pStatement_bestellungen.setNull(10, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(10, strings[5]);
+
+                if (strings[6].equals(null)) {
+                    pStatement_bestellungen.setNull(11, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(11, strings[6]);
+
+                if (strings[7].equals(null)) {
+                    pStatement_bestellungen.setNull(12, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(12, strings[7]);
+
+                if (strings[8].equals(null)) {
+                    pStatement_bestellungen.setNull(13, Types.VARCHAR);
+                } else pStatement_bestellungen.setString(13, strings[8]);
+
+
+                pStatement_bestellungen.execute();
+                con.close();
+
             } else if (table.equals("kategorien")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
                 String url = "jdbc:mysql://localhost:3306/nordwind";     //Datenbankverbindung angeben
@@ -166,11 +245,11 @@ public class DBQuery {
                 } else pStatement_kategorien.setInt(1, ints[0]);
 
                 if (strings[0].equals(null)) {
-                    pStatement_kategorien.setNull(1, Types.VARCHAR);
+                    pStatement_kategorien.setNull(2, Types.VARCHAR);
                 } else pStatement_kategorien.setString(2, strings[0]);
 
                 if (strings[1].equals(null)) {
-                    pStatement_kategorien.setNull(1, Types.VARCHAR);
+                    pStatement_kategorien.setNull(3, Types.VARCHAR);
                 } else pStatement_kategorien.setString(3, strings[1]);
 
                 pStatement_kategorien.execute();
@@ -288,13 +367,84 @@ public class DBQuery {
                 con.close();
 
 
+            } else if (table.equals("personal")) {
+                Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
+                String url = "jdbc:mysql://localhost:3306/nordwind";     //Datenbankverbindung angeben
+                Connection con = DriverManager.getConnection(url, "java", "java");    // Verbindungsparameter angeben
+
+                command = "insert into personal(personalnr, nachname, vorname, position, anrede, geburtsdatum, einstellung, strasse, ort, plz, land, telefonprivat, durchwahlbuero)"
+                        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement pStatement_personal = con.prepareStatement(command);
+
+
+                if (ints[0] == -1) {
+                    pStatement_personal.setNull(1, Types.INTEGER);
+                } else pStatement_personal.setInt(1, ints[0]);
+
+                if (strings[0].equals(null)) {
+                    pStatement_personal.setNull(2, Types.VARCHAR);
+                } else pStatement_personal.setString(2, strings[0]);
+
+                if (strings[1].equals(null)) {
+                    pStatement_personal.setNull(3, Types.VARCHAR);
+                } else pStatement_personal.setString(3, strings[1]);
+
+                if (strings[2].equals(null)) {
+                    pStatement_personal.setNull(4, Types.VARCHAR);
+                } else pStatement_personal.setString(4, strings[2]);
+
+                if (strings[3].equals(null)) {
+                    pStatement_personal.setNull(5, Types.VARCHAR);
+                } else pStatement_personal.setString(5, strings[3]);
+
+                if (strings[4].equals("")) {
+                    pStatement_personal.setNull(6, Types.DATE);
+                } else {
+                    Date bestelldatum = Date.valueOf(strings[4]);
+                    pStatement_personal.setDate(6, bestelldatum);
+                }
+                if (strings[5].equals("")) {
+                    pStatement_personal.setNull(7, Types.DATE);
+                } else {
+                    Date bestelldatum = Date.valueOf(strings[5]);
+                    pStatement_personal.setDate(7, bestelldatum);
+                }
+
+                if (strings[6].equals(null)) {
+                    pStatement_personal.setNull(8, Types.VARCHAR);
+                } else pStatement_personal.setString(8, strings[6]);
+
+                if (strings[7].equals(null)) {
+                    pStatement_personal.setNull(9, Types.VARCHAR);
+                } else pStatement_personal.setString(9, strings[7]);
+
+                if (strings[8].equals(null)) {
+                    pStatement_personal.setNull(10, Types.VARCHAR);
+                } else pStatement_personal.setString(10, strings[8]);
+
+                if (strings[9].equals(null)) {
+                    pStatement_personal.setNull(11, Types.VARCHAR);
+                } else pStatement_personal.setString(11, strings[9]);
+
+                if (strings[10].equals(null)) {
+                    pStatement_personal.setNull(12, Types.VARCHAR);
+                } else pStatement_personal.setString(12, strings[10]);
+
+                if (strings[11].equals(null)) {
+                    pStatement_personal.setNull(13, Types.VARCHAR);
+                } else pStatement_personal.setString(13, strings[11]);
+
+                pStatement_personal.execute();
+                con.close();
+
             } else if (table.equals("versandfirmen")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");    //Treiber einbinden
                 String url = "jdbc:mysql://localhost:3306/nordwind";     //Datenbankverbindung angeben
                 Connection con = DriverManager.getConnection(url, "java", "java");    // Verbindungsparameter angeben
 
-                command = "insert into versandfirmen(lieferantennr, firma, kontaktperson, position, strasse, ort, plz, land, telefon, telefax, homepage)"
-                        + " values (?, ?, ?,?, ?, ?,?, ?, ?,?, ?)";
+                command = "insert into versandfirmen(firmennr, firma, telefon)"
+                        + " values (?, ?, ?)";
 
                 PreparedStatement pStatement_versandfirmen = con.prepareStatement(command);
                 if (ints[0] == 0) {
@@ -312,21 +462,7 @@ public class DBQuery {
                 pStatement_versandfirmen.execute();
                 con.close();
             }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public static void createRecord(String table, int[] ints, String[] strings, double[] doubles, boolean[] bools, Date[] dates) {
-        String command;
-        String empty = "";
-        try {
-            if (table.equals("bestellungen")) {
-
-            } else if (table.equals("personal")) {
-            }
-
-
+            System.out.println("Datensatz angelegt");
         } catch (Exception e) {
             System.out.println(e);
         }

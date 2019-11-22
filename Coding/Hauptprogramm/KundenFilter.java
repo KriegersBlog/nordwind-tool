@@ -79,7 +79,6 @@ public class KundenFilter extends Filter {
         this.main_textfieldTelefax = textfield_telefax;
         textfield_telefax.setToolTipText("Telefax angeben");
 
-
         panel.add(label_kundencode);
         panel.add(textfield_kundencode);
         panel.add(label_firma);
@@ -104,6 +103,7 @@ public class KundenFilter extends Filter {
 
         setFilterBounds(panel);
     }
+
     public void createRecord() {
         int[] integers = new int[0];
 
@@ -118,7 +118,6 @@ public class KundenFilter extends Filter {
         strings[7] = this.main_textfieldLand.getText();
         strings[8] = this.main_textfieldTelefon.getText();
         strings[9] = this.main_textfieldTelefax.getText();
-
 
         double[] doubles = new double[0];
 

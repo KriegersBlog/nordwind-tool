@@ -68,7 +68,7 @@ public class Menu {
         this.main_item_userAdministration = item_userAdministration;
 
         //Menü Info
-        JMenuItem item_about = new JMenuItem("�ber 'Nordwind - Tool'", info);
+        JMenuItem item_about = new JMenuItem("Über 'Nordwind - Tool'", info);
         this.main_item_about = item_about;
 
         //Menüitem Info -> Alle Objekte
@@ -169,9 +169,12 @@ public class Menu {
         /* ALLE ACTIONLISTENER */
         item_query.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+           /*
                 Filter.resetFilter();
                 NordwindTool.modus = "Abfragen";
                 liste_tabellen.enable_listPanel();
+                */
+                System.out.println("Funktion noch nicht vorhanden");
             }
         });
 
@@ -185,9 +188,12 @@ public class Menu {
 
         item_edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+              /*
                 Filter.resetFilter();
                 NordwindTool.modus = "Editieren";
                 liste_tabellen.enable_listPanel();
+               */
+                System.out.println("Funktion noch nicht vorhanden");
             }
         });
 
@@ -243,7 +249,7 @@ public class Menu {
                     String url = "https://github.com/KriegersBlog/nordwind-tool/blob/master/README.md";
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 } catch (java.io.IOException ex) {
-                    System.out.println("Fehler bei Verlinkung. Bitte Admin kontaktieren. | Error Code: 8");
+                    System.out.println("Fehler bei Verlinkung. Bitte Admin kontaktieren. | Error Code: 7");
                 }
             }
         });

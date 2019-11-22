@@ -4,15 +4,14 @@ package Hauptprogramm;
 
 import javax.swing.*;
 
-public class KategorieFilter extends Filter{
+public class KategorieFilter extends Filter {
     //Attribute
     JNumberField main_numberfieldKategorienr;
     JTextField main_textfieldKategoriename;
     JTextField main_textfieldBeschreibung;
 
-    public KategorieFilter(JPanel panel){
+    public KategorieFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
-
         JLabel label_kategoriennr = new JLabel();
         label_kategoriennr.setText("Kategorienr.:");
         JNumberField numberfield_kategorienr = new JNumberField();
@@ -38,6 +37,7 @@ public class KategorieFilter extends Filter{
         panel.add(label_beschreibung);
         panel.add(textfield_beschreibung);
         panel.add(button_submit);
+
         setFilterBounds(panel);
     }
 

@@ -5,15 +5,15 @@ package Hauptprogramm;
 import javax.swing.*;
 import java.util.Date;
 
-public class BestellungenFilter extends Filter{
+public class BestellungenFilter extends Filter {
     //Attribute
     JNumberField main_numberfieldBestellnr;
     JNumberField main_numberfieldPersonalnr;
     JNumberField main_numberfieldVersandUeber;
     JNumberField main_numberfieldFrachtkosten;
-    JFormattedTextField main_datefieldBestelldatum;
-    JFormattedTextField main_datefieldLieferdatum;
-    JFormattedTextField main_datefieldVersanddatum;
+    JTextField main_textfieldBestelldatum;
+    JTextField main_textfieldLieferdatum;
+    JTextField main_textfieldVersanddatum;
     JTextField main_textfieldKundencode;
     JTextField main_textfieldEmpfaenger;
     JTextField main_textfieldStrasse;
@@ -21,7 +21,7 @@ public class BestellungenFilter extends Filter{
     JTextField main_textfieldOrt;
     JTextField main_textfieldLand;
 
-    public BestellungenFilter(JPanel panel){
+    public BestellungenFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
 
         //Bestellnummer erstellen
@@ -48,20 +48,20 @@ public class BestellungenFilter extends Filter{
         //Bestelldatum erstellen
         JLabel label_bestelldatum = new JLabel();
         label_bestelldatum.setText("Bestelldatum:");
-        JFormattedTextField datefield_bestelldatum = new JFormattedTextField(normalDateFormat);
-        this.main_datefieldBestelldatum = datefield_bestelldatum;
+        JTextField textfield_bestelldatum = new JTextField();
+        this.main_textfieldBestelldatum = textfield_bestelldatum;
 
         //Anzahl erstellen
         JLabel label_lieferdatum = new JLabel();
         label_lieferdatum.setText("Lieferdatum:");
-        JFormattedTextField datefield_lieferdatum = new JFormattedTextField(normalDateFormat);
-        this.main_datefieldLieferdatum = datefield_lieferdatum;
+        JTextField textfield_lieferdatum = new JTextField();
+        this.main_textfieldLieferdatum = textfield_lieferdatum;
 
 
         JLabel label_versanddatum = new JLabel();
         label_versanddatum.setText("Versanddatum:");
-        JFormattedTextField datefield_versanddatum = new JFormattedTextField(normalDateFormat);
-        this.main_datefieldVersanddatum = datefield_versanddatum;
+        JTextField textfield_versanddatum = new JTextField();
+        this.main_textfieldVersanddatum = textfield_versanddatum;
 
 
         JLabel label_versandUeber = new JLabel();
@@ -86,10 +86,10 @@ public class BestellungenFilter extends Filter{
 
 
         JLabel label_strasse = new JLabel();
-        label_strasse.setText("Stra�e:");
+        label_strasse.setText("Straße:");
         JTextField textfield_strasse = new JTextField();
         this.main_textfieldStrasse = textfield_strasse;
-        textfield_strasse.setToolTipText("Stra�e angeben");
+        textfield_strasse.setToolTipText("Straße angeben");
 
 
         JLabel label_plz = new JLabel();
@@ -118,11 +118,11 @@ public class BestellungenFilter extends Filter{
         panel.add(label_personalnr);
         panel.add(numberfield_personalnr);
         panel.add(label_bestelldatum);
-        panel.add(datefield_bestelldatum);
+        panel.add(textfield_bestelldatum);
         panel.add(label_lieferdatum);
-        panel.add(datefield_lieferdatum);
+        panel.add(textfield_lieferdatum);
         panel.add(label_versanddatum);
-        panel.add(datefield_versanddatum);
+        panel.add(textfield_versanddatum);
         panel.add(label_versandUeber);
         panel.add(numberfield_versandUeber);
         panel.add(label_frachtkosten);
@@ -139,6 +139,31 @@ public class BestellungenFilter extends Filter{
         panel.add(textfield_land);
         panel.add(button_submit);
         setFilterBounds(panel);
+    }
+
+    public void createRecord() {
+        int[] integers = new int[3];
+        integers[0] = this.main_numberfieldBestellnr.getInt();
+        integers[1] = this.main_numberfieldPersonalnr.getInt();
+        integers[2] = this.main_numberfieldVersandUeber.getInt();
+
+        String[] strings = new String[9];
+        strings[0] = this.main_textfieldKundencode.getText();
+        strings[1] = this.main_textfieldBestelldatum.getText();
+        strings[2] = this.main_textfieldLieferdatum.getText();
+        strings[3] = this.main_textfieldVersanddatum.getText();
+        strings[4] = this.main_textfieldEmpfaenger.getText();
+        strings[5] = this.main_textfieldStrasse.getText();
+        strings[6] = this.main_textfieldOrt.getText();
+        strings[7] = this.main_textfieldPlz.getText();
+        strings[8] = this.main_textfieldLand.getText();
+
+        double[] doubles = new double[1];
+        doubles[0] = this.main_numberfieldFrachtkosten.getDouble();
+
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("bestellungen", integers, strings, doubles, booleans);
     }
 
 }

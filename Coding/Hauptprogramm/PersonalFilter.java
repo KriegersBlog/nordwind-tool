@@ -7,8 +7,8 @@ import javax.swing.*;
 public class PersonalFilter extends Filter {
     //Attribute
     JNumberField main_numberfieldPersonalnr;
-    JNumberField main_numberfieldTelefon;
-    JNumberField main_numberfieldDurchwahl;
+    JTextField main_textfieldTelefon;
+    JTextField main_textfieldDurchwahl;
     JTextField main_textfieldVorname;
     JTextField main_textfieldNachname;
     JTextField main_textfieldPosition;
@@ -16,8 +16,8 @@ public class PersonalFilter extends Filter {
     JTextField main_textfieldPlz;
     JTextField main_textfieldOrt;
     JTextField main_textfieldLand;
-    JFormattedTextField main_datefieldGeburtsdatum;
-    JFormattedTextField main_datefieldEinstellung;
+    JTextField main_textfieldGeburtsdatum;
+    JTextField main_textfieldEinstellung;
     JComboBox main_comboboxAnrede;
 
     public PersonalFilter(JPanel panel) {
@@ -58,13 +58,13 @@ public class PersonalFilter extends Filter {
 
         JLabel label_geburtsdatum = new JLabel();
         label_geburtsdatum.setText("Geburtsdatum:");
-        JFormattedTextField datefield_geburtsdatum = new JFormattedTextField(normalDateFormat);
-        this.main_datefieldGeburtsdatum = datefield_geburtsdatum;
+        JTextField textfield_geburtsdatum = new JTextField();
+        this.main_textfieldGeburtsdatum = textfield_geburtsdatum;
 
         JLabel label_einstellung = new JLabel();
         label_einstellung.setText("Einstellung:");
-        JFormattedTextField datefield_einstellung = new JFormattedTextField(normalDateFormat);
-        this.main_datefieldEinstellung = datefield_einstellung;
+        JTextField textfield_einstellung = new JTextField();
+        this.main_textfieldEinstellung = textfield_einstellung;
 
         JLabel label_strasse = new JLabel();
         label_strasse.setText("Stra�e:");
@@ -92,15 +92,15 @@ public class PersonalFilter extends Filter {
 
         JLabel label_telefon = new JLabel();
         label_telefon.setText("Telefon:");
-        JNumberField numberfield_telefon = new JNumberField();
-        this.main_numberfieldTelefon = numberfield_telefon;
-        numberfield_telefon.setToolTipText("Telefon angeben");
+        JTextField textfield_telefon = new JTextField();
+        this.main_textfieldTelefon = textfield_telefon;
+        textfield_telefon.setToolTipText("Telefon angeben");
 
         JLabel label_durchwahl = new JLabel();
         label_durchwahl.setText("Durchwahl:");
-        JNumberField numberfield_durchwahl = new JNumberField();
-        this.main_numberfieldDurchwahl = numberfield_durchwahl;
-        numberfield_durchwahl.setToolTipText("Durchwahl angeben");
+        JTextField textfield_durchwahl = new JTextField();
+        this.main_textfieldDurchwahl = textfield_durchwahl;
+        textfield_durchwahl.setToolTipText("Durchwahl angeben");
 
         panel.add(label_personalnr);
         panel.add(numberfield_personalnr);
@@ -113,9 +113,9 @@ public class PersonalFilter extends Filter {
         panel.add(label_anrede);
         panel.add(combobox_anrede);
         panel.add(label_geburtsdatum);
-        panel.add(datefield_geburtsdatum);
+        panel.add(textfield_geburtsdatum);
         panel.add(label_einstellung);
-        panel.add(datefield_einstellung);
+        panel.add(textfield_einstellung);
         panel.add(label_strasse);
         panel.add(textfield_strasse);
         panel.add(label_plz);
@@ -125,11 +125,35 @@ public class PersonalFilter extends Filter {
         panel.add(label_land);
         panel.add(textfield_land);
         panel.add(label_telefon);
-        panel.add(numberfield_telefon);
+        panel.add(textfield_telefon);
         panel.add(label_durchwahl);
-        panel.add(numberfield_durchwahl);
+        panel.add(textfield_durchwahl);
         panel.add(button_submit);
         setFilterBounds(panel);
+    }
+
+    public void createRecord() {
+        int[] integers = new int[1];
+        integers[0] = this.main_numberfieldPersonalnr.getInt();
+
+        String[] strings = new String[12];
+        strings[0] = this.main_textfieldNachname.getText();
+        strings[1] = this.main_textfieldVorname.getText();
+        strings[2] = this.main_textfieldPosition.getText();
+        strings[3] = (String) main_comboboxAnrede.getSelectedItem();
+        strings[4] = this.main_textfieldGeburtsdatum.getText();
+        strings[5] = this.main_textfieldEinstellung.getText();
+        strings[6] = this.main_textfieldStrasse.getText();
+        strings[7] = this.main_textfieldOrt.getText();
+        strings[8] = this.main_textfieldPlz.getText();
+        strings[9] = this.main_textfieldLand.getText();
+        strings[10] = this.main_textfieldTelefon.getText();
+        strings[11] = this.main_textfieldDurchwahl.getText();
+
+        double[] doubles = new double[0];
+        boolean[] booleans = new boolean[0];
+
+        DBQuery.createRecord("personal", integers, strings, doubles, booleans);
     }
 }
 

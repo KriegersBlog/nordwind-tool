@@ -80,8 +80,6 @@ public class Login {
                 login_process();
             }
         });
-
-
     }
 
     public JPanel getPanel() {
@@ -131,9 +129,6 @@ public class Login {
         this.main_label_loginstatus.setBackground(null);
 
         NordwindTool.activateHome();
-
-        //disable_listPanel();
-        //list_tables.clearSelection();
     }
 
 }

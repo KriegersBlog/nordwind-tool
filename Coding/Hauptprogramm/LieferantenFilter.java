@@ -18,7 +18,6 @@ public class LieferantenFilter extends Filter {
     JTextField main_textfieldLand;
     JTextField main_textfieldHomepage;
 
-
     public LieferantenFilter(JPanel panel) {
         //OBJEKTE ERSTELLEN
         JLabel label_lieferantennr = new JLabel();
@@ -87,7 +86,6 @@ public class LieferantenFilter extends Filter {
         this.main_textfieldHomepage = textfield_homepage;
         textfield_homepage.setToolTipText("Homepage angeben");
 
-
         panel.add(label_lieferantennr);
         panel.add(numberfield_lieferantennr);
         panel.add(label_firma);
@@ -114,6 +112,7 @@ public class LieferantenFilter extends Filter {
 
         setFilterBounds(panel);
     }
+
     public void createRecord() {
         int[] integers = new int[1];
         integers[0] = this.main_numberfieldLieferantennr.getInt();
@@ -130,14 +129,13 @@ public class LieferantenFilter extends Filter {
         strings[8] = this.main_textfieldTelefax.getText();
         strings[9] = this.main_textfieldHomepage.getText();
 
-
         double[] doubles = new double[0];
 
         boolean[] booleans = new boolean[0];
 
         DBQuery.createRecord("lieferanten", integers, strings, doubles, booleans);
     }
-    
+
 }
 
 

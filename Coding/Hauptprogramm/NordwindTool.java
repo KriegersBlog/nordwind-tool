@@ -13,7 +13,6 @@ import java.util.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.*;
 import javax.imageio.*;
-
 import java.io.IOException;
 
 public class NordwindTool extends JFrame {
@@ -107,7 +106,6 @@ public class NordwindTool extends JFrame {
         /*           ERGEBNIS PANEL          */
         panel_results.setBounds(721, 104, 500, 536);
         panel_results.setOpaque(true);
-        panel_results.setBackground(new Color(0xFFAFAF));
         panel_home.add(panel_results);
 
         /***** Objekte instanziieren *****/
@@ -155,7 +153,7 @@ public class NordwindTool extends JFrame {
         NordwindTool mainFrame = new NordwindTool();
     }
 
-    /*-----------------------ANDERE METHODEN-----------------------------------*/
+    /*-----------------------METHODEN-----------------------------------*/
 
     public static JPanel getMain_panel_filter() {
         return panel_filter;
@@ -174,37 +172,42 @@ public class NordwindTool extends JFrame {
         Menu.disableList();
         hauptmenu.menu_control(false);
     }
-    public static ArtikelFilter getMain_artikelFilter(){
-       return main_artikelFilter;
+
+    /***** GETTER METHODEN *****/
+
+    public static ArtikelFilter getMain_artikelFilter() {
+        return main_artikelFilter;
     }
 
-    public static BestelldetailsFilter getMain_bestelldetailsFilter(){
+    public static BestelldetailsFilter getMain_bestelldetailsFilter() {
         return main_bestellDetailsFilter;
     }
 
-    public static BestellungenFilter getMain_bestellungenFilter(){
+    public static BestellungenFilter getMain_bestellungenFilter() {
         return main_bestellungenFilter;
     }
 
-    public static KategorieFilter getMain_kategorieFilter(){
+    public static KategorieFilter getMain_kategorieFilter() {
         return main_kategorieFilter;
     }
 
-    public static KundenFilter getMain_kundenFilter(){
+    public static KundenFilter getMain_kundenFilter() {
         return main_kundenFilter;
     }
 
-    public static LieferantenFilter getMain_lieferantenFilter(){
+    public static LieferantenFilter getMain_lieferantenFilter() {
         return main_lieferantenFilter;
     }
 
-    public static PersonalFilter getMain_personalFilter(){
+    public static PersonalFilter getMain_personalFilter() {
         return main_personalFilter;
     }
 
-    public static VersandfirmenFilter getMain_versandfirmenFilter(){
+    public static VersandfirmenFilter getMain_versandfirmenFilter() {
         return main_versandfirmenFilter;
     }
+
+    /***** Utility Methoden *****/
 
     public static void openFilterPanel(int index) {
         Filter.clearFilter();
@@ -232,7 +235,7 @@ public class NordwindTool extends JFrame {
 
             case 3:
                 KategorieFilter kategorie = new KategorieFilter(panel_filter);
-                main_kategorieFilter =  kategorie;
+                main_kategorieFilter = kategorie;
                 break;
 
             case 4:
@@ -255,7 +258,7 @@ public class NordwindTool extends JFrame {
                 main_versandfirmenFilter = versandfirmen;
                 break;
 
-            default:                                                                       
+            default:
                 System.out.println("Fehler bei Filtersteuerung. Bitte Admin kontaktieren | Error Code: 1");
         }
     }

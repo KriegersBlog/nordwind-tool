@@ -38,7 +38,7 @@ public class Liste {
         panel_table.setOpaque(true);
         //panel_home.add(panel_table);
 
-        //Setzen der Parameter fr die Objekte des Tabellenpanels
+        //Setzen der Parameter fuer die Objekte des Tabellenpanels
         button_resetList.setBounds(10, 420, 280, 40);
         button_resetList.setText("Auswahl zurücksetzen");
         button_resetList.setMargin(new Insets(2, 2, 2, 2));
