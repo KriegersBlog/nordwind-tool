@@ -78,30 +78,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="687" y="328" key="FileChooserDialogImpl" timestamp="1576416302030">
+    <state x="342" y="140" key="new project wizard" timestamp="1590076298615">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="687" y="328" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576416302030" />
-    <state width="1877" height="202" key="GridCell.Tab.0.bottom" timestamp="1576417167505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="202" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576417167505" />
-    <state width="1877" height="202" key="GridCell.Tab.0.center" timestamp="1576417167505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="202" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576417167505" />
-    <state width="1877" height="202" key="GridCell.Tab.0.left" timestamp="1576417167505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="202" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576417167505" />
-    <state width="1877" height="202" key="GridCell.Tab.0.right" timestamp="1576417167505">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="202" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576417167505" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1578989864015">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1576416305471" />
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1578989864015" />
+    <state x="342" y="140" key="new project wizard/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1590076298615" />
   </component>
 </project>
